@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.models import Member, Member_without_serial
+from .models import Member, Member_without_serial
 
 # Main App Object
 app = FastAPI()

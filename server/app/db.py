@@ -1,9 +1,10 @@
+from .config import settings
 # MongoDB driver
 import motor.motor_asyncio
 
-from app.models import Member
+from .models import Member
 
-client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://localhost:27017")
+client = motor.motor_asyncio.AsyncIOMotorClient(settings.database_uri)
 database = client.FERM
 collection = database.queue
 
