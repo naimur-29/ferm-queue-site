@@ -1,0 +1,19 @@
+from pydantic import BaseSettings, AnyHttpUrl
+from typing import List
+
+class Settings_v1(BaseSettings):
+    api_v1_str: str = "/api/v1"
+    jwt_secret_key: str
+    jwt_refresh_secret_key: str
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 15
+    refresh_token_expire_minutes: int = 60*24*7 # 7 days
+    project_name: str = "Ferm Queue Site"
+    
+    # Database
+    database_uri: str = "mongodb://localhost:27017"
+    
+    class Config:
+        env_file = '.env'
+        
+settings = Settings_v1()
