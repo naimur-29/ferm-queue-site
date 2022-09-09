@@ -1,5 +1,4 @@
-from pydantic import BaseSettings, AnyHttpUrl
-from typing import List
+from pydantic import BaseSettings
 
 class Settings_v1(BaseSettings):
     api_v1_str: str = "/api/v1"
