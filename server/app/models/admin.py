@@ -4,13 +4,14 @@ from pydantic import Field, EmailStr
 from datetime import datetime
 
 class Admin(Document):
-    id: UUID = Field(default_factory=uuid4)
+    user_id: UUID = Field(default_factory=uuid4)
     username: str = Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
     hashed_password: str
-    first_name: str = ""
-    last_name: str = ""
+    first_name: str
+    last_name: str
     disabled: bool = True
+    created_at: str = str(datetime.now())
     
     def __repr__(self) -> str:
         return f"<Admin {self.email}>"

@@ -7,7 +7,7 @@ class Settings_v1(BaseSettings):
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 15
     refresh_token_expire_minutes: int = 60*24*7 # 7 days
-    project_name: str = "Ferm Queue Site"
+    project_name: str = "Ferm Queue Server"
     
     # Database
     database_uri: str = "mongodb://localhost:27017"
