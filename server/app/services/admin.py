@@ -37,3 +37,8 @@ class AdminService:
     async def get_admin_by_username(username: str) -> Optional[Admin]:
         res = await Admin.find_one(Admin.username == username)
         return res
+    
+    @staticmethod
+    async def get_admin_by_user_id(user_id: str) -> Optional[Admin]:
+        res = await Admin.find_one(Admin.user_id == user_id)
+        return res
