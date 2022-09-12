@@ -9,7 +9,7 @@ class Admin(Document):
     email: Indexed(EmailStr, unique=True)
     hashed_password: str
     active: bool = True
-    created_at: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
     
     def __repr__(self) -> str:
         return f"<Admin {self.email}>"

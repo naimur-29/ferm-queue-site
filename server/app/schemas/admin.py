@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr
+from datetime import datetime
 
 class AdminCreate(BaseModel):
     email: EmailStr = Field(..., description="admin email")
@@ -6,6 +7,6 @@ class AdminCreate(BaseModel):
     password: str = Field(..., min_length=8, max_length=24, description="admin password")
     
 class AdminReturn(BaseModel):
-    email: EmailStr = Field(..., description="admin email")
-    username: str = Field(..., min_length=1, max_length=50, description="admin username")
-    
+    email: EmailStr
+    username: str
+    created_at: datetime

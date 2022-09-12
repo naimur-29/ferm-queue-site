@@ -4,7 +4,7 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.core.config import settings
-from app.models import user, admin 
+from app.models import queuer, admin 
 from app.api.api_v1.router import router
 
 # Main App Object
@@ -36,7 +36,8 @@ async def app_init():
     await init_beanie(
         database=db_client.queue,
         document_models= [
-            user.User, admin.Admin
+            admin.Admin,
+            queuer.Queuer
         ]
     )
     print("""

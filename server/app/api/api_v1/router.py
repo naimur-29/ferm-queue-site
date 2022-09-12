@@ -1,15 +1,15 @@
 from fastapi import APIRouter
 
-from app.api.api_v1.handlers import user, admin
+from app.api.api_v1.handlers import queuer, admin
 from app.api.auth.jwt import auth_router
 
 router = APIRouter()
 
 # include routers
 router.include_router(
-    user.user_router,
-    prefix="/user",
-    tags=["user"]
+    queuer.queuer_router,
+    prefix="/queuer",
+    tags=["queuer"]
 )
 
 router.include_router(

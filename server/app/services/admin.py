@@ -10,8 +10,7 @@ class AdminService:
         admin_in = Admin(
             username=admin.username,
             email=admin.email,
-            hashed_password=get_password(admin.password),
-            created_at=str(datetime.utcnow())
+            hashed_password=get_password(admin.password)
         )
         await admin_in.save()
         return admin_in
