@@ -5,13 +5,11 @@ from datetime import datetime
 
 class Admin(Document):
     user_id: UUID = Field(default_factory=uuid4)
-    username: str = Indexed(str, unique=True)
+    username: Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
     hashed_password: str
-    first_name: str
-    last_name: str
-    disabled: bool = True
-    created_at: str = str(datetime.now())
+    active: bool = True
+    created_at: str
     
     def __repr__(self) -> str:
         return f"<Admin {self.email}>"

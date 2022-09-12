@@ -10,9 +10,9 @@ admin_router = APIRouter()
 async def add_admin(data: AdminCreate):
     try:
         await AdminService.create_admin(data)
-        return {"message": "admin created successfully!"}
+        return {"message": "Admin Created Successfully!"}
     except pymongo.errors.DuplicateKeyError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="admin already exist!"
+            detail="Admin Already Exists!"
         )
