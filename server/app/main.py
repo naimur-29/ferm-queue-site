@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_utils.tasks import repeat_every
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
+from datetime import datetime
 
 from app.core.config import settings
 from app.models import queuer, admin 
@@ -43,6 +45,17 @@ async def app_init():
     print("""
         created database!      
     """)
+    
+# scheduled tasks
+@app.on_event("startup")
+@repeat_every(seconds=60*10, wait_first=True)
+async def auto_hold():
+    res = await queuer.Queuer.find(queuer.Queuer.on_hold == False).to_list()
+    
+    if res != []:
+        for q in res:
+            if (datetime.utcnow() - q.refreshed_at).total_seconds() >= 60*60:
+                await q.update({"$set": {"on_hold": True}})
 
 # root path
 @app.get("/")

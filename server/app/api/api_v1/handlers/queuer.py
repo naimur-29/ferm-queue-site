@@ -37,7 +37,12 @@ async def get_hold_queue():
 
 @queuer_router.get("/{id}", summary="Get queuer by user ID", response_model=QueuerResponsePersonal)
 async def get_queuer_by_uuid(id: UUID):
-    return await QueuerService.queuer_by_user_id(id)
+    res =  await QueuerService.queuer_by_user_id(id)
+    
+    if not res:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Queuer not found!")
+    
+    return res
 
 @queuer_router.post("/", summary="Add queuer to queue", response_model=QueuerResponsePersonal, status_code=status.HTTP_201_CREATED)
 async def add_queuer(data: QueuerCreate):
@@ -51,7 +56,12 @@ async def add_queuer(data: QueuerCreate):
         
 @queuer_router.put("/{id}", summary="Update on hold status", response_model=QueuerResponsePersonal)
 async def update_queuer_by_uuid(data: QueuerUpdate, id: UUID):
-    return await QueuerService.update_queuer_data(data, id)
+    res = await QueuerService.update_queuer_data(data, id)
+    
+    if not res:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Queuer not found!")
+    
+    return res
 
 # Requires Admin Auth
 @queuer_router.get("/queue/admin", summary="Get the queue as admin", response_model=List[QueuerResponseAdmin])

@@ -33,6 +33,7 @@ class QueuerResponse(BaseModel):
     track_title: str
     youtube_username: str
     link: str
+    on_hold: bool
     created_at: datetime
     
 class QueuerResponsePersonal(BaseModel):

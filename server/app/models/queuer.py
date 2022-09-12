@@ -11,6 +11,7 @@ class Queuer(Document):
     link: Indexed(str, unique=True)
     message: str = ""
     on_hold: bool = False
+    refreshed_at: datetime = Field(default_factory=datetime.utcnow)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     
     def __repr__(self) -> str:
