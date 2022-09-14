@@ -8,7 +8,7 @@ class Admin(Document):
     username: Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
     hashed_password: str
-    active: bool = True
+    active: bool = False
     created_at: datetime = Field(default_factory=datetime.utcnow)
     
     def __repr__(self) -> str:
