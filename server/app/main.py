@@ -34,7 +34,6 @@ async def app_init():
     """)
     
     db_client = AsyncIOMotorClient(settings.database_uri)
-    # mongodb+srv://FERM:IVtg382gcrvx@cluster0.dtkp3sd.mongodb.net/?retryWrites=true&w=majority
     
     await init_beanie(
         database=db_client.queue,
