@@ -12,6 +12,7 @@ class Settings_v1(BaseSettings):
     # Other Info
     admin: str = ""
     origin: str = ""
+    time_limit_for_hold = int = 60
     
     # Database
     database_uri: str = "mongodb://localhost:27017"
