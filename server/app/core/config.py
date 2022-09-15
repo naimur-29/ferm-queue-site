@@ -14,7 +14,7 @@ class Settings_v1(BaseSettings):
     origin: str = ""
     
     # Database
-    database_uri: str = "mongodb://localhost:27017"
+    database_uri: str = "mongodb+srv://FERM:IVtg382gcrvx@cluster0.dtkp3sd.mongodb.net/?retryWrites=true&w=majority"
     
     class Config:
         env_file = '.env'
