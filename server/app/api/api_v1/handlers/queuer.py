@@ -3,11 +3,11 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from typing import List
 from uuid import UUID
 
-from app.schemas.queuer import QueuerCreate, QueuerResponse, QueuerResponseAdmin, QueuerResponsePersonal, QueuerUpdate
-from app.services.queuer import QueuerService
-from app.models.admin import Admin
-from app.api.deps.admin import get_current_admin
-from app.services.queue_settings import QueueSettingsService
+from ....schemas.queuer import QueuerCreate, QueuerResponse, QueuerResponseAdmin, QueuerResponsePersonal, QueuerUpdate
+from ....services.queuer import QueuerService
+from ....models.admin import Admin
+from ....api.deps.admin import get_current_admin
+from ....services.queue_settings import QueueSettingsService
 
 queuer_router = APIRouter()
 

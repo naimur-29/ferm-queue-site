@@ -4,13 +4,13 @@ from typing import Any
 from jose import jwt
 from pydantic import ValidationError
 
-from app.services import admin
-from app.core.security import create_access_token, create_refresh_token
-from app.schemas import auth, admin
-from app.api.deps.admin import get_current_admin, reusable_oauth
-from app.models.admin import Admin
-from app.services.admin import AdminService
-from app.core.config import settings
+from ...services import admin
+from ...core.security import create_access_token, create_refresh_token
+from ...schemas import auth, admin
+from ...api.deps.admin import get_current_admin, reusable_oauth
+from ...models.admin import Admin
+from ...services.admin import AdminService
+from ...core.config import settings
 
 
 auth_router = APIRouter()

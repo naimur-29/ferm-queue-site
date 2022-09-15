@@ -1,10 +1,10 @@
 import pymongo
 from fastapi import APIRouter, HTTPException, status, Depends
 
-from app.schemas.queue_settings import QueueSettingsCreate, QueueSettingsUpdateState
-from app.services.queue_settings import QueueSettingsService
-from app.api.auth.jwt import get_current_admin
-from app.models.admin import Admin
+from ....schemas.queue_settings import QueueSettingsCreate, QueueSettingsUpdateState
+from ....services.queue_settings import QueueSettingsService
+from ....api.auth.jwt import get_current_admin
+from ....models.admin import Admin
 
 queue_settings_router = APIRouter()
 

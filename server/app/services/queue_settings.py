@@ -1,5 +1,5 @@
-from app.models.queue_settings import QueueSettings
-from app.schemas.queue_settings import QueueSettingsCreate, QueueSettingsUpdateState
+from ..models.queue_settings import QueueSettings
+from ..schemas.queue_settings import QueueSettingsCreate, QueueSettingsUpdateState
 
 class QueueSettingsService:
     @staticmethod

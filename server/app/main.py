@@ -5,9 +5,9 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
 
-from app.core.config import settings
-from app.models import queuer, admin, queue_settings
-from app.api.api_v1.router import router
+from .core.config import settings
+from .models import queuer, admin, queue_settings
+from .api.api_v1.router import router
 
 # Main App Object
 app = FastAPI(

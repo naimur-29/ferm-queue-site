@@ -1,9 +1,9 @@
-from app.models.queuer import Queuer
 from typing import List
 from uuid import UUID
 from datetime import datetime
 
-from app.schemas.queuer import QueuerCreate, QueuerUpdate
+from ..models.queuer import Queuer
+from ..schemas.queuer import QueuerCreate, QueuerUpdate
 
 class QueuerService:
     @staticmethod

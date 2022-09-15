@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 import pymongo
 
-from app.schemas.admin import AdminCreate
-from app.services.admin import AdminService
-from app.api.auth.jwt import get_current_admin
-from app.models.admin import Admin
-from app.core.config import settings
+from ....schemas.admin import AdminCreate
+from ....services.admin import AdminService
+from ....api.auth.jwt import get_current_admin
+from ....models.admin import Admin
+from ....core.config import settings
 
 admin_router = APIRouter()
 

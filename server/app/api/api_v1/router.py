@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from app.api.api_v1.handlers import queuer, admin, queue_settings
-from app.api.auth.jwt import auth_router
+from .handlers import queuer, admin, queue_settings
+from ..auth.jwt import auth_router
 
 router = APIRouter()
 

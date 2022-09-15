@@ -4,10 +4,10 @@ from jose import jwt
 from datetime import datetime
 from pydantic import ValidationError
 
-from app.core.config import settings
-from app.models.admin import Admin
-from app.schemas.auth import TokenPayload
-from app.services.admin import AdminService
+from ...core.config import settings
+from ...models.admin import Admin
+from ...schemas.auth import TokenPayload
+from ...services.admin import AdminService
 
 reusable_oauth = OAuth2PasswordBearer(
     tokenUrl=f"{settings.api_v1_str}/auth/admin",
