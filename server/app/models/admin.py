@@ -7,8 +7,8 @@ class Admin(Document):
     user_id: UUID = Field(default_factory=uuid4)
     username: Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
-    hashed_password: Indexed(str)
-    active: Indexed(int) = 0
+    hashed_password: str
+    active: bool = False
     created_at: datetime = Field(default_factory=datetime.utcnow)
     
     def __repr__(self) -> str:

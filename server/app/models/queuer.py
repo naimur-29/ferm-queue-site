@@ -5,12 +5,12 @@ from datetime import datetime
 
 class Queuer(Document):
     user_id: UUID = Field(default_factory=uuid4)
-    artist_name: Indexed(str)
-    track_title: Indexed(str)
+    artist_name: str
+    track_title: str
     youtube_username: Indexed(str, unique=True)
     link: Indexed(str, unique=True)
-    message: Indexed(str) = ""
-    on_hold: Indexed(int) = 0
+    message: str = ""
+    on_hold: bool = False
     refreshed_at: datetime = Field(default_factory=datetime.utcnow)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     
