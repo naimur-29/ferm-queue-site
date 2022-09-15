@@ -48,3 +48,23 @@ class QueuerService:
         
         await res.delete()
         return True
+    
+    @staticmethod
+    async def delete_active_queue():
+        res = Queuer.find(Queuer.on_hold == False)
+        
+        if not await res.to_list():
+            return False
+        
+        await res.delete()
+        return True
+    
+    @staticmethod
+    async def delete_hold_queue():
+        res = Queuer.find(Queuer.on_hold == True)
+        
+        if not await res.to_list():
+            return False
+        
+        await res.delete()
+        return True

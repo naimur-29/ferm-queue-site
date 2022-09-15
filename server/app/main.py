@@ -6,7 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
 
 from app.core.config import settings
-from app.models import queuer, admin 
+from app.models import queuer, admin, queue_settings
 from app.api.api_v1.router import router
 
 # Main App Object
@@ -16,7 +16,7 @@ app = FastAPI(
 )
 
 # Backend cors origins
-origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+origins = [settings.origin]
 
 app.add_middleware (
     CORSMiddleware,
@@ -40,7 +40,8 @@ async def app_init():
         database=db_client.queue,
         document_models= [
             admin.Admin,
-            queuer.Queuer
+            queuer.Queuer,
+            queue_settings.QueueSettings
         ]
     )
     print("""
