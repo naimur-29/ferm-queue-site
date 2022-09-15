@@ -8,7 +8,6 @@ from app.services.queuer import QueuerService
 from app.models.admin import Admin
 from app.api.deps.admin import get_current_admin
 from app.services.queue_settings import QueueSettingsService
-from app.models.queue_settings import QueueSettings
 
 queuer_router = APIRouter()
 
