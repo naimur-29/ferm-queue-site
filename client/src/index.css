@@ -103,6 +103,16 @@ a {
   }
 }
 
+@keyframes shadowGlow1mobile {
+  0% {
+    text-shadow: 4px 0px 5px #eb58b5;
+  }
+
+  100% {
+    text-shadow: -2px 0px 10px #fff;
+  }
+}
+
 @keyframes startup {
   0% {
     opacity: 0;
