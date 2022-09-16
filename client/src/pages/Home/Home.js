@@ -50,11 +50,6 @@ const Home = () => {
           </h1>
           <h3 className="schedule">Monday Wednesday Friday</h3>
 
-          <div className="btn-container">
-            <button className="btn">Join Queue</button>
-            <button className="btn">View Queue</button>
-          </div>
-
           <p className="disclaimer">
             *Queue's only open during showtime. One submission per artist at a
             time. To guarantee your track is played for free, stay engaged &
@@ -62,6 +57,11 @@ const Home = () => {
             time. So, remove yourself from from the on hold queue to let us know
             you're still there to keep you spot in line.
           </p>
+
+          <div className="btn-container">
+            <button className="btn">Join Queue</button>
+            <button className="btn">View Queue</button>
+          </div>
         </main>
       </div>
     </section>
