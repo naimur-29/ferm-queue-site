@@ -1,0 +1,241 @@
+.home-section-container {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.home-section-container .main-container {
+  background-color: rgba(0, 0, 0, 0.15);
+  min-height: 100vh;
+  width: 100%;
+  animation: homebg 3s ease-in infinite alternate;
+}
+
+.home-section-container .main-container::before {
+  content: "";
+  width: 100%;
+  max-width: 1920px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: url("https://cdn.discordapp.com/attachments/1011744799629529208/1019645944532324486/queue_site_background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -100;
+}
+
+/* Top Nav Section */
+.home-section-container .main-container .nav-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  user-select: none;
+}
+
+.home-section-container .main-container .nav-container .left,
+.home-section-container .main-container .nav-container .right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-section-container .main-container .nav-container .left a .logo {
+  width: 96px;
+  object-fit: cover;
+}
+
+.home-section-container .main-container .nav-container .right a .icons {
+  width: 40px;
+}
+
+.home-section-container .main-container .nav-container .right a.site-link {
+  display: none;
+}
+
+.home-section-container .main-container .nav-container .right a,
+.home-section-container .main-container .nav-container .right a.site-link {
+  transition: all 0.25s ease-in;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+@media (hover: hover) {
+  .home-section-container .main-container .nav-container .left a .logo:hover {
+    animation: shake 0.01s ease infinite alternate;
+  }
+
+  .home-section-container .main-container .nav-container .right a:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 0, 255, 0.2);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .home-section-container .main-container .nav-container {
+    justify-content: center;
+  }
+
+  .home-section-container .main-container .nav-container .right {
+    width: 100%;
+  }
+
+  .home-section-container .main-container .nav-container .left,
+  .home-section-container .main-container .nav-container .right a .icons {
+    display: none;
+  }
+
+  .home-section-container .main-container .nav-container .right a.site-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: yellow;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 30%;
+    font-size: 2.7rem;
+    width: 100%;
+    transform: translateX(-5%);
+  }
+}
+
+@media (max-width: 450px) {
+  .home-section-container .main-container .nav-container .right a.site-link {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .home-section-container .main-container .nav-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .home-section-container .main-container .nav-container .right a.site-link {
+    font-size: 1.7rem;
+    overflow-x: hidden;
+    border-radius: 0;
+  }
+}
+
+/* Main section */
+.home-section-container .main-container .main-section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+.home-section-container .main-container .main-section-container .title {
+  color: #fff;
+  font-size: 6rem;
+  letter-spacing: 7px;
+  font-weight: bold;
+  text-shadow: 6px 4px 5px #eb58b5;
+  text-align: center;
+  font-family: "Bebas Neue", cursive, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.home-section-container .main-container .main-section-container .title span {
+  text-shadow: 6px 4px 5px #8b01da;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&display=swap");
+.home-section-container .main-container .main-section-container .schedule {
+  color: #fff;
+  margin-top: -20px;
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin-bottom: 60px;
+  text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.15);
+  font-family: "Lalezar", cursive, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.btn,
+.btn:after {
+  width: 200px;
+  height: 86px;
+  line-height: 88px;
+  font-size: 2.4rem;
+  text-shadow: 0px 3px 3px rgba(255, 0, 255, 0.15);
+  font-family: "Bebas Neue", sans-serif;
+  background: linear-gradient(45deg, transparent 5%, #fff 5%);
+  border: 0;
+  color: #121212;
+  letter-spacing: 3px;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn {
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.btn:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+
+  content: "ALTERNATE TEXT";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 3%,
+    #eb58b5 3%,
+    #eb58b5 5%,
+    #fff 5%
+  );
+  text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
+  clip-path: var(--slice-0);
+}
+
+.btn:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@media (hover: hover) {
+  .btn-container .btn:hover {
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.home-section-container .main-container .main-section-container .disclaimer {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+}
