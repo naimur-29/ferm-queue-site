@@ -83,12 +83,32 @@ a {
   }
 }
 
-@keyframes homebg {
+@keyframes homeBG {
   0% {
-    background-color: rgba(255, 0, 255, 0.1);
+    background-color: rgba(255, 0, 255, 0.15);
   }
 
   100% {
     background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes shadowGlow1 {
+  0% {
+    text-shadow: 7px 0px 5px #eb58b5;
+  }
+
+  100% {
+    text-shadow: -2px 0px 10px #fff;
+  }
+}
+
+@keyframes startup {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

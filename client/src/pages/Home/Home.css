@@ -2,13 +2,18 @@
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
+  animation: startup 1s ease-in;
 }
 
 .home-section-container .main-container {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-image: radial-gradient(
+    50% 176%,
+    rgba(0, 0, 0, 0.1) 80%,
+    #000 100%
+  );
   min-height: 100vh;
   width: 100%;
-  animation: homebg 3s ease-in infinite alternate;
+  animation: homeBG 3s ease-in infinite alternate;
 }
 
 .home-section-container .main-container::before {
@@ -141,6 +146,7 @@
   font-weight: bold;
   text-shadow: 6px 4px 5px #eb58b5;
   text-align: center;
+  animation: shadowGlow1 3s ease-in infinite alternate;
   font-family: "Bebas Neue", cursive, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
@@ -156,20 +162,11 @@
   margin-top: -10px;
   font-size: 3.5rem;
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: 60px;
   text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.15);
   font-family: "Lalezar", cursive, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
-}
-
-.home-section-container .main-container .main-section-container .disclaimer {
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-  font-size: 1.5rem;
-  max-width: 920px;
-  margin-bottom: 60px;
 }
 
 .btn-container {
@@ -237,5 +234,66 @@
 @media (hover: hover) {
   .btn-container .btn:hover {
     transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.home-section-container
+  .main-container
+  .main-section-container
+  .disclaimer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-section-container
+  .main-container
+  .main-section-container
+  .disclaimer-container
+  .disclaimer {
+  color: #fff;
+  padding: 16px 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  max-width: 920px;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Snow effect */
+.home-section-container .snow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.home-section-container .snow .svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#snow-top-layer {
+  will-change: transform;
+  transform: translateY(-768px);
+  animation: fall 22.5s infinite linear;
+}
+
+#snow-bottom-layer {
+  will-change: transform;
+  transform: translateY(-768px);
+  animation: fall 45s infinite linear;
+}
+
+@keyframes fall {
+  100% {
+    transform: translateY(0);
   }
 }
