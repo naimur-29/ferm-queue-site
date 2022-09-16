@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 
 // Importing img assets from local directory
 import fbIcon from "../../assets/socials/fb-icon.svg";
 import instaIcon from "../../assets/socials/insta-icon.svg";
 import twitterIcon from "../../assets/socials/twitter-icon.svg";
+import ytIcon from "../../assets/socials/yt-icon.svg";
 
 // constant variables
 const realFermAudioLogoImg =
   "https://cdn.discordapp.com/attachments/1011744799629529208/1019645944221941841/realFERMaudio_logo_w_face2.png";
 
 const Home = () => {
+  const [isLoadingActive, setIsLoadingActive] = useState(true);
+
+  useEffect(() => {
+    let timer1 = setTimeout(() => setIsLoadingActive(false), 3 * 1000);
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, []);
+
   return (
     <section className="home-section-container">
+      {/* loading animation */}
+      <div class={isLoadingActive ? "spinner" : "spinner inactive"}>
+        <div class="spinner-item"></div>
+        <div class="spinner-item"></div>
+        <div class="spinner-item"></div>
+      </div>
+
       <div class="snow">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +133,11 @@ const Home = () => {
         <nav className="nav-container">
           {/* Logo section */}
           <div className="left">
-            <a href="/">
+            <a
+              href="https://realfermaudio.com/faq"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img
                 src={realFermAudioLogoImg}
                 alt="RealFerm Audio Logo"
@@ -126,17 +148,33 @@ const Home = () => {
 
           {/* Socials Section */}
           <div className="right">
-            <a href="/">
-              <img src={fbIcon} alt="" className="icons" />
+            <a
+              href="https://www.facebook.com/realfermaudio"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={fbIcon} alt="fb icon" className="icons" />
             </a>
-            <a href="/">
-              <img src={instaIcon} alt="" className="icons" />
+            <a
+              href="https://www.instagram.com/realfermaudio/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={instaIcon} alt="instagram icon" className="icons" />
             </a>
-            <a href="/">
-              <img src={twitterIcon} alt="" className="icons" />
+            <a
+              href="https://twitter.com/realFERMaudio"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={twitterIcon} alt="twitter icon" className="icons" />
             </a>
-            <a href="/" className="site-link">
-              REALFERMAUDIO
+            <a
+              href="https://www.youtube.com/channel/UCegXLVNGhEVDnje5leOXXYQ"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={ytIcon} alt="youtube icon" className="icons" />
             </a>
           </div>
         </nav>
