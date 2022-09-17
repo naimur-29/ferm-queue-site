@@ -12,6 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 100%;
 
   scroll-behavior: smooth;
 }
@@ -115,7 +116,12 @@ a {
 
 @keyframes startup {
   0% {
-    opacity: 0;
+    opacity: 0.4;
+    transform: rotateY(90deg);
+  }
+
+  10% {
+    transform: rotateY(0deg);
   }
 
   100% {

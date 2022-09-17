@@ -13,6 +13,7 @@ const realFermAudioLogoImg =
 
 const Home = () => {
   const [isLoadingActive, setIsLoadingActive] = useState(true);
+  const [isDisclaimerActive, setIsDisclaimerActive] = useState(false);
 
   useEffect(() => {
     let timer1 = setTimeout(() => setIsLoadingActive(false), 3 * 1000);
@@ -186,18 +187,31 @@ const Home = () => {
           <h3 className="schedule">Monday Wednesday Friday</h3>
 
           <div className="btn-container">
-            <button className="btn">Join Queue</button>
+            <button
+              className="btn"
+              onMouseOver={() => setIsDisclaimerActive(true)}
+              onMouseLeave={() => setIsDisclaimerActive(false)}
+            >
+              Join Queue
+            </button>
             <button className="btn">View Queue</button>
           </div>
-          <div className="disclaimer-container">
-            <p className="disclaimer">
-              *Queue is only open during showtime. One submission per artist at
-              a time. To guarantee your track is played for free, stay engaged
-              and keep an eye on the queue page. You may be put on hold after a
-              certain time of inactivity*
-            </p>
-          </div>
         </main>
+
+        <div
+          className={
+            isDisclaimerActive
+              ? "disclaimer-container active"
+              : "disclaimer-container"
+          }
+        >
+          <p className="disclaimer">
+            *Queue is only open during showtime. One submission per artist at a
+            time. To guarantee your track is played for free, stay engaged and
+            keep an eye on the queue page. You may be put on hold after a
+            certain time of inactivity*
+          </p>
+        </div>
       </div>
     </section>
   );
