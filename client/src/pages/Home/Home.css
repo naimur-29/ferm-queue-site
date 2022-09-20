@@ -234,12 +234,7 @@
   transition: 0.35s ease;
 }
 
-.home-section-container .main-container .disclaimer-container.down {
-  bottom: -100%;
-  z-index: 0;
-}
-
-.home-section-container .main-container .disclaimer-container.up {
+.home-section-container .main-container .disclaimer-container.active {
   bottom: 100%;
   z-index: 0;
 }
@@ -260,21 +255,22 @@
   font-weight: bold;
   border: none;
   outline: none;
-  background-color: #f569;
+  background-color: #fff;
   cursor: pointer;
-  color: #fff;
+  color: #232323;
+  transition: all 0.25s ease;
 }
 
 @media (hover: hover) {
   .home-section-container .main-container .disclaimer-container .close-overlay {
-    background-color: #f569;
+    background-color: #fff;
   }
 
   .home-section-container
     .main-container
     .disclaimer-container
     .close-overlay:hover {
-    background-color: #f56;
+    transform: translateY(3px);
   }
 }
 

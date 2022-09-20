@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 1920px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,10 +20,46 @@
 }
 
 .submit-form-container .form-container {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255);
   padding: 10px;
   border-radius: 4px;
   width: 90%;
   max-width: 520px;
   z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-form-container .form-container .title {
+  font-size: 2rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.submit-form-container .form-container .item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-form-container .form-container .item label {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.submit-form-container .form-container .item input {
+  border: none;
+  outline: none;
+  background: rgba(0, 0, 0, 0.3);
+  height: 40px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 0 5px;
+  color: #fff;
 }

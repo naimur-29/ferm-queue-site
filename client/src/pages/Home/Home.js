@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Home.css";
 
 // Importing local components
@@ -19,15 +19,6 @@ const realFermAudioLogoImg =
 const Home = () => {
   const [isDisclaimerActive, setIsDisclaimerActive] = useState(false);
   const [isFormActive, setIsFormActive] = useState(false);
-  const [disclaimerHidePos, setDisclaimerHidePos] = useState("down");
-
-  useEffect(() => {
-    let timer1 = setTimeout(() => setIsDisclaimerActive(true), 4 * 1000);
-
-    return () => {
-      clearTimeout(timer1);
-    };
-  }, []);
 
   return (
     <section className="home-section-container">
@@ -97,7 +88,7 @@ const Home = () => {
           <h3 className="schedule">Monday Wednesday Friday</h3>
 
           <div className="btn-container">
-            <button className="btn" onClick={() => setIsFormActive(true)}>
+            <button className="btn" onClick={() => setIsDisclaimerActive(true)}>
               Join Queue
             </button>
 
@@ -109,19 +100,9 @@ const Home = () => {
           className={
             isDisclaimerActive
               ? "disclaimer-container"
-              : `disclaimer-container ${disclaimerHidePos}`
+              : `disclaimer-container active`
           }
         >
-          <button
-            className="close-overlay"
-            onClick={() => {
-              setIsDisclaimerActive(false);
-              setDisclaimerHidePos("up");
-            }}
-          >
-            Shoot Up
-          </button>
-
           <p className="disclaimer">
             *Queue is only open during showtime. One submission per artist at a
             time. To guarantee your track is played for free, stay engaged and
@@ -133,10 +114,10 @@ const Home = () => {
             className="close-overlay"
             onClick={() => {
               setIsDisclaimerActive(false);
-              setDisclaimerHidePos("down");
+              setIsFormActive(true);
             }}
           >
-            Shoot Down
+            Join Queue
           </button>
         </div>
 

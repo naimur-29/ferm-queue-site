@@ -12,43 +12,50 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
       }
     >
       <div className="form-container">
-        <h3 className="title">Submit Your Song & Join The Queue</h3>
+        <h3 className="title">Enter your submission</h3>
         <div className="item">
-          <label htmlFor="ArtistName">Artist Name:</label>
-          <input type="text" />
+          <label htmlFor="ArtistName">{"Artist(s) Name"}</label>
+          <input type="text" placeholder="ex: artist1, artist2, ..." />
         </div>
         <div className="item">
-          <label htmlFor="ArtistName">Track Title:</label>
-          <input type="text" />
+          <label htmlFor="TrackName">Track Title</label>
+          <input type="text" placeholder="ex: song name" />
         </div>
         <div className="item">
-          <label htmlFor="ArtistName">Youtube Username:</label>
-          <input type="text" />
+          <label htmlFor="YoutubeUsername">Youtube Username</label>
+          <input type="text" placeholder="ex: username" />
+        </div>
+
+        <div className="item">
+          <label htmlFor="ArtistName">
+            <button onClick={() => setIsFile(true)}>File</button>
+            <button onClick={() => setIsFile(false)}>Link</button>
+          </label>
+          {isFile ? (
+            <>
+              <p className="if-file">Send your file to this mail address!</p>
+              <input
+                type="text"
+                value="submit@realfermaudio.com"
+                disabled
+                style={{ cursor: "pointer" }}
+              />
+            </>
+          ) : (
+            <input type="text" placeholder="ex: only one link" />
+          )}
         </div>
 
         {isMessageActive ? (
           <div className="item">
-            <label htmlFor="ArtistName">Message:</label>
-            <input type="text" />
+            <label htmlFor="Message">Message</label>
+            <input type="text" placeholder="ex: message to ferm" />
           </div>
         ) : (
           <></>
         )}
 
-        {isFile ? (
-          <div className="item">
-            <p>Email: submit.realfermaudio.com</p>
-          </div>
-        ) : (
-          <div className="item">
-            <label htmlFor="ArtistName">Link:</label>
-            <input type="text" />
-          </div>
-        )}
-
         <div className="config-btn-container">
-          <button onClick={() => setIsFile(true)}>File</button>
-          <button onClick={() => setIsFile(false)}>Link</button>
           <button onClick={() => setIsMessageActive(!isMessageActive)}>
             Add a message
           </button>

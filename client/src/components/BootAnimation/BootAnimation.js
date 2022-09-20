@@ -13,10 +13,10 @@ const BootAnimation = () => {
   }, []);
 
   return (
-    <div class={isLoadingActive ? "spinner" : "spinner inactive"}>
-      <div class="spinner-item"></div>
-      <div class="spinner-item"></div>
-      <div class="spinner-item"></div>
+    <div className={isLoadingActive ? "spinner" : "spinner inactive"}>
+      <div className="spinner-item"></div>
+      <div className="spinner-item"></div>
+      <div className="spinner-item"></div>
     </div>
   );
 };
