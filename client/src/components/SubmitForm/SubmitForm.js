@@ -1,10 +1,44 @@
 import React, { useState } from "react";
 import "./SubmitForm.css";
+import { useNavigate } from "react-router-dom";
+
+import axiosInstance from "../../services/axios";
 
 const SubmitForm = ({ isFormActive, setIsFormActive }) => {
   const [isFile, setIsFile] = useState(false);
   const [isMessageActive, setIsMessageActive] = useState(false);
   const [errMessage, setErrMessage] = useState("");
+  const [userInput, setUserInput] = useState({
+    artist_name: "",
+    track_title: "",
+    youtube_username: "",
+    song_link: "",
+    message: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axiosInstance.post("queuer", {
+        artist_name: userInput?.artist_name ? userInput.artist_name : "Empty!",
+        track_title: userInput?.track_title ? userInput.track_title : "Empty!",
+        youtube_username: userInput?.youtube_username,
+        link: isFile ? userInput?.youtube_username : userInput?.song_link,
+        message: userInput?.message ? userInput.message : "Empty!",
+      });
+
+      res?.data && localStorage.setItem("userInfo", JSON.stringify(res?.data));
+      navigate("/queue");
+    } catch (error) {
+      setErrMessage("Connection failed!");
+
+      error?.response?.status && setErrMessage(error?.response?.data?.detail);
+
+      error?.response?.status === 422 &&
+        setErrMessage("Must include youtube username & link!");
+    }
+  };
 
   return (
     <div
@@ -22,15 +56,38 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
 
           <div className="item">
             <label htmlFor="ArtistName">{"Artist(s) name"}</label>
-            <input type="text" placeholder="ex: artist1, artist2, ..." />
+            <input
+              type="text"
+              placeholder="ex: artist1, artist2, ..."
+              onChange={(e) =>
+                setUserInput({ ...userInput, artist_name: e?.target?.value })
+              }
+            />
           </div>
+
           <div className="item">
             <label htmlFor="TrackName">Track title</label>
-            <input type="text" placeholder="ex: song name" />
+            <input
+              type="text"
+              placeholder="ex: song name"
+              onChange={(e) =>
+                setUserInput({ ...userInput, track_title: e?.target?.value })
+              }
+            />
           </div>
+
           <div className="item">
             <label htmlFor="YoutubeUsername">Youtube username</label>
-            <input type="text" placeholder="ex: username" />
+            <input
+              type="text"
+              placeholder="ex: username"
+              onChange={(e) =>
+                setUserInput({
+                  ...userInput,
+                  youtube_username: e?.target?.value,
+                })
+              }
+            />
           </div>
 
           <div className="item">
@@ -45,7 +102,16 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
                   />
                 </>
               ) : (
-                <input type="text" placeholder="ex: one link only" />
+                <input
+                  type="text"
+                  placeholder="ex: one link only"
+                  onChange={(e) =>
+                    setUserInput({
+                      ...userInput,
+                      song_link: e?.target?.value,
+                    })
+                  }
+                />
               )}
 
               <button
@@ -74,7 +140,16 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
           {isMessageActive ? (
             <div className="item">
               <label htmlFor="Message">Message</label>
-              <input type="text" placeholder="ex: message to ferm" />
+              <input
+                type="text"
+                placeholder="ex: message to ferm"
+                onChange={(e) =>
+                  setUserInput({
+                    ...userInput,
+                    message: e?.target?.value,
+                  })
+                }
+              />
             </div>
           ) : (
             <></>
@@ -89,7 +164,9 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
             </button>
 
             <div className="submit-btn-container">
-              <button className="form-btn">Submit</button>
+              <button className="form-btn" onClick={() => handleSubmit()}>
+                Submit
+              </button>
               <button
                 className="form-btn"
                 onClick={() => setIsFormActive(false)}

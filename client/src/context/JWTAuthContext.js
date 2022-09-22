@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect, useRef } from "react";
 
 import { validateToken } from "../utils/jwt";
-import { setSession, resetSession } from "../utils/session";
+import { setSession, resetSession, refresh } from "../utils/session";
 import axiosInstance from "../services/axios";
 
 const initialState = {
@@ -60,11 +60,26 @@ export const AuthProvider = (props) => {
     const initialize = async () => {
       try {
         const accessToken = localStorage.getItem("accessToken");
+        const refreshToken = localStorage.getItem("refreshToken");
 
         if (accessToken && validateToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axiosInstance.get("auth/admin/test-token");
+          const response = await axiosInstance.post("auth/admin/test-token");
+          const { data: admin } = response;
+          dispatch({
+            type: "INITIALIZE",
+            payload: {
+              isAuthenticated: true,
+              admin,
+            },
+          });
+        } else if (refreshToken && validateToken(refreshToken)) {
+          refresh(refreshToken);
+          const newTokens = await axiosInstance.post("auth/admin/refresh");
+          setSession(newTokens.data.access_token, newTokens.data.refresh_token);
+
+          const response = await axiosInstance.post("auth/admin/test-token");
           const { data: admin } = response;
           dispatch({
             type: "INITIALIZE",
@@ -104,7 +119,7 @@ export const AuthProvider = (props) => {
   const login = async (email, password) => {
     try {
       await getTokens(email, password);
-      const response = await axiosInstance.get("auth/admin/test-token");
+      const response = await axiosInstance.post("auth/admin/test-token");
       const { data: admin } = response;
       dispatch({
         type: "LOGIN",

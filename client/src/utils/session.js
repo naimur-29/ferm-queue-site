@@ -16,6 +16,17 @@ export const setSession = (accessToken, refreshToken = null) => {
   }
 };
 
+export const refresh = (refreshToken) => {
+  if (refreshToken) {
+    axiosInstance.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${refreshToken}`;
+  } else {
+    localStorage.removeItem("refresh_token");
+    delete axiosInstance.defaults.headers.common["Authorization"];
+  }
+};
+
 export const resetSession = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");

@@ -28,22 +28,9 @@ const App = () => {
                 <BootAnimation />
               ) : (
                 <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <PublicRoute>
-                        <Home />
-                      </PublicRoute>
-                    }
-                  />
-                  <Route
-                    path="/queue"
-                    element={
-                      <PublicRoute>
-                        <Queue />
-                      </PublicRoute>
-                    }
-                  />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/queue" element={<Queue />} />
+
                   <Route
                     path="/access"
                     element={

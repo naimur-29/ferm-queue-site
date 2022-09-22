@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 // Importing local components
 import Snow from "../../components/Snow/Snow";
@@ -19,6 +20,13 @@ const realFermAudioLogoImg =
 const Home = () => {
   const [isDisclaimerActive, setIsDisclaimerActive] = useState(false);
   const [isFormActive, setIsFormActive] = useState(false);
+  const [isAlreadyInQueue, setIsAlreadyInQueue] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.getItem("userInfo") && setIsAlreadyInQueue(true);
+  }, []);
 
   return (
     <section className="home-section-container">
@@ -92,7 +100,9 @@ const Home = () => {
               Join Queue
             </button>
 
-            <button className="btn">View Queue</button>
+            <button className="btn" onClick={() => navigate("/queue")}>
+              View Queue
+            </button>
           </div>
         </main>
 
@@ -104,19 +114,31 @@ const Home = () => {
           }
         >
           <p className="disclaimer">
-            *One submission per artist at a time. To guarantee your track is
+            {isAlreadyInQueue ? (
+              <>
+                <strong>*You've already Joined the queue!*</strong>
+                <br /> *One submission per artist at a time. To guarantee your
+                track is played for free, stay engaged and keep an eye on the
+                queue page. You may be put on hold after a certain time of
+                inactivity*
+              </>
+            ) : (
+              `*One submission per artist at a time. To guarantee your track is
             played for free, stay engaged and keep an eye on the queue page. You
-            may be put on hold after a certain time of inactivity*
+            may be put on hold after a certain time of inactivity*`
+            )}
           </p>
 
           <button
             className="close-overlay"
             onClick={() => {
               setIsDisclaimerActive(false);
-              setIsFormActive(true);
+              isAlreadyInQueue
+                ? navigate("/queue")
+                : setIsDisclaimerActive(true);
             }}
           >
-            Join Queue
+            {isAlreadyInQueue ? "View Queue" : "Join Queue"}
           </button>
         </div>
 
