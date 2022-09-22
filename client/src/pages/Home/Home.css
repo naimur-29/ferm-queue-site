@@ -5,7 +5,7 @@
   margin: 0 auto;
   overflow: hidden;
   animation: startup 1.5s ease-out;
-  animation-delay: 3s;
+  animation-delay: 1s;
 }
 
 .home-section-container .main-container {
@@ -243,9 +243,16 @@
   color: #fff;
   padding: 16px 10px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
   max-width: 920px;
+  margin-bottom: 20px;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 920px) {
+  .home-section-container .main-container .disclaimer-container .disclaimer {
+    font-size: 1.7rem;
+  }
 }
 
 .home-section-container .main-container .disclaimer-container .close-overlay {
@@ -335,12 +342,8 @@
     width: 80vw;
   }
 
-  .home-section-container
-    .main-container
-    .main-section-container
-    .disclaimer-container
-    .disclaimer {
-    font-size: 1rem;
+  .home-section-container .main-container .disclaimer-container .disclaimer {
+    font-size: 1.4rem;
   }
 }
 

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./BootAnimation.css";
 
-const BootAnimation = () => {
+const BootAnimation = ({ time }) => {
   const [isLoadingActive, setIsLoadingActive] = useState(true);
 
   useEffect(() => {
-    let timer1 = setTimeout(() => setIsLoadingActive(false), 3 * 1000);
+    if (time) {
+      let timer1 = setTimeout(() => setIsLoadingActive(false), time * 1000);
 
-    return () => {
-      clearTimeout(timer1);
-    };
-  }, []);
+      return () => {
+        clearTimeout(timer1);
+      };
+    }
+  }, [time]);
 
   return (
     <div className={isLoadingActive ? "spinner" : "spinner inactive"}>

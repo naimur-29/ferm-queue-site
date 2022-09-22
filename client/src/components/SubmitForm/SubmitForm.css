@@ -82,6 +82,16 @@
   animation-delay: -3s;
 }
 
+.submit-form-container .outer-container .form-container .error-message {
+  background-color: #f47;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
 .submit-form-container .outer-container .form-container .title {
   color: aliceblue;
   font-size: 2rem;
@@ -176,7 +186,7 @@
     .form-container
     .item
     .submission-type-btn {
-    background-color: #2695dbaa;
+    background-color: #2695db;
   }
 
   .submit-form-container
@@ -184,7 +194,7 @@
     .form-container
     .item
     .submission-type-btn:hover {
-    background-color: #2695db;
+    background-color: #2695dbaa;
     transition: all 0.15s ease;
   }
 }
@@ -225,14 +235,14 @@
 
 @media (hover: hover) {
   .submit-form-container .outer-container .config-btn-container .form-btn {
-    background-color: #2695dbaa;
+    background-color: #2695db;
   }
 
   .submit-form-container
     .outer-container
     .config-btn-container
     .form-btn:hover {
-    background-color: #2695db;
+    background-color: #2695dbaa;
     transition: all 0.15s ease;
   }
 }

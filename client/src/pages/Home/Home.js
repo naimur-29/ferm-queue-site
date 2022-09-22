@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <section className="home-section-container">
       {/* loading animation */}
-      <BootAnimation />
+      <BootAnimation time={1} />
 
       {/* Snow Effect on Background */}
       <Snow />
@@ -104,10 +104,9 @@ const Home = () => {
           }
         >
           <p className="disclaimer">
-            *Queue is only open during showtime. One submission per artist at a
-            time. To guarantee your track is played for free, stay engaged and
-            keep an eye on the queue page. You may be put on hold after a
-            certain time of inactivity*
+            *One submission per artist at a time. To guarantee your track is
+            played for free, stay engaged and keep an eye on the queue page. You
+            may be put on hold after a certain time of inactivity*
           </p>
 
           <button

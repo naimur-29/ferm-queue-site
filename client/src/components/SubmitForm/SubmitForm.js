@@ -4,6 +4,7 @@ import "./SubmitForm.css";
 const SubmitForm = ({ isFormActive, setIsFormActive }) => {
   const [isFile, setIsFile] = useState(false);
   const [isMessageActive, setIsMessageActive] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
 
   return (
     <div
@@ -16,6 +17,9 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
       >
         <div className="form-container">
           <h3 className="title">Enter your submission</h3>
+
+          {errMessage ? <p className="error-message">{errMessage}</p> : <></>}
+
           <div className="item">
             <label htmlFor="ArtistName">{"Artist(s) name"}</label>
             <input type="text" placeholder="ex: artist1, artist2, ..." />
@@ -56,7 +60,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
                   }
                 }}
               >
-                {isFile ? "File" : "Link"}
+                {!isFile ? "File" : "Link"}
               </button>
             </div>
 
