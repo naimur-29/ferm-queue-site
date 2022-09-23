@@ -4,7 +4,7 @@
   min-height: 100vh;
   margin: 0 auto;
   overflow: hidden;
-  animation: startup 1.5s ease-out;
+  animation: startup 2s ease-out;
   animation-delay: 1s;
 }
 
@@ -199,7 +199,7 @@
     transparent 3%,
     #eb58b5 3%,
     #eb58b5 5%,
-    rgba(255, 255, 255, 0.7) 5%
+    #fff 5%
   );
   text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
   clip-path: var(--slice-0);

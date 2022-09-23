@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Importing local components
 import Snow from "../../components/Snow/Snow";
@@ -38,7 +39,12 @@ const Home = () => {
 
       <div className="main-container">
         {/* Top nav section with logo & socials */}
-        <nav className="nav-container">
+        <motion.nav
+          className="nav-container"
+          initial={{ y: "-200%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.1 }}
+        >
           {/* Logo section */}
           <div className="left">
             <a
@@ -85,7 +91,7 @@ const Home = () => {
               <img src={ytIcon} alt="youtube icon" className="icons" />
             </a>
           </div>
-        </nav>
+        </motion.nav>
 
         {/* Hero section */}
         <main className="main-section-container">
@@ -113,7 +119,12 @@ const Home = () => {
               : `disclaimer-container active`
           }
         >
-          <p className="disclaimer">
+          <motion.p
+            className="disclaimer"
+            initial={{ y: "-100%" }}
+            animate={isDisclaimerActive ? { y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+          >
             {isAlreadyInQueue ? (
               <>
                 <strong>*You've already Joined the queue!*</strong>
@@ -124,22 +135,33 @@ const Home = () => {
               </>
             ) : (
               `*One submission per artist at a time. To guarantee your track is
-            played for free, stay engaged and keep an eye on the queue page. You
-            may be put on hold after a certain time of inactivity*`
+              played for free, stay engaged and keep an eye on the queue page. You
+              may be put on hold after a certain time of inactivity*`
             )}
-          </p>
+          </motion.p>
 
-          <button
+          <motion.button
+            className="close-overlay"
+            onClick={() => setIsDisclaimerActive(false)}
+            initial={{ x: "-100%", opacity: 0 }}
+            animate={isDisclaimerActive ? { x: 0, opacity: 1 } : {}}
+            transition={{ delay: 0, duration: 0.25 }}
+          >
+            Go Back
+          </motion.button>
+
+          <motion.button
             className="close-overlay"
             onClick={() => {
               setIsDisclaimerActive(false);
-              isAlreadyInQueue
-                ? navigate("/queue")
-                : setIsDisclaimerActive(true);
+              isAlreadyInQueue ? navigate("/queue") : setIsFormActive(true);
             }}
+            initial={{ x: "100%", opacity: 0 }}
+            animate={isDisclaimerActive ? { x: 0, opacity: 1 } : {}}
+            transition={{ delay: 0, duration: 0.25 }}
           >
             {isAlreadyInQueue ? "View Queue" : "Join Queue"}
-          </button>
+          </motion.button>
         </div>
 
         <SubmitForm
