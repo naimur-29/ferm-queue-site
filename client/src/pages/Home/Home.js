@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Importing local components
 import Snow from "../../components/Snow/Snow";
@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <section className="home-section-container">
       {/* loading animation */}
-      <BootAnimation time={1} />
+      <BootAnimation time={2} />
 
       {/* Snow Effect on Background */}
       <Snow />
@@ -43,7 +43,7 @@ const Home = () => {
           className="nav-container"
           initial={{ y: "-200%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.1 }}
+          transition={{ delay: 2.2 }}
         >
           {/* Logo section */}
           <div className="left">

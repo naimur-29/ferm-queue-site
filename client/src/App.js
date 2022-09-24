@@ -6,6 +6,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "react-query";
 
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
@@ -17,9 +18,11 @@ import BootAnimation from "./components/BootAnimation/BootAnimation";
 import Authenticated from "./auth/Authenticated";
 import PublicRoute from "./auth/PublicRoute";
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
           <AuthConsumer>
@@ -56,7 +59,7 @@ const App = () => {
           </AuthConsumer>
         </Router>
       </AuthProvider>
-    </>
+    </QueryClientProvider>
   );
 };
 

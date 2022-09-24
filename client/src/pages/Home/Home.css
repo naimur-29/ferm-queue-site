@@ -4,8 +4,8 @@
   min-height: 100vh;
   margin: 0 auto;
   overflow: hidden;
-  animation: startup 2s ease-out;
-  animation-delay: 1s;
+  animation: startup 2s ease-in;
+  animation-delay: 1.9s;
 }
 
 .home-section-container .main-container {
@@ -24,7 +24,7 @@
   content: "";
   width: 100%;
   max-width: 1920px;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   top: 0;
   left: 50%;
