@@ -17,6 +17,7 @@ const TimeBeautifier = (timeString) => {
 
   // get users time offset:
   let offset = new Date().getTimezoneOffset();
+  offset *= -1;
 
   time = time.split(":"); // convert to array
 
