@@ -26,7 +26,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.getItem("userInfo") && setIsAlreadyInQueue(true);
+    if (
+      localStorage.getItem("userInfo") !== "undefined" &&
+      localStorage.getItem("userInfo")
+    ) {
+      const user = JSON.parse(localStorage.getItem("userInfo"));
+      user?.user_id && setIsAlreadyInQueue(true);
+    }
   }, []);
 
   return (

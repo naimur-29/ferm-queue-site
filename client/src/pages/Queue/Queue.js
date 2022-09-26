@@ -84,19 +84,34 @@ const Queue = () => {
   }, [isLoadingQueue, isLoadingOnHoldQueue, queue, onHoldQueue]);
 
   useEffect(() => {
-    setCurrentQueuer(JSON.parse(localStorage.getItem("userInfo")));
+    if (
+      localStorage.getItem("userInfo") !== "undefined" &&
+      localStorage.getItem("userInfo")
+    ) {
+      setCurrentQueuer(JSON.parse(localStorage.getItem("userInfo")));
+    }
   }, []);
 
   // remove on hold:
-  const { isLoading: isRefreshing } = useQuery("refresh-queuer", () => {
-    return axiosInstance.put(`queuer/${currentQueuer?.user_id}`, {
-      ...currentQueuer,
-      on_hold: false,
-    });
+  useQuery("refresh-queuer", () => {
+    let targetID = "";
+    if (
+      localStorage.getItem("userInfo") !== "undefined" &&
+      localStorage.getItem("userInfo")
+    ) {
+      targetID = JSON.parse(localStorage.getItem("userInfo"))?.user_id;
+    }
+    console.log(targetID);
+    return (
+      targetID &&
+      axiosInstance.put(`queuer/${targetID}`, {
+        ...currentQueuer,
+        on_hold: false,
+      })
+    );
   });
 
-  if (isLoadingQueue || isLoadingOnHoldQueue || isRefreshing)
-    return <BootAnimation />;
+  if (isLoadingQueue || isLoadingOnHoldQueue) return <BootAnimation />;
 
   return (
     <section className="queue-section-container">
@@ -124,7 +139,7 @@ const Queue = () => {
           queueState={onHoldQueueState}
           setQueueState={setOnHoldQueueState}
           heading={"On-hold Queue"}
-          opacity={0.5}
+          opacity={0.3}
         />
       </main>
     </section>
