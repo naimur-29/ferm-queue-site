@@ -17,8 +17,8 @@ app = FastAPI(
 
 # Backend cors origins
 origins = [
-    "http://localhost:3000",
-    "https://ferm-queue.naimur29.com/"
+    "https://ferm-queue.naimur29.com",
+    "http://localhost:3000"
 ]
 
 app.add_middleware (
