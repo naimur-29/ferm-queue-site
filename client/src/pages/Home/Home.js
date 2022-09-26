@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useQuery } from "react-query";
 
 // Importing local components
 import Snow from "../../components/Snow/Snow";
@@ -14,6 +15,9 @@ import instaIcon from "../../assets/socials/insta-icon.svg";
 import twitterIcon from "../../assets/socials/twitter-icon.svg";
 import ytIcon from "../../assets/socials/yt-icon.svg";
 
+// local services:
+import axiosInstance from "../../services/axios";
+
 // constant variables
 const realFermAudioLogoImg =
   "https://cdn.discordapp.com/attachments/1011744799629529208/1019645944221941841/realFERMaudio_logo_w_face2.png";
@@ -25,6 +29,21 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  // fetching active queue:
+  const { isLoading: isLoadingCurrentQueuer, isError: isCurrentQueuerDead } =
+    useQuery("current-queuer", () => {
+      let targetID = "";
+      if (
+        localStorage.getItem("userInfo") !== "undefined" &&
+        localStorage.getItem("userInfo")
+      ) {
+        targetID = JSON.parse(localStorage.getItem("userInfo"))?.user_id;
+      }
+      if (targetID.length > 10) {
+        return axiosInstance.get(`queuer/${targetID}`);
+      }
+    });
+
   useEffect(() => {
     if (
       localStorage.getItem("userInfo") !== "undefined" &&
@@ -34,6 +53,15 @@ const Home = () => {
       user?.user_id && setIsAlreadyInQueue(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (isCurrentQueuerDead) {
+      localStorage.removeItem("userInfo");
+      setIsAlreadyInQueue(false);
+    }
+  }, [isCurrentQueuerDead]);
+
+  if (isLoadingCurrentQueuer) return <BootAnimation />;
 
   return (
     <section className="home-section-container">
