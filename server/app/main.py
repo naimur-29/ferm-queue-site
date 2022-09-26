@@ -16,7 +16,10 @@ app = FastAPI(
 )
 
 # Backend cors origins
-origins = [settings.origin]
+origins = [
+    "http://localhost:3000",
+    "https://ferm-queue.naimur29.com/"
+]
 
 app.add_middleware (
     CORSMiddleware,
