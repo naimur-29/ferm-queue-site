@@ -11,7 +11,7 @@ class Settings_v1(BaseSettings):
     
     # Other Info
     admin: str = ""
-    origin: str = ""
+    origin: str = "http://localhost:3000"
     
     # Database
     database_uri: str = "mongodb://localhost:27017"
