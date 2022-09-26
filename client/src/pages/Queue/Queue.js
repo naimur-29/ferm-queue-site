@@ -15,11 +15,20 @@ const TimeBeautifier = (timeString) => {
   let date = timeString.slice(0, 10);
   let time = timeString.slice(11, -7);
 
+  // get users time offset:
+  let offset = new Date().getTimezoneOffset();
+
   time = time.split(":"); // convert to array
 
   // fetch
-  let hours = Number(time[0]);
-  let minutes = Number(time[1]);
+  let hours = Number(time[0]) + Math.floor(offset / 60);
+  let minutes = Number(time[1]) + (offset % 60);
+
+  // calculate
+  if (minutes > 60) {
+    minutes = minutes % 60;
+    hours++;
+  }
 
   // calculate
   let timeValue;
