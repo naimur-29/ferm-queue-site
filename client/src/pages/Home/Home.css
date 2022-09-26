@@ -4,7 +4,7 @@
   min-height: 100vh;
   margin: 0 auto;
   overflow: hidden;
-  animation: startup 2s ease-in;
+  animation: startup 1s ease-in;
   animation-delay: 1.9s;
 }
 

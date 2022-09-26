@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Queue.css";
 import { useQuery } from "react-query";
-import { motion } from "framer-motion";
 
 // local services:
 import axiosInstance from "../../services/axios";
 
 // local components:
 import BootAnimation from "../../components/BootAnimation/BootAnimation";
+import QueueDisclaimer from "../../components/QueueDisclaimer/QueueDisclaimer";
+import PublicQueueContainer from "../../components/PublicQueueContainer/PublicQueueContainer";
 
 // global declarations:
 const TimeBeautifier = (timeString) => {
@@ -77,148 +78,45 @@ const Queue = () => {
   }, []);
 
   // remove on hold:
-  useQuery("refresh-queuer", () => {
+  const { isLoading: isRefreshing } = useQuery("refresh-queuer", () => {
     return axiosInstance.put(`queuer/${currentQueuer?.user_id}`, {
       ...currentQueuer,
       on_hold: false,
     });
   });
 
-  if (isLoadingQueue || isLoadingOnHoldQueue) return <BootAnimation />;
+  if (isLoadingQueue || isLoadingOnHoldQueue || isRefreshing)
+    return <BootAnimation />;
 
   return (
     <section className="queue-section-container">
-      <div className="main-container">
+      <main className="main-container">
         <h1 className="title">Upcoming Artist Radio</h1>
 
-        {isDisclaimerActive ? <div className="overlay"></div> : <></>}
-        <motion.div
-          className={
-            isDisclaimerActive
-              ? "disclaimer-container active"
-              : "disclaimer-container"
-          }
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.15 }}
-        >
-          <button
-            className="close-btn"
-            onClick={() => setIsDisclaimerActive(false)}
-          >
-            X
-          </button>
-          <article className="disclaimer">
-            *To guarantee your track is played for free, stay engaged and keep
-            an eye on the queue page. You may be put on hold after a certain
-            time of inactivity*
-          </article>
-        </motion.div>
+        <QueueDisclaimer
+          isDisclaimerActive={isDisclaimerActive}
+          setIsDisclaimerActive={setIsDisclaimerActive}
+        />
 
-        <div className="queue-container">
-          <h2>Queue</h2>
-          {queue?.data?.length ? (
-            queue?.data.map((item, ind) => (
-              <div
-                key={ind}
-                className={!queueState[ind] ? "queuer active" : "queuer"}
-              >
-                <p className="username">
-                  <span>
-                    {queueState[ind] ? "Username:" : item?.youtube_username}
-                  </span>{" "}
-                  {queueState[ind] ? item?.youtube_username : ""}
-                </p>
+        {/* queue section */}
+        <PublicQueueContainer
+          TimeBeautifier={TimeBeautifier}
+          queue={queue}
+          queueState={queueState}
+          setQueueState={setQueueState}
+          heading={"Queue"}
+          opacity={1}
+        />
 
-                <a href={item?.link} target="_blank" rel="noreferrer">
-                  <button className="link-btn">{">>"}</button>
-                </a>
-                <button
-                  className="info-btn"
-                  onClick={() => {
-                    let newArr = [...queueState];
-                    newArr[ind] = !newArr[ind];
-                    setQueueState([...newArr]);
-                  }}
-                >
-                  {ind + 1}
-                </button>
-
-                {queueState[ind] ? (
-                  <>
-                    <p>
-                      <span>Artist:</span> {item?.artist_name}
-                    </p>
-                    <p>
-                      <span>Track:</span> {item?.track_title}
-                    </p>
-                    <p>
-                      <span>Joined:</span> {TimeBeautifier(item?.created_at)}
-                    </p>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            ))
-          ) : (
-            <h3>Empty!</h3>
-          )}
-        </div>
-
-        <div className="on-hold-queue-container">
-          <h2>On Hold</h2>
-          {onHoldQueue?.data?.length ? (
-            onHoldQueue?.data.map((item, ind) => (
-              <div
-                key={ind}
-                className={!onHoldQueueState[ind] ? "queuer active" : "queuer"}
-              >
-                <p className="username">
-                  <span>
-                    {onHoldQueueState[ind]
-                      ? "Username:"
-                      : item?.youtube_username}
-                  </span>{" "}
-                  {onHoldQueueState[ind] ? item?.youtube_username : ""}
-                </p>
-
-                <a href={item?.link} target="_blank" rel="noreferrer">
-                  <button className="link-btn">{">>"}</button>
-                </a>
-                <button
-                  className="info-btn"
-                  onClick={() => {
-                    let newArr = [...onHoldQueueState];
-                    newArr[ind] = !newArr[ind];
-                    setOnHoldQueueState([...newArr]);
-                  }}
-                >
-                  {ind + 1}
-                </button>
-
-                {onHoldQueueState[ind] ? (
-                  <>
-                    <p>
-                      <span>Artist:</span> {item?.artist_name}
-                    </p>
-                    <p>
-                      <span>Track:</span> {item?.track_title}
-                    </p>
-                    <p>
-                      <span>Joined:</span> {TimeBeautifier(item?.created_at)}
-                    </p>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            ))
-          ) : (
-            <h3>Empty!</h3>
-          )}
-        </div>
-      </div>
+        <PublicQueueContainer
+          TimeBeautifier={TimeBeautifier}
+          queue={onHoldQueue}
+          queueState={onHoldQueueState}
+          setQueueState={setOnHoldQueueState}
+          heading={"On-hold Queue"}
+          opacity={0.5}
+        />
+      </main>
     </section>
   );
 };
