@@ -24,6 +24,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
         artist_name: userInput?.artist_name ? userInput.artist_name : "Empty!",
         track_title: userInput?.track_title ? userInput.track_title : "Empty!",
         youtube_username: userInput?.youtube_username,
+        username: userInput?.youtube_username.toLowerCase(),
         link: isFile ? userInput?.youtube_username : userInput?.song_link,
         message: userInput?.message ? userInput.message : "Empty!",
       });

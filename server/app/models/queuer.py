@@ -7,7 +7,8 @@ class Queuer(Document):
     user_id: UUID = Field(default_factory=uuid4)
     artist_name: str
     track_title: str
-    youtube_username: Indexed(str, unique=True)
+    youtube_username: str
+    username: Indexed(str, unique=True)
     link: Indexed(str, unique=True)
     message: str = ""
     on_hold: bool = False

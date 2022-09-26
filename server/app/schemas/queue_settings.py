@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class QueueSettingsCreate(BaseModel):
     name: str
-    state: bool = False
+    state: str
 
 class QueueSettingsUpdateState(BaseModel):
-    state: bool
+    state: str

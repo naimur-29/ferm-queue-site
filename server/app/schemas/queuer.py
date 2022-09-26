@@ -7,6 +7,7 @@ class QueuerCreate(BaseModel):
     artist_name: str = Field(..., min_length=1, max_length=100, description="artist name")
     track_title: str = Field(..., min_length=1, max_length=100, description="track_title")
     youtube_username: str = Field(..., min_length=1, max_length=100, description="youtube username")
+    username: str = Field(..., min_length=1, max_length=100, description="username")
     link: str = Field(..., min_length=1, max_length=500, description="song link")
     message: Optional[str] = Field(..., max_length=200, description="message for streamer")
     
@@ -14,6 +15,7 @@ class QueuerUpdate(BaseModel):
     artist_name: Optional[str] = Field(..., min_length=1, max_length=100, description="artist name")
     track_title: Optional[str] = Field(..., min_length=1, max_length=100, description="track_title")
     youtube_username: Optional[str] = Field(..., min_length=1, max_length=100, description="youtube username")
+    username: str = Field(..., min_length=1, max_length=100, description="username")
     link: Optional[str] = Field(..., min_length=1, max_length=500, description="song link")
     message: Optional[str] = Field(..., max_length=200, description="message for streamer")
     on_hold: Optional[bool]

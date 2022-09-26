@@ -101,7 +101,6 @@ const Queue = () => {
     ) {
       targetID = JSON.parse(localStorage.getItem("userInfo"))?.user_id;
     }
-    console.log(targetID);
     return (
       targetID &&
       axiosInstance.put(`queuer/${targetID}`, {

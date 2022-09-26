@@ -48,7 +48,7 @@ async def get_queuer_by_uuid(id: UUID):
 @queuer_router.post("/", summary="Add queuer to queue", response_model=QueuerResponsePersonal, status_code=status.HTTP_201_CREATED)
 async def add_queuer(data: QueuerCreate):
     queue_status = await QueueSettingsService.get_queue_setting_by_name("isQueueOn")
-    if not queue_status.state:
+    if not queue_status.state.lower() == "true":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Queue not active at this moment!"
