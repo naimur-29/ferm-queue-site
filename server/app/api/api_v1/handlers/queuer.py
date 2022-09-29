@@ -59,7 +59,7 @@ async def add_queuer(data: QueuerCreate):
     except pymongo.errors.DuplicateKeyError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Already submitted!"
+            detail="Already Joined The Queue!"
         )
         
 @queuer_router.put("/{id}", summary="Update on hold status", response_model=QueuerResponsePersonal)

@@ -25,9 +25,8 @@ const TimeBeautifier = (timeString) => {
   let hours = Number(time[0]) + Math.floor(offset / 60);
   let minutes = Number(time[1]) + (offset % 60);
 
-  // calculate
   if (minutes > 60) {
-    minutes = minutes % 60;
+    minutes -= 60;
     hours++;
   }
 
@@ -37,13 +36,13 @@ const TimeBeautifier = (timeString) => {
   if (hours > 0 && hours <= 12) {
     timeValue = "" + hours;
   } else if (hours > 12) {
-    timeValue = "" + (hours - 12);
+    timeValue = "" + (hours - 24);
   } else if (hours === 0) {
     timeValue = "12";
   }
 
   timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
-  timeValue += hours >= 12 ? " PM" : " AM";
+  timeValue += hours >= 12 ? " AM" : " PM";
 
   return date + " at " + timeValue;
 };
@@ -65,16 +64,18 @@ const Queue = () => {
   const [onHoldQueueState, setOnHoldQueueState] = useState([]);
 
   // fetching active queue:
-  const { isLoading: isLoadingQueue, data: queue } = useQuery(
-    "queue",
-    fetchQueue
-  );
+  const {
+    isLoading: isLoadingQueue,
+    data: queue,
+    isError: isQueueError,
+  } = useQuery("queue", fetchQueue);
 
   // fetching on hold queue:
-  const { isLoading: isLoadingOnHoldQueue, data: onHoldQueue } = useQuery(
-    "on-hold-queue",
-    fetchOnHoldQueue
-  );
+  const {
+    isLoading: isLoadingOnHoldQueue,
+    data: onHoldQueue,
+    isError: isOnHoldQueueError,
+  } = useQuery("on-hold-queue", fetchOnHoldQueue);
 
   useEffect(() => {
     if (!isLoadingQueue && !isLoadingOnHoldQueue) {
@@ -83,31 +84,25 @@ const Queue = () => {
     }
   }, [isLoadingQueue, isLoadingOnHoldQueue, queue, onHoldQueue]);
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("userInfo") !== "undefined" &&
-      localStorage.getItem("userInfo")
-    ) {
-      setCurrentQueuer(JSON.parse(localStorage.getItem("userInfo")));
-    }
-  }, []);
-
   // remove on hold:
   useQuery("refresh-queuer", () => {
-    let targetID = "";
-    if (
-      localStorage.getItem("userInfo") !== "undefined" &&
-      localStorage.getItem("userInfo")
-    ) {
-      targetID = JSON.parse(localStorage.getItem("userInfo"))?.user_id;
+    let targetQueuer = {};
+    if (localStorage.getItem("userInfo") !== "undefined") {
+      targetQueuer = JSON.parse(localStorage.getItem("userInfo"));
+      setCurrentQueuer(targetQueuer);
     }
-    return (
-      targetID &&
-      axiosInstance.put(`queuer/${targetID}`, {
-        ...currentQueuer,
+
+    if (targetQueuer?.user_id) {
+      return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
+        artist_name: targetQueuer?.artist_name,
+        track_title: targetQueuer?.track_title,
+        youtube_username: targetQueuer?.youtube_username,
+        username: targetQueuer?.youtube_username?.toLowerCase(),
+        link: targetQueuer?.link,
+        message: targetQueuer?.message,
         on_hold: false,
-      })
-    );
+      });
+    }
   });
 
   if (isLoadingQueue || isLoadingOnHoldQueue) return <BootAnimation />;
@@ -125,7 +120,7 @@ const Queue = () => {
         {/* queue section */}
         <PublicQueueContainer
           TimeBeautifier={TimeBeautifier}
-          queue={queue}
+          queue={isQueueError ? {} : queue}
           queueState={queueState}
           setQueueState={setQueueState}
           heading={"Queue"}
@@ -135,7 +130,7 @@ const Queue = () => {
         <PublicQueueContainer
           TimeBeautifier={TimeBeautifier}
           queue={onHoldQueue}
-          queueState={onHoldQueueState}
+          queueState={isOnHoldQueueError ? {} : onHoldQueueState}
           setQueueState={setOnHoldQueueState}
           heading={"On-hold Queue"}
           opacity={0.3}

@@ -166,11 +166,14 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
 
             <div className="submit-btn-container">
               <button className="form-btn" onClick={() => handleSubmit()}>
-                Submit
+                Join
               </button>
               <button
                 className="form-btn"
-                onClick={() => setIsFormActive(false)}
+                onClick={() => {
+                  setIsFormActive(false);
+                  setErrMessage("");
+                }}
               >
                 Cancel
               </button>
