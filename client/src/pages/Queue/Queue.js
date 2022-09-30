@@ -6,46 +6,9 @@ import { useQuery } from "react-query";
 import axiosInstance from "../../services/axios";
 
 // local components:
-import BootAnimation from "../../components/BootAnimation/BootAnimation";
 import QueueDisclaimer from "../../components/QueueDisclaimer/QueueDisclaimer";
 import PublicQueueContainer from "../../components/PublicQueueContainer/PublicQueueContainer";
-
-// global declarations:
-const TimeBeautifier = (timeString) => {
-  let date = timeString.slice(0, 10);
-  let time = timeString.slice(11, -7);
-
-  // get users time offset:
-  let offset = new Date().getTimezoneOffset();
-  offset *= -1;
-
-  time = time.split(":"); // convert to array
-
-  // fetch
-  let hours = Number(time[0]) + Math.floor(offset / 60);
-  let minutes = Number(time[1]) + (offset % 60);
-
-  if (minutes > 60) {
-    minutes -= 60;
-    hours++;
-  }
-
-  // calculate
-  let timeValue;
-
-  if (hours > 0 && hours <= 12) {
-    timeValue = "" + hours;
-  } else if (hours > 12) {
-    timeValue = "" + (hours - 24);
-  } else if (hours === 0) {
-    timeValue = "12";
-  }
-
-  timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
-  timeValue += hours >= 12 ? " AM" : " PM";
-
-  return date + " at " + timeValue;
-};
+import PublicQueueLoading from "../../components/PublicQueueContainer/PublicQueueLoading";
 
 // query functions:
 const fetchQueue = () => {
@@ -57,7 +20,6 @@ const fetchOnHoldQueue = () => {
 
 const Queue = () => {
   const [isDisclaimerActive, setIsDisclaimerActive] = useState(true);
-  const [currentQueuer, setCurrentQueuer] = useState({});
 
   // queue & onHoldQueue states
   const [queueState, setQueueState] = useState([]);
@@ -89,7 +51,6 @@ const Queue = () => {
     let targetQueuer = {};
     if (localStorage.getItem("userInfo") !== "undefined") {
       targetQueuer = JSON.parse(localStorage.getItem("userInfo"));
-      setCurrentQueuer(targetQueuer);
     }
 
     if (targetQueuer?.user_id) {
@@ -105,8 +66,6 @@ const Queue = () => {
     }
   });
 
-  if (isLoadingQueue || isLoadingOnHoldQueue) return <BootAnimation />;
-
   return (
     <section className="queue-section-container">
       <main className="main-container">
@@ -118,23 +77,32 @@ const Queue = () => {
         />
 
         {/* queue section */}
-        <PublicQueueContainer
-          TimeBeautifier={TimeBeautifier}
-          queue={isQueueError ? {} : queue}
-          queueState={queueState}
-          setQueueState={setQueueState}
-          heading={"Queue"}
-          opacity={1}
-        />
+        {isLoadingQueue ? (
+          <PublicQueueLoading heading={"Queue"} opacity={1} />
+        ) : (
+          <PublicQueueContainer
+            queue={isQueueError ? {} : queue}
+            queueState={queueState}
+            setQueueState={setQueueState}
+            heading={"Queue"}
+            opacity={1}
+          />
+        )}
 
-        <PublicQueueContainer
-          TimeBeautifier={TimeBeautifier}
-          queue={onHoldQueue}
-          queueState={isOnHoldQueueError ? {} : onHoldQueueState}
-          setQueueState={setOnHoldQueueState}
-          heading={"On-hold Queue"}
-          opacity={0.3}
-        />
+        {isLoadingOnHoldQueue ? (
+          <PublicQueueLoading heading={"On-hold Queue"} />
+        ) : (
+          <PublicQueueContainer
+            queue={isOnHoldQueueError ? {} : onHoldQueue}
+            queueState={onHoldQueueState}
+            setQueueState={setOnHoldQueueState}
+            heading={"On-hold Queue"}
+            opacity={0.3}
+          />
+        )}
+
+        {/* Navigation */}
+        <div className="nav-container"></div>
       </main>
     </section>
   );

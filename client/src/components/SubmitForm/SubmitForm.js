@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import "./SubmitForm.css";
 import { useNavigate } from "react-router-dom";
 
+// Local Components:
+import BootAnimation from "../../components/BootAnimation/BootAnimation";
+
+// Local Services:
 import axiosInstance from "../../services/axios";
 
 const SubmitForm = ({ isFormActive, setIsFormActive }) => {
@@ -15,11 +19,14 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
     song_link: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
+      setIsLoading(true);
+
       const res = await axiosInstance.post("queuer", {
         artist_name: userInput?.artist_name ? userInput.artist_name : "Empty!",
         track_title: userInput?.track_title ? userInput.track_title : "Empty!",
@@ -39,7 +46,11 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
       error?.response?.status === 422 &&
         setErrMessage("Must include youtube username & link!");
     }
+
+    setIsLoading(false);
   };
+
+  if (isLoading) return <BootAnimation />;
 
   return (
     <div
@@ -61,7 +72,10 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
               type="text"
               placeholder="ex: artist1, artist2, ..."
               onChange={(e) =>
-                setUserInput({ ...userInput, artist_name: e?.target?.value })
+                setUserInput({
+                  ...userInput,
+                  artist_name: e?.target?.value.trim(),
+                })
               }
             />
           </div>
@@ -72,7 +86,10 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
               type="text"
               placeholder="ex: song name"
               onChange={(e) =>
-                setUserInput({ ...userInput, track_title: e?.target?.value })
+                setUserInput({
+                  ...userInput,
+                  track_title: e?.target?.value.trim(),
+                })
               }
             />
           </div>
@@ -85,7 +102,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
               onChange={(e) =>
                 setUserInput({
                   ...userInput,
-                  youtube_username: e?.target?.value,
+                  youtube_username: e?.target?.value.trim(),
                 })
               }
             />
@@ -109,7 +126,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
                   onChange={(e) =>
                     setUserInput({
                       ...userInput,
-                      song_link: e?.target?.value,
+                      song_link: e?.target?.value.trim(),
                     })
                   }
                 />
@@ -147,7 +164,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
                 onChange={(e) =>
                   setUserInput({
                     ...userInput,
-                    message: e?.target?.value,
+                    message: e?.target?.value.trim(),
                   })
                 }
               />

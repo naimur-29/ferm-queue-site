@@ -1,14 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./PublicQueueContainer.css";
 
-const PublicQueue = ({
-  TimeBeautifier,
+// Global Functions & Variables:
+const TimeBeautifier = (timeString) => {
+  let date = timeString.slice(0, 10);
+  let time = timeString.slice(11, -7);
+
+  // get users time offset:
+  let offset = new Date().getTimezoneOffset();
+  offset *= -1;
+
+  time = time.split(":"); // convert to array
+
+  // fetch
+  let hours = Number(time[0]) + Math.floor(offset / 60);
+  let minutes = Number(time[1]) + (offset % 60);
+
+  if (minutes > 60) {
+    minutes -= 60;
+    hours++;
+  }
+
+  // calculate
+  let timeValue;
+
+  if (hours > 0 && hours <= 12) {
+    timeValue = "" + hours;
+  } else if (hours > 12) {
+    timeValue = "" + (hours - 24);
+  } else if (hours === 0) {
+    timeValue = "12";
+  }
+
+  timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
+  timeValue += hours >= 12 ? " AM" : " PM";
+
+  return date + " at " + timeValue;
+};
+
+const PublicQueueContainer = ({
   queue,
   queueState,
   setQueueState,
   heading,
   opacity,
 }) => {
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    if (localStorage.getItem("userInfo") !== "undefined") {
+      setCurrentUser(JSON.parse(localStorage.getItem("userInfo")));
+    }
+  }, []);
+
   return (
     <div className="queue-container">
       <h2>{heading}</h2>
@@ -16,7 +60,15 @@ const PublicQueue = ({
         queue?.data.map((item, ind) => (
           <div
             key={ind}
-            className={!queueState[ind] ? "queuer active" : "queuer"}
+            className={
+              currentUser?.youtube_username === item?.youtube_username
+                ? !queueState[ind]
+                  ? "queuer active current"
+                  : "queuer current"
+                : !queueState[ind]
+                ? "queuer active"
+                : "queuer"
+            }
             style={{ opacity: opacity }}
           >
             <p className="username">
@@ -76,4 +128,4 @@ const PublicQueue = ({
   );
 };
 
-export default PublicQueue;
+export default PublicQueueContainer;
