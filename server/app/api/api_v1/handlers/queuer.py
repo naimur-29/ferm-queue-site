@@ -102,18 +102,6 @@ async def get_hold_queue_admin(admin: Admin = Depends(get_current_admin)):
 
     return res
 
-@queuer_router.delete("/admin/{id}", summary="Delete queuer from queue as admin", status_code=status.HTTP_410_GONE)
-async def update_queuer_by_uuid(id: UUID, admin: Admin = Depends(get_current_admin)):
-    if not admin.active:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized for this action!")
-    
-    res = await QueuerService.delete_queuer(id)
-    
-    if not res:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Queuer not found!")
-    
-    return {"message": "Successfully removed the queuer!"}
-
 # delete the whole active queue as admin
 @queuer_router.delete("/queue/admin", summary="Delete the whole active queue as admin", status_code=status.HTTP_410_GONE)
 async def update_queuer_by_uuid(admin: Admin = Depends(get_current_admin)):

@@ -112,9 +112,9 @@ const PublicQueueContainer = ({
                     ? item?.link.slice(0, 47) + "..."
                     : item?.link}
                 </p>
-                <p>
+                {/* <p>
                   <span>Joined:</span> {TimeBeautifier(item?.created_at)}
-                </p>
+                </p> */}
               </>
             ) : (
               <></>

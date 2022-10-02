@@ -61,6 +61,10 @@ const Home = () => {
     }
   }, [isCurrentQueuerDead]);
 
+  useEffect(() => {
+    window.localStorage.setItem("visitCount", 0);
+  }, []);
+
   if (isLoadingCurrentQueuer) return <BootAnimation />;
 
   return (

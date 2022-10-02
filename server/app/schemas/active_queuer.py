@@ -3,7 +3,9 @@ from typing import Optional
 from datetime import datetime
 from uuid import UUID
 
-class QueuerCreate(BaseModel):
+class ActiveQueuerCreate(BaseModel):
+    user_id: UUID  = Field(..., description="user id (UUID)")
+    
     artist_name: str = Field(..., min_length=1, max_length=100, description="artist name")
     
     track_title: str = Field(..., min_length=1, max_length=100, description="track_title")
@@ -16,7 +18,7 @@ class QueuerCreate(BaseModel):
     
     message: Optional[str] = Field(..., max_length=200, description="message for streamer")
     
-class QueuerUpdate(BaseModel):
+class ActiveQueuerUpdate(BaseModel):
     artist_name: Optional[str] = Field(..., min_length=1, max_length=100, description="artist name")
     
     track_title: Optional[str] = Field(..., min_length=1, max_length=100, description="track_title")
@@ -29,33 +31,28 @@ class QueuerUpdate(BaseModel):
     
     message: Optional[str] = Field(..., max_length=200, description="message for streamer")
     
-    on_hold: Optional[bool]
-    
-class QueuerResponseAdmin(BaseModel):
+class ActiveQueuerResponseAdmin(BaseModel):
     user_id: UUID
     artist_name: str
     track_title: str
     youtube_username: str
     link: str
     message: str
-    on_hold: bool
     created_at: datetime
     
-class QueuerResponse(BaseModel):
+class ActiveQueuerResponse(BaseModel):
     artist_name: str
     track_title: str
     youtube_username: str
     link: str
-    on_hold: bool
     message: str
     created_at: datetime
     
-class QueuerResponsePersonal(BaseModel):
+class ActiveQueuerResponsePersonal(BaseModel):
     user_id: UUID
     artist_name: str
     track_title: str
     youtube_username: str
     link: str
     message: str
-    on_hold: bool
     created_at: datetime
