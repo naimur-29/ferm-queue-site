@@ -17,7 +17,6 @@
 }
 
 .queue-container .queuer {
-  cursor: pointer;
   background-color: #18182a;
   color: #b3baffcc;
   width: 90%;
@@ -74,6 +73,7 @@
   font-weight: bolder;
   background-color: #4f8;
   color: #2a2a49;
+  z-index: 10;
 }
 
 /* Loading */
@@ -99,11 +99,13 @@
 
   .queue-container .queuer:hover .link-btn {
     background-color: #4f8;
+    box-shadow: 0px 0px 10px #4f8a;
     color: #2a2a49;
   }
 
   .queue-container .queuer:hover .info-btn {
     background-color: #47f;
+    box-shadow: 0px 0px 10px #47fa;
     color: #fff;
   }
 
@@ -111,6 +113,7 @@
   .queue-container .queuer.loading:hover .link-btn,
   .queue-container .queuer.loading:hover .info-btn {
     background-color: #2a2a49;
+    box-shadow: none;
     color: transparent;
   }
 }
@@ -123,6 +126,46 @@
   font-size: 1.4rem;
   width: 80%;
   text-align: center;
+}
+
+.queue-container .queuer.current .leave-btn {
+  display: inline-block;
+  padding: 0.5rem 0;
+  margin-top: 10px;
+  text-decoration: none;
+  background: #d86666;
+  box-shadow: 0 0 5px #d86666;
+  color: #fff;
+  border: none;
+  border-bottom: solid 4px #b93434;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+@media (hover: hover) {
+  .queue-container .queuer.current .leave-btn {
+    background: #b3baffcc;
+    box-shadow: 0 0 5px #b3baffcc;
+    border-bottom: solid 4px #949eff;
+  }
+
+  .queue-container .queuer.current .leave-btn:hover {
+    background: #d86666;
+    border-bottom: solid 4px #b93434;
+    translate: 0 -1px;
+    box-shadow: 0 0 5px #d86666;
+  }
+}
+
+.queue-container .queuer.current .leave-btn:active {
+  /*on Click*/
+  -ms-transform: translateY(4px);
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px); /*Move down*/
+  border-bottom: none; /*disappears*/
 }
 
 /* Loading */

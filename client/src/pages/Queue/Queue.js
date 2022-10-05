@@ -23,8 +23,18 @@ const fetchActiveQueue = () => {
   return axiosInstance.get("active-queuer/queue");
 };
 
+const removeCurrentUser = () => {
+  let targetQueuer = {};
+  if (localStorage.getItem("userInfo") !== "undefined") {
+    targetQueuer = JSON.parse(localStorage.getItem("userInfo"));
+  }
+
+  return axiosInstance.delete(`queuer/${targetQueuer?.user_id}`);
+};
+
 const Queue = () => {
   const [isDisclaimerActive, setIsDisclaimerActive] = useState(true);
+  const [isDeleteOverlayActive, setIsDeleteOverlayActive] = useState(false);
   const isMounted = useRef();
 
   // queue & onHoldQueue states
@@ -52,6 +62,10 @@ const Queue = () => {
     data: activeQueue,
     isError: isActiveQueueError,
   } = useQuery("active-queue", fetchActiveQueue);
+
+  // remove current user from the queue
+  const { isLoading: isLoadingRemoveCurrent, refetch: initiateLeaveQueue } =
+    useQuery("remove-current", removeCurrentUser, { enabled: false });
 
   // remove on hold:
   useQuery("refresh-queuer", () => {
@@ -110,30 +124,51 @@ const Queue = () => {
           setIsDisclaimerActive={setIsDisclaimerActive}
         />
 
+        {/* Remove current user overlay */}
+        <div
+          className={
+            isDeleteOverlayActive ? "delete-overlay active" : "delete-overlay"
+          }
+          onClick={() => setIsDeleteOverlayActive(false)}
+        >
+          <button
+            className="del-btn"
+            onClick={() => {
+              initiateLeaveQueue();
+              localStorage.removeItem("userInfo");
+              window.location.reload();
+            }}
+          >
+            Leave Queue?
+          </button>
+        </div>
+
         {/* queue section */}
         {/* About To Be Played */}
         {isLoadingActiveQueue ? (
-          <PublicQueueLoading heading={"Active Queue"} opacity={1} />
+          <PublicQueueLoading heading={"Up Next"} opacity={1} />
         ) : (
           <PublicQueueContainer
             queue={isActiveQueueError ? {} : activeQueue}
             queueState={activeQueueState}
             setQueueState={setActiveQueueState}
-            heading={"Active Queue"}
+            heading={"Up Next"}
             opacity={1}
           />
         )}
 
         {/* Pending */}
-        {isLoadingQueue ? (
-          <PublicQueueLoading heading={"Pending Queue"} opacity={1} />
+        {isLoadingQueue || isLoadingRemoveCurrent ? (
+          <PublicQueueLoading heading={"Waiting"} opacity={1} />
         ) : (
           <PublicQueueContainer
             queue={isQueueError ? {} : queue}
             queueState={queueState}
             setQueueState={setQueueState}
-            heading={"Pending Queue"}
+            heading={"Waiting"}
             opacity={1}
+            isDeleteOverlayActive={isDeleteOverlayActive}
+            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
           />
         )}
 

@@ -2,41 +2,41 @@ import React, { useState, useEffect } from "react";
 import "./PublicQueueContainer.css";
 
 // Global Functions & Variables:
-const TimeBeautifier = (timeString) => {
-  let date = timeString.slice(0, 10);
-  let time = timeString.slice(11, -7);
+// const TimeBeautifier = (timeString) => {
+//   let date = timeString.slice(0, 10);
+//   let time = timeString.slice(11, -7);
 
-  // get users time offset:
-  let offset = new Date().getTimezoneOffset();
-  offset *= -1;
+//   // get users time offset:
+//   let offset = new Date().getTimezoneOffset();
+//   offset *= -1;
 
-  time = time.split(":"); // convert to array
+//   time = time.split(":"); // convert to array
 
-  // fetch
-  let hours = Number(time[0]) + Math.floor(offset / 60);
-  let minutes = Number(time[1]) + (offset % 60);
+//   // fetch
+//   let hours = Number(time[0]) + Math.floor(offset / 60);
+//   let minutes = Number(time[1]) + (offset % 60);
 
-  if (minutes > 60) {
-    minutes -= 60;
-    hours++;
-  }
+//   if (minutes > 60) {
+//     minutes -= 60;
+//     hours++;
+//   }
 
-  // calculate
-  let timeValue;
+//   // calculate
+//   let timeValue;
 
-  if (hours > 0 && hours <= 12) {
-    timeValue = "" + hours;
-  } else if (hours > 12) {
-    timeValue = "" + (hours - 24);
-  } else if (hours === 0) {
-    timeValue = "12";
-  }
+//   if (hours > 0 && hours <= 12) {
+//     timeValue = "" + hours;
+//   } else if (hours > 12) {
+//     timeValue = "" + (hours - 24);
+//   } else if (hours === 0) {
+//     timeValue = "12";
+//   }
 
-  timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
-  timeValue += hours >= 12 ? " AM" : " PM";
+//   timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
+//   timeValue += hours >= 12 ? " AM" : " PM";
 
-  return date + " at " + timeValue;
-};
+//   return date + " at " + timeValue;
+// };
 
 const PublicQueueContainer = ({
   queue,
@@ -44,6 +44,7 @@ const PublicQueueContainer = ({
   setQueueState,
   heading,
   opacity,
+  setIsDeleteOverlayActive,
 }) => {
   const [currentUser, setCurrentUser] = useState({});
 
@@ -115,6 +116,21 @@ const PublicQueueContainer = ({
                 {/* <p>
                   <span>Joined:</span> {TimeBeautifier(item?.created_at)}
                 </p> */}
+
+                {/* leave button */}
+                {currentUser?.youtube_username === item?.youtube_username &&
+                heading !== "Up Next" ? (
+                  <button
+                    className="leave-btn"
+                    onClick={() => {
+                      setIsDeleteOverlayActive(true);
+                    }}
+                  >
+                    Leave
+                  </button>
+                ) : (
+                  <></>
+                )}
               </>
             ) : (
               <></>
