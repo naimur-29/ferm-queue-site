@@ -1,0 +1,197 @@
+.adminLogin-section-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1920px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.adminLogin-section-container .main-container {
+  padding: 3px;
+  border-radius: 4px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 100vh;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.adminLogin-section-container .main-container .form-container {
+  background-color: #18182a;
+  color: #b3bac3;
+  padding: 15px;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  z-index: 300;
+}
+
+.adminLogin-section-container .main-container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  background: linear-gradient(0deg, transparent 20%, #fff, #fff);
+  transform-origin: bottom right;
+  animation: borderGlow 6s linear infinite;
+}
+
+.adminLogin-section-container .main-container::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  background: linear-gradient(0deg, transparent 20%, #fff, #fff);
+  transform-origin: bottom right;
+  animation: borderGlow 6s linear infinite;
+  animation-delay: -3s;
+}
+
+.adminLogin-section-container .main-container .form-container .error-message {
+  background-color: #f47;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.adminLogin-section-container .main-container .form-container .title {
+  color: aliceblue;
+  font-size: 2rem;
+  font-weight: 500;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+  .adminLogin-section-container .main-container .form-container .title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 325px) {
+  .adminLogin-section-container .main-container .form-container .title {
+    font-size: 1.4rem;
+  }
+}
+
+.adminLogin-section-container .main-container .form-container .item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.adminLogin-section-container .main-container .form-container .item label {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.adminLogin-section-container
+  .main-container
+  .form-container
+  .item
+  .input-container {
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.adminLogin-section-container .main-container .form-container .item input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #10101e;
+  color: aliceblue;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0 10px;
+  transition: all 0.25s ease;
+}
+
+.adminLogin-section-container
+  .main-container
+  .form-container
+  .item
+  input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.adminLogin-section-container
+  .main-container
+  .form-container
+  .item
+  input::placeholder {
+  color: #646470;
+  font-size: 1.2rem;
+}
+
+.adminLogin-section-container .main-container .submit-btn {
+  background-color: #2695db;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 6px 8px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  transition: all 0.15s ease;
+}
+
+.adminLogin-section-container .main-container .submit-btn:disabled {
+  opacity: 0.3;
+}
+
+@media (max-width: 400px) {
+  .adminLogin-section-container .main-container .submit-btn {
+    font-size: 1.2rem;
+  }
+}
+
+.adminLogin-section-container .main-container .submit-btn:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) {
+  .adminLogin-section-container .main-container .submit-btn {
+    background-color: #2695db;
+  }
+
+  .adminLogin-section-container .main-container .submit-btn:hover {
+    background-color: #2695dbaa;
+    transition: all 0.15s ease;
+  }
+}

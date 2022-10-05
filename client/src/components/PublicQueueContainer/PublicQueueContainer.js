@@ -80,9 +80,16 @@ const PublicQueueContainer = ({
             </p>
 
             {item?.youtube_username === item?.link ? (
-              <button className="link-btn">{"F"}</button>
+              <button className="link-btn" title="File submission">
+                {"F"}
+              </button>
             ) : (
-              <a href={item?.link} target="_blank" rel="noreferrer">
+              <a
+                href={item?.link}
+                target="_blank"
+                rel="noreferrer"
+                title="Click to visit"
+              >
                 <button className="link-btn">{">>"}</button>
               </a>
             )}
@@ -93,6 +100,7 @@ const PublicQueueContainer = ({
                 newArr[ind] = !newArr[ind];
                 setQueueState([...newArr]);
               }}
+              title="Click to expand"
             >
               {ind + 1}
             </button>

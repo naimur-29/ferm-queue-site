@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import "./AdminLogin.css";
 
 import { useAuth } from "../../hooks/useAuth";
 
@@ -29,9 +29,9 @@ const AdminLogin = () => {
   return (
     <section className="adminLogin-section-container">
       <div className="main-container">
-        <h1 className="title">Admin Login</h1>
-
         <div className="form-container">
+          <h1 className="title">Admin Login</h1>
+
           {errMessage ? <h3 className="error-message">{errMessage}</h3> : <></>}
 
           <div className="item">
@@ -40,7 +40,7 @@ const AdminLogin = () => {
               type="text"
               placeholder="username"
               onChange={(e) =>
-                setUserInput({ ...userInput, email: e.target.value })
+                setUserInput({ ...userInput, email: e.target?.value.trim() })
               }
             />
           </div>
@@ -51,7 +51,7 @@ const AdminLogin = () => {
               type="password"
               placeholder="password"
               onChange={(e) =>
-                setUserInput({ ...userInput, password: e.target.value })
+                setUserInput({ ...userInput, password: e.target?.value.trim() })
               }
             />
           </div>
