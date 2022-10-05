@@ -97,7 +97,7 @@ const Queue = () => {
 
   // setting how may times the user visited the queue page & showing the disclaimer message at the start if visit count is 1:
   useEffect(() => {
-    if (isMounted.current) {
+    if (!isMounted.current) {
       let visitCount = Number(window.localStorage.getItem("visitCount"));
 
       if (visitCount) {
