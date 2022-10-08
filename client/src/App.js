@@ -15,6 +15,8 @@ import Queue from "./pages/Queue/Queue";
 import Admin from "./pages/Admin/Admin";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import BootAnimation from "./components/BootAnimation/BootAnimation";
+import ManageQueue from "./components/ManageQueue/ManageQueue";
+import QueueSettings from "./components/QueueSettings/QueueSettings";
 import Authenticated from "./auth/Authenticated";
 import PublicRoute from "./auth/PublicRoute";
 
@@ -33,7 +35,6 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/queue" element={<Queue />} />
-
                   <Route
                     path="/access"
                     element={
@@ -42,7 +43,7 @@ const App = () => {
                       </PublicRoute>
                     }
                   />
-
+                  {/* Admin Panel Routes */}
                   <Route
                     path="/admin"
                     element={
@@ -51,7 +52,24 @@ const App = () => {
                       </Authenticated>
                     }
                   />
+                  <Route
+                    path="/access-queue"
+                    element={
+                      <Authenticated>
+                        <ManageQueue />
+                      </Authenticated>
+                    }
+                  />
+                  <Route
+                    path="/settings"
+                    element={
+                      <Authenticated>
+                        <QueueSettings />
+                      </Authenticated>
+                    }
+                  />
 
+                  {/* Error Routes */}
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               )

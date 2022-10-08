@@ -1,0 +1,66 @@
+.admin-home-section-container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.admin-home-section-container .main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 100vh;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.admin-home-section-container .main-container .outer-btn {
+  display: inline-block;
+  width: 100%;
+}
+
+.admin-home-section-container .main-container .outer-btn .btn {
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  transition: all 0.35s ease;
+}
+
+.admin-home-section-container .main-container .outer-btn .btn:active {
+  scale: 50;
+}
+
+.admin-home-section-container .main-container .outer-btn .btn::after {
+  content: none;
+}
+
+.admin-home-section-container .main-container .outer-btn .btn::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: #eb58b5;
+  box-shadow: 0px 0px 20px #eb58b5;
+  transition: all 0.15s ease-in-out;
+  z-index: -10;
+}
+
+@media (hover: hover) {
+  .admin-home-section-container .main-container .outer-btn .btn:hover {
+    animation: none;
+    box-shadow: 20px 0px 10px rgba(0, 0, 0, 0.15);
+    translate: 0 -3px;
+    color: #fff;
+  }
+
+  .admin-home-section-container .main-container .outer-btn .btn:hover::before {
+    height: 100%;
+  }
+}

@@ -1,14 +1,23 @@
 ////////////////////////////////////////////////////
-1. Need to change the "on-hold queue" title to "On Hold" //done
+1. Need to change the "on-hold queue" title to "On Hold" --> done
 
-2. Show the queue page notification only the first time! //done
+2. Show the queue page notification only the first time! --> done
 
-3. another whole new queue for about to be played queuers & functionality to move the current  queuers to about to be played queue! //done
+3. another whole new queue for about to be played queuers & functionality to move the current  queuers to about to be played queue! --> done
 ///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////
-1. Add user remove functionality //done
-2. Design admin home page 
+1. Add user remove functionality --> done
+2. Design admin home page
 3. Design manage queue page
 4. Design settings page
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
+ADMIN PAGE FEATURES:
+1. add new members
+2. remove anyone
+3. move someone to up next
+4. manual hold & release
+5. setting the queue on & off
 ///////////////////////////////////////////////////
