@@ -184,9 +184,6 @@ const Queue = () => {
             opacity={0.3}
           />
         )}
-
-        {/* Navigation */}
-        <div className="nav-container"></div>
       </main>
     </section>
   );
