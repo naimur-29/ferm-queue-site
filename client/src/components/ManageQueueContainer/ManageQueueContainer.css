@@ -124,16 +124,16 @@
   text-align: center;
 }
 
-.queue-container .queuer .leave-btn {
+.queue-container .queuer .new-btn {
   display: inline-block;
   padding: 0.5rem 0;
   margin-top: 10px;
   text-decoration: none;
-  background: #d86666;
-  box-shadow: 0 0 5px #d86666;
   color: #fff;
   border: none;
-  border-bottom: solid 4px #b93434;
+  background: #ff10f0;
+  border-bottom: solid 4px #e20bd3;
+  box-shadow: 0 0 5px #ff10f0;
   border-radius: 3px;
   font-size: 1.4rem;
   font-weight: bold;
@@ -142,21 +142,21 @@
 }
 
 @media (hover: hover) {
-  .queue-container .queuer .leave-btn {
+  .queue-container .queuer .new-btn {
     background: #b3baffcc;
     box-shadow: 0 0 5px #b3baffcc;
     border-bottom: solid 4px #949eff;
   }
 
-  .queue-container .queuer .leave-btn:hover {
-    background: #d86666;
-    border-bottom: solid 4px #b93434;
+  .queue-container .queuer .new-btn:hover {
+    background: #ff10f0;
+    border-bottom: solid 4px #e20bd3;
     translate: 0 -1px;
-    box-shadow: 0 0 5px #d86666;
+    box-shadow: 0 0 5px #ff10f0;
   }
 }
 
-.queue-container .queuer .leave-btn:active {
+.queue-container .queuer .new-btn:active {
   /*on Click*/
   -ms-transform: translateY(4px);
   -webkit-transform: translateY(4px);

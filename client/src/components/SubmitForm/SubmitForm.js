@@ -8,7 +8,7 @@ import BootAnimation from "../../components/BootAnimation/BootAnimation";
 // Local Services:
 import axiosInstance from "../../services/axios";
 
-const SubmitForm = ({ isFormActive, setIsFormActive }) => {
+const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
   const [isFile, setIsFile] = useState(false);
   const [isMessageActive, setIsMessageActive] = useState(false);
   const [errMessage, setErrMessage] = useState("");
@@ -36,8 +36,16 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
         message: userInput?.message ? userInput.message : "Empty!",
       });
 
-      res?.data && localStorage.setItem("userInfo", JSON.stringify(res?.data));
-      navigate("/queue");
+      setErrMessage("");
+      setIsFormActive(false);
+
+      if (isAdmin) {
+        window.location.reload();
+      } else {
+        res?.data &&
+          localStorage.setItem("userInfo", JSON.stringify(res?.data));
+        navigate("/queue");
+      }
     } catch (error) {
       setErrMessage("Connection failed!");
 
@@ -53,16 +61,24 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
   if (isLoading) return <BootAnimation />;
 
   return (
-    <div
+    <section
       className={
-        isFormActive ? "submit-form-container active" : "submit-form-container"
+        isAdmin
+          ? isFormActive
+            ? "submit-form-container active admin"
+            : "submit-form-container admin"
+          : isFormActive
+          ? "submit-form-container active"
+          : "submit-form-container"
       }
     >
       <div
         className={isFormActive ? "outer-container active" : "outer-container"}
       >
         <div className="form-container">
-          <h3 className="title">Enter your submission</h3>
+          <h3 className="title">
+            {isAdmin ? "You're in control" : "Enter your submission"}
+          </h3>
 
           {errMessage ? <p className="error-message">{errMessage}</p> : <></>}
 
@@ -136,7 +152,8 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
                 className="submission-type-btn"
                 onClick={() => {
                   setIsFile(!isFile);
-                  if (!isFile) {
+
+                  if (!isFile && !isAdmin) {
                     navigator.clipboard.writeText("submit@realfermaudio.com");
                     setTimeout(() => {
                       alert("Copied email address to clipboard!");
@@ -183,7 +200,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
 
             <div className="submit-btn-container">
               <button className="form-btn" onClick={() => handleSubmit()}>
-                Join
+                {isAdmin ? "Add" : "Join"}
               </button>
               <button
                 className="form-btn"
@@ -198,7 +215,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive }) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

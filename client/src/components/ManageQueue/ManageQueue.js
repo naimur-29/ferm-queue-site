@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ManageQueue.css";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 // local services:
 import axiosInstance from "../../services/axios";
@@ -8,6 +9,7 @@ import axiosInstance from "../../services/axios";
 // local components:
 import ManageQueueContainer from "../../components/ManageQueueContainer/ManageQueueContainer";
 import ManageQueueLoading from "../../components/ManageQueueContainer/ManageQueueLoading";
+import SubmitForm from "../SubmitForm/SubmitForm";
 
 // query functions:
 const fetchQueue = () => {
@@ -24,8 +26,12 @@ const fetchActiveQueue = () => {
 
 const ManageQueue = () => {
   const [isDeleteOverlayActive, setIsDeleteOverlayActive] = useState(false);
+  const [isFormActive, setIsFormActive] = useState(false);
   const [targetQueuer, setTargetQueuer] = useState({});
   const [targetHeader, setTargetHeader] = useState("");
+
+  // react router dom:
+  const navigate = useNavigate();
 
   // queue & onHoldQueue states
   const [queueState, setQueueState] = useState([]);
@@ -115,11 +121,12 @@ const ManageQueue = () => {
           <button
             className="del-btn"
             onClick={() => {
+              setIsDeleteOverlayActive(false);
               initiateLeaveQueue();
               window.location.reload();
             }}
           >
-            Remove Queue?
+            Remove Queuer?
           </button>
         </div>
 
@@ -172,8 +179,25 @@ const ManageQueue = () => {
           />
         )}
 
+        {/* Add new Queuer form */}
+        <SubmitForm
+          isFormActive={isFormActive}
+          setIsFormActive={setIsFormActive}
+          isAdmin
+        />
+
         {/* Navigation */}
-        <div className="nav-container"></div>
+        <div className="nav-container">
+          <button
+            onClick={() => {
+              setIsFormActive(true);
+            }}
+          >
+            Add Queuer
+          </button>
+          <button>Queue Settings</button>
+          <button>Go Back</button>
+        </div>
       </main>
     </section>
   );

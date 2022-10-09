@@ -49,10 +49,10 @@
 
 .manage-queue-section-container .main-container .delete-overlay .del-btn {
   z-index: 999;
-  background: #d86666;
-  box-shadow: 0 0 5px #d86666;
   color: #fff;
-  border-bottom: solid 4px #b93434;
+  background: #ff10f0;
+  border-bottom: solid 4px #e20bd3;
+  box-shadow: 0 0 5px #ff10f0;
   width: 90%;
   max-width: 520px;
   border: none;

@@ -90,6 +90,7 @@
   border-radius: 4px;
   font-size: 1.2rem;
   color: #fff;
+  animation: ErrorMessageGlow 0.75s infinite alternate;
 }
 
 .submit-form-container .outer-container .form-container .title {
@@ -146,8 +147,22 @@
   transition: all 0.25s ease;
 }
 
+/* for admins */
+.submit-form-container.admin .outer-container .form-container .item input {
+  color: #ff10f0;
+}
+
 .submit-form-container .outer-container .form-container .item input:focus {
   border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* for admin */
+.submit-form-container.admin
+  .outer-container
+  .form-container
+  .item
+  input:active {
+  border: 1px solid #ff10f0;
 }
 
 .submit-form-container
@@ -197,6 +212,23 @@
     background-color: #2695dbaa;
     transition: all 0.15s ease;
   }
+
+  /* Admin Form */
+  .submit-form-container.admin
+    .outer-container
+    .form-container
+    .item
+    .submission-type-btn {
+    background-color: #ff10f0;
+  }
+
+  .submit-form-container.admin
+    .outer-container
+    .form-container
+    .item
+    .submission-type-btn:hover {
+    background-color: #e200d3;
+  }
 }
 
 .submit-form-container .outer-container .config-btn-container {
@@ -244,6 +276,21 @@
     .form-btn:hover {
     background-color: #2695dbaa;
     transition: all 0.15s ease;
+  }
+
+  /* For Admin */
+  .submit-form-container.admin
+    .outer-container
+    .config-btn-container
+    .form-btn {
+    background-color: #ff10f0;
+  }
+
+  .submit-form-container.admin
+    .outer-container
+    .config-btn-container
+    .form-btn:hover {
+    background-color: #e200d3;
   }
 }
 

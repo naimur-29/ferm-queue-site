@@ -186,3 +186,13 @@ a {
     box-shadow: 0px 0px 10px #10ffa3;
   }
 }
+
+@keyframes ErrorMessageGlow {
+  0% {
+    box-shadow: 0 0 20px #f47;
+  }
+
+  100% {
+    box-shadow: 0 0 10px #f47;
+  }
+}

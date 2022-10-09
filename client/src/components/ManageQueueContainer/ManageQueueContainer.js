@@ -74,9 +74,28 @@ const ManageQueueContainer = ({
                   <span>Joined:</span> {TimeBeautifier(item?.created_at)}
                 </p> */}
 
+                {/* Buttons */}
+                {heading === "Waiting" ? (
+                  <button className="new-btn">Hold</button>
+                ) : (
+                  <></>
+                )}
+
+                {heading === "On Hold" ? (
+                  <button className="new-btn">Remove hold</button>
+                ) : (
+                  <></>
+                )}
+
+                {heading === "Waiting" || heading === "On Hold" ? (
+                  <button className="new-btn">Up Next</button>
+                ) : (
+                  <></>
+                )}
+
                 {/* Remove from queue button */}
                 <button
-                  className="leave-btn"
+                  className="new-btn"
                   onClick={() => {
                     setTargetQueuer(item);
                     setTargetHeader(heading);
