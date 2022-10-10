@@ -26,9 +26,12 @@ const fetchActiveQueue = () => {
 
 const ManageQueue = () => {
   const [isDeleteOverlayActive, setIsDeleteOverlayActive] = useState(false);
+  const [isReleaseOverlayActive, setIsReleaseOverlayActive] = useState(false);
+  const [isHoldOverlayActive, setIsHoldOverlayActive] = useState(false);
+  const [isUpNextOverlayActive, setIsUpNextOverlayActive] = useState(false);
   const [isFormActive, setIsFormActive] = useState(false);
   const [targetQueuer, setTargetQueuer] = useState({});
-  const [targetHeader, setTargetHeader] = useState("");
+  const [targetHeader, setTargetHeader] = useState("Waiting");
 
   // react router dom:
   const navigate = useNavigate();
@@ -78,25 +81,68 @@ const ManageQueue = () => {
       }
     );
 
-  // remove on hold:
-  // useQuery("refresh-queuer-admin", () => {
-  //   let targetQueuer = {};
-  //   if (localStorage.getItem("userInfo") !== "undefined") {
-  //     targetQueuer = JSON.parse(localStorage.getItem("userInfo"));
-  //   }
+  // put on hold:
+  const { refetch: initiateHoldQueuer } = useQuery(
+    ["hold-queuer-admin", targetQueuer],
+    () => {
+      if (targetQueuer?.user_id) {
+        return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
+          artist_name: targetQueuer?.artist_name,
+          track_title: targetQueuer?.track_title,
+          youtube_username: targetQueuer?.youtube_username,
+          username: targetQueuer?.youtube_username?.toLowerCase(),
+          link: targetQueuer?.link,
+          message: targetQueuer?.message,
+          on_hold: true,
+        });
+      }
+    },
+    {
+      enabled: false,
+    }
+  );
 
-  //   if (targetQueuer?.user_id) {
-  //     return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
-  //       artist_name: targetQueuer?.artist_name,
-  //       track_title: targetQueuer?.track_title,
-  //       youtube_username: targetQueuer?.youtube_username,
-  //       username: targetQueuer?.youtube_username?.toLowerCase(),
-  //       link: targetQueuer?.link,
-  //       message: targetQueuer?.message,
-  //       on_hold: false,
-  //     });
-  //   }
-  // });
+  // Release from hold:
+  const { refetch: initiateReleaseQueuer } = useQuery(
+    ["release-queuer-admin", targetQueuer],
+    () => {
+      if (targetQueuer?.user_id) {
+        return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
+          artist_name: targetQueuer?.artist_name,
+          track_title: targetQueuer?.track_title,
+          youtube_username: targetQueuer?.youtube_username,
+          username: targetQueuer?.youtube_username?.toLowerCase(),
+          link: targetQueuer?.link,
+          message: targetQueuer?.message,
+          on_hold: false,
+        });
+      }
+    },
+    {
+      enabled: false,
+    }
+  );
+
+  // Move Queuer to up next:
+  const { refetch: initiateMoveUpNext } = useQuery(
+    ["move-queuer-admin", targetQueuer],
+    () => {
+      if (targetQueuer?.user_id) {
+        return axiosInstance.post("active-queuer", {
+          user_id: targetQueuer?.user_id,
+          artist_name: targetQueuer?.artist_name,
+          track_title: targetQueuer?.track_title,
+          youtube_username: targetQueuer?.youtube_username,
+          username: targetQueuer?.youtube_username?.toLowerCase(),
+          link: targetQueuer?.link,
+          message: targetQueuer?.message,
+        });
+      }
+    },
+    {
+      enabled: false,
+    }
+  );
 
   // useEffect hooks:
   useEffect(() => {
@@ -113,13 +159,11 @@ const ManageQueue = () => {
 
         {/* Remove current user overlay */}
         <div
-          className={
-            isDeleteOverlayActive ? "delete-overlay active" : "delete-overlay"
-          }
+          className={isDeleteOverlayActive ? "overlay active" : "overlay"}
           onClick={() => setIsDeleteOverlayActive(false)}
         >
           <button
-            className="del-btn"
+            className="manage-btn"
             onClick={() => {
               setIsDeleteOverlayActive(false);
               initiateLeaveQueue();
@@ -127,6 +171,58 @@ const ManageQueue = () => {
             }}
           >
             Remove Queuer?
+          </button>
+        </div>
+
+        {/* hold overlay */}
+        <div
+          className={isHoldOverlayActive ? "overlay active" : "overlay"}
+          onClick={() => setIsHoldOverlayActive(false)}
+        >
+          <button
+            className="manage-btn"
+            onClick={() => {
+              setIsHoldOverlayActive(false);
+              initiateHoldQueuer();
+              window.location.reload();
+            }}
+          >
+            Put On Hold?
+          </button>
+        </div>
+
+        {/* Remove hold overlay */}
+        <div
+          className={isReleaseOverlayActive ? "overlay active" : "overlay"}
+          onClick={() => setIsReleaseOverlayActive(false)}
+        >
+          <button
+            className="manage-btn"
+            onClick={() => {
+              setIsReleaseOverlayActive(false);
+              initiateReleaseQueuer();
+              window.location.reload();
+            }}
+          >
+            Release Queuer?
+          </button>
+        </div>
+
+        {/* Move to up next overlay */}
+        <div
+          className={isUpNextOverlayActive ? "overlay active" : "overlay"}
+          onClick={() => setIsUpNextOverlayActive(false)}
+        >
+          <button
+            className="manage-btn"
+            onClick={() => {
+              setIsUpNextOverlayActive(false);
+              initiateMoveUpNext();
+              initiateLeaveQueue();
+              window.location.reload();
+            }}
+          >
+            Move to Up Next?
           </button>
         </div>
 
@@ -141,9 +237,9 @@ const ManageQueue = () => {
             setQueueState={setActiveQueueState}
             heading={"Up Next"}
             opacity={1}
-            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
             setTargetQueuer={setTargetQueuer}
             setTargetHeader={setTargetHeader}
+            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
           />
         )}
 
@@ -157,9 +253,11 @@ const ManageQueue = () => {
             setQueueState={setQueueState}
             heading={"Waiting"}
             opacity={1}
-            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
             setTargetQueuer={setTargetQueuer}
             setTargetHeader={setTargetHeader}
+            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
+            setIsHoldOverlayActive={setIsHoldOverlayActive}
+            setIsUpNextOverlayActive={setIsUpNextOverlayActive}
           />
         )}
 
@@ -173,9 +271,11 @@ const ManageQueue = () => {
             setQueueState={setOnHoldQueueState}
             heading={"On Hold"}
             opacity={0.3}
-            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
             setTargetQueuer={setTargetQueuer}
             setTargetHeader={setTargetHeader}
+            setIsDeleteOverlayActive={setIsDeleteOverlayActive}
+            setIsReleaseOverlayActive={setIsReleaseOverlayActive}
+            setIsUpNextOverlayActive={setIsUpNextOverlayActive}
           />
         )}
 

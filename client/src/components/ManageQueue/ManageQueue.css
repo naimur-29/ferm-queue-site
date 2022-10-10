@@ -27,7 +27,7 @@
   padding: 5px;
 }
 
-.manage-queue-section-container .main-container .delete-overlay {
+.manage-queue-section-container .main-container .overlay {
   position: fixed;
   z-index: 990;
   width: 0;
@@ -42,12 +42,12 @@
   translate: -50% -50%;
 }
 
-.manage-queue-section-container .main-container .delete-overlay.active {
+.manage-queue-section-container .main-container .overlay.active {
   top: 50%;
   width: 100vw;
 }
 
-.manage-queue-section-container .main-container .delete-overlay .del-btn {
+.manage-queue-section-container .main-container .overlay .manage-btn {
   z-index: 999;
   color: #fff;
   background: #ff10f0;
@@ -65,18 +65,12 @@
 }
 
 @media (hover: hover) {
-  .manage-queue-section-container
-    .main-container
-    .delete-overlay
-    .del-btn:hover {
+  .manage-queue-section-container .main-container .overlay .manage-btn:hover {
     translate: 0 -3px;
   }
 }
 
-.manage-queue-section-container
-  .main-container
-  .delete-overlay
-  .del-btn:active {
+.manage-queue-section-container .main-container .overlay .manage-btn:active {
   /*on Click*/
   -ms-transform: translateY(4px);
   -webkit-transform: translateY(4px);

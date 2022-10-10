@@ -7,9 +7,12 @@ const ManageQueueContainer = ({
   setQueueState,
   heading,
   opacity,
-  setIsDeleteOverlayActive,
   setTargetQueuer,
   setTargetHeader,
+  setIsDeleteOverlayActive,
+  setIsHoldOverlayActive,
+  setIsReleaseOverlayActive,
+  setIsUpNextOverlayActive,
 }) => {
   return (
     <div className="queue-container">
@@ -76,19 +79,43 @@ const ManageQueueContainer = ({
 
                 {/* Buttons */}
                 {heading === "Waiting" ? (
-                  <button className="new-btn">Hold</button>
+                  <button
+                    className="new-btn"
+                    onClick={() => {
+                      setTargetQueuer(item);
+                      setIsHoldOverlayActive(true);
+                    }}
+                  >
+                    Hold
+                  </button>
                 ) : (
                   <></>
                 )}
 
                 {heading === "On Hold" ? (
-                  <button className="new-btn">Remove hold</button>
+                  <button
+                    className="new-btn"
+                    onClick={() => {
+                      setTargetQueuer(item);
+                      setIsReleaseOverlayActive(true);
+                    }}
+                  >
+                    Release
+                  </button>
                 ) : (
                   <></>
                 )}
 
                 {heading === "Waiting" || heading === "On Hold" ? (
-                  <button className="new-btn">Up Next</button>
+                  <button
+                    className="new-btn"
+                    onClick={() => {
+                      setTargetQueuer(item);
+                      setIsUpNextOverlayActive(true);
+                    }}
+                  >
+                    Move
+                  </button>
                 ) : (
                   <></>
                 )}
