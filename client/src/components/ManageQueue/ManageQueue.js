@@ -30,6 +30,7 @@ const ManageQueue = () => {
   const [isHoldOverlayActive, setIsHoldOverlayActive] = useState(false);
   const [isUpNextOverlayActive, setIsUpNextOverlayActive] = useState(false);
   const [isFormActive, setIsFormActive] = useState(false);
+  const [isNavigationActive, setIsNavigationActive] = useState(false);
   const [targetQueuer, setTargetQueuer] = useState({});
   const [targetHeader, setTargetHeader] = useState("Waiting");
 
@@ -124,11 +125,10 @@ const ManageQueue = () => {
   );
 
   // Move Queuer to up next:
-  const { refetch: initiateMoveUpNext } = useQuery(
-    ["move-queuer-admin", targetQueuer],
-    () => {
-      if (targetQueuer?.user_id) {
-        return axiosInstance.post("active-queuer", {
+  const initiateMoveUpNext = async () => {
+    if (targetQueuer?.user_id) {
+      try {
+        await axiosInstance.post("active-queuer", {
           user_id: targetQueuer?.user_id,
           artist_name: targetQueuer?.artist_name,
           track_title: targetQueuer?.track_title,
@@ -137,12 +137,17 @@ const ManageQueue = () => {
           link: targetQueuer?.link,
           message: targetQueuer?.message,
         });
+
+        initiateLeaveQueue();
+        window.location.reload();
+      } catch (error) {
+        alert("Connection failed!");
+        error?.response?.status && alert(error?.response?.data?.detail);
+        error?.response?.status === 422 &&
+          alert("Must include youtube username & link!");
       }
-    },
-    {
-      enabled: false,
     }
-  );
+  };
 
   // useEffect hooks:
   useEffect(() => {
@@ -155,7 +160,9 @@ const ManageQueue = () => {
   return (
     <section className="manage-queue-section-container">
       <main className="main-container">
-        <h1 className="title">Upcoming Artist Radio</h1>
+        <h1 className="title" onClick={() => setIsNavigationActive(true)}>
+          Upcoming Artist Radio
+        </h1>
 
         {/* Remove current user overlay */}
         <div
@@ -218,8 +225,6 @@ const ManageQueue = () => {
             onClick={() => {
               setIsUpNextOverlayActive(false);
               initiateMoveUpNext();
-              initiateLeaveQueue();
-              window.location.reload();
             }}
           >
             Move to Up Next?
@@ -287,16 +292,34 @@ const ManageQueue = () => {
         />
 
         {/* Navigation */}
-        <div className="nav-container">
+        <div
+          className={
+            isNavigationActive ? "nav-container active" : "nav-container"
+          }
+        >
           <button
+            className="btn"
             onClick={() => {
+              setIsNavigationActive(false);
               setIsFormActive(true);
             }}
           >
             Add Queuer
           </button>
-          <button>Queue Settings</button>
-          <button>Go Back</button>
+
+          <button className="btn" onClick={() => setIsNavigationActive(false)}>
+            Go Back
+          </button>
+
+          <button
+            className="btn"
+            onClick={() => {
+              setIsNavigationActive(false);
+              navigate("/access");
+            }}
+          >
+            Return Admin Page
+          </button>
         </div>
       </main>
     </section>

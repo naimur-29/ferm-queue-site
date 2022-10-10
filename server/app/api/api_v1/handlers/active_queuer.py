@@ -33,7 +33,13 @@ async def get_queuer_by_uuid(id: UUID):
     return res
 
 @active_queuer_router.post("/", summary="Add queuer to active queue", response_model=ActiveQueuerResponsePersonal, status_code=status.HTTP_201_CREATED)
-async def add_queuer(data: ActiveQueuerCreate):  
+async def add_queuer(data: ActiveQueuerCreate, admin: Admin = Depends(get_current_admin)):
+    if not admin.active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Unauthorized to access this data!"
+        )
+        
     try:
         return await ActiveQueuerService.add_queuer_service(data)
     except pymongo.errors.DuplicateKeyError:

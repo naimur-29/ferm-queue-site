@@ -23,11 +23,13 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
 
   const navigate = useNavigate();
 
+  const endPoint = isAdmin ? "/admin-post" : "";
+
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
 
-      const res = await axiosInstance.post("queuer", {
+      const res = await axiosInstance.post(`queuer${endPoint}`, {
         artist_name: userInput?.artist_name ? userInput.artist_name : "Empty!",
         track_title: userInput?.track_title ? userInput.track_title : "Empty!",
         youtube_username: userInput?.youtube_username,
@@ -207,6 +209,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
                 onClick={() => {
                   setIsFormActive(false);
                   setErrMessage("");
+                  setIsFile(false);
                 }}
               >
                 Cancel

@@ -1,0 +1,103 @@
+.queue-settings-section-container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #18182a;
+  animation: startup 0.5s ease-in;
+  user-select: none;
+}
+
+.queue-settings-section-container .main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 100vh;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.queue-settings-section-container .main-container .queue-on-off {
+  font-size: 3rem;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.queue-settings-section-container .main-container .queue-on-off .btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.queue-settings-section-container
+  .main-container
+  .queue-on-off
+  .btn-container
+  .settings-btn {
+  font-size: 3rem;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.queue-settings-section-container
+  .main-container
+  .queue-on-off
+  .btn-container
+  .settings-btn.on {
+  color: #4f8;
+}
+
+.queue-settings-section-container
+  .main-container
+  .queue-on-off
+  .btn-container
+  .settings-btn.off {
+  color: #f49;
+}
+
+.queue-settings-section-container
+  .main-container
+  .queue-on-off
+  .btn-container
+  .settings-btn:active {
+  scale: 0.8;
+}
+
+@media (max-width: 520px) {
+  .queue-settings-section-container .main-container .queue-on-off {
+    font-size: 2.4rem;
+  }
+
+  .queue-settings-section-container
+    .main-container
+    .queue-on-off
+    .btn-container
+    .settings-btn {
+    font-size: 2.4rem;
+    margin-top: 7px;
+  }
+}
+
+@media (max-width: 420px) {
+  .queue-settings-section-container .main-container .queue-on-off {
+    font-size: 2rem;
+  }
+
+  .queue-settings-section-container
+    .main-container
+    .queue-on-off
+    .btn-container
+    .settings-btn {
+    font-size: 2rem;
+    margin-top: 5px;
+  }
+}

@@ -62,6 +62,22 @@ async def add_queuer(data: QueuerCreate):
             detail="Already Joined The Queue!"
         )
         
+@queuer_router.post("/admin-post", summary="Add queuer to queue", response_model=QueuerResponsePersonal, status_code=status.HTTP_201_CREATED)
+async def add_queuer(data: QueuerCreate, admin: Admin = Depends(get_current_admin)):
+    if not admin.active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Unauthorized to access this data!"
+        )
+        
+    try:
+        return await QueuerService.add_queuer_service(data)
+    except pymongo.errors.DuplicateKeyError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Already Joined The Queue!"
+        )
+        
 @queuer_router.put("/{id}", summary="Update on hold status", response_model=QueuerResponsePersonal)
 async def update_queuer_by_uuid(data: QueuerUpdate, id: UUID):
     res = await QueuerService.update_queuer_data(data, id)

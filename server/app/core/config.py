@@ -5,7 +5,7 @@ class Settings_v1(BaseSettings):
     jwt_secret_key: str
     jwt_refresh_secret_key: str
     algorithm: str = "HS256"
-    access_token_expire_minutes: int = 60*5 # 5 hours
+    access_token_expire_minutes: int = 60*10 # 10 hours
     refresh_token_expire_minutes: int = 60*24*7 # 7 days
     project_name: str = "Ferm Queue Server"
     

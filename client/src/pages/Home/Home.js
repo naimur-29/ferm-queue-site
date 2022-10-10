@@ -44,6 +44,14 @@ const Home = () => {
       }
     });
 
+  // fetching queue settings:
+  const { data: isQueueOn, isLoading: isLoadingQueueOn } = useQuery(
+    "is-queue-on",
+    () => {
+      return axiosInstance.get("set/isQueueOn");
+    }
+  );
+
   useEffect(() => {
     if (
       localStorage.getItem("userInfo") !== "undefined" &&
@@ -65,7 +73,7 @@ const Home = () => {
     window.localStorage.setItem("visitCount", 0);
   }, []);
 
-  if (isLoadingCurrentQueuer) return <BootAnimation />;
+  if (isLoadingCurrentQueuer || isLoadingQueueOn) return <BootAnimation />;
 
   return (
     <section className="home-section-container">
@@ -171,6 +179,11 @@ const Home = () => {
                 queue page. You may be put on hold after a certain time of
                 inactivity*
               </>
+            ) : isQueueOn?.data?.state === "false" && !isAlreadyInQueue ? (
+              <strong>
+                *The queue is closed, no more free submissions are being
+                accepted. Come back next show!*
+              </strong>
             ) : (
               `*One submission per artist at a time. To guarantee your track is
               played for free, stay engaged and keep an eye on the queue page. You
@@ -188,18 +201,22 @@ const Home = () => {
             Go Back
           </motion.button>
 
-          <motion.button
-            className="close-overlay"
-            onClick={() => {
-              setIsDisclaimerActive(false);
-              isAlreadyInQueue ? navigate("/queue") : setIsFormActive(true);
-            }}
-            initial={{ x: "100%", opacity: 0 }}
-            animate={isDisclaimerActive ? { x: 0, opacity: 1 } : {}}
-            transition={{ delay: 0, duration: 0.25 }}
-          >
-            {isAlreadyInQueue ? "View Queue" : "Join Queue"}
-          </motion.button>
+          {isQueueOn?.data?.state === "true" || isAlreadyInQueue ? (
+            <motion.button
+              className="close-overlay"
+              onClick={() => {
+                setIsDisclaimerActive(false);
+                isAlreadyInQueue ? navigate("/queue") : setIsFormActive(true);
+              }}
+              initial={{ x: "100%", opacity: 0 }}
+              animate={isDisclaimerActive ? { x: 0, opacity: 1 } : {}}
+              transition={{ delay: 0, duration: 0.25 }}
+            >
+              {isAlreadyInQueue ? "View Queue" : "Join Queue"}
+            </motion.button>
+          ) : (
+            <></>
+          )}
         </div>
 
         <SubmitForm
