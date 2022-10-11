@@ -17,6 +17,8 @@ app = FastAPI(
 
 # Backend cors origins
 origins = [
+    "www.upcomingartistradio.com",
+    "upcomingartistradio.com",
     "https://ferm-queue.naimur29.com",
     "http://localhost:3000"
 ]

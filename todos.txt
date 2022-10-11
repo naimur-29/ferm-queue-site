@@ -8,16 +8,21 @@
 
 ///////////////////////////////////////////////////
 1. Add user remove functionality --> done
-2. Design admin home page
-3. Design manage queue page
-4. Design settings page
+2. Design admin home page  --> done
+3. Design manage queue page  --> done
+4. Design settings page  --> done
 ///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////
 ADMIN PAGE FEATURES:
-1. add new members
-2. remove anyone
-3. move someone to up next
-4. manual hold & release
-5. setting the queue on & off
+1. add new members  --> done
+2. remove anyone  --> done
+3. move someone to up next  --> done
+4. manual hold & release  --> done
+5. setting the queue on & off  --> done
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
+Bugs To Fix:
+1. make the reload a bit slower so that the server can take the req or find an alternative to reload! (slow network caused this problem!) [solution 1: can make the window reload after the process has been loaded off by isLoading property, solution 2: can delay the window reload with setTimeout function]
 ///////////////////////////////////////////////////
