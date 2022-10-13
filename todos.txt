@@ -24,5 +24,6 @@ ADMIN PAGE FEATURES:
 
 ///////////////////////////////////////////////////
 Bugs To Fix:
-1. make the reload a bit slower so that the server can take the req or find an alternative to reload! (slow network caused this problem!) [solution 1: can make the window reload after the process has been loaded off by isLoading property, solution 2: can delay the window reload with setTimeout function]
+1. make the reload a bit slower so that the server can take the req or find an alternative to reload! (slow network caused this problem!) [solution 1: can make the window reload after the process has been loaded off by isLoading property, solution 2: can delay the window reload with setTimeout function] --> done
+2. Add the messages showing [queuer messages!] --> done
 ///////////////////////////////////////////////////

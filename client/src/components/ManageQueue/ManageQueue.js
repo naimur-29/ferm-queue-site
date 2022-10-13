@@ -83,46 +83,48 @@ const ManageQueue = () => {
     );
 
   // put on hold:
-  const { refetch: initiateHoldQueuer } = useQuery(
-    ["hold-queuer-admin", targetQueuer],
-    () => {
-      if (targetQueuer?.user_id) {
-        return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
-          artist_name: targetQueuer?.artist_name,
-          track_title: targetQueuer?.track_title,
-          youtube_username: targetQueuer?.youtube_username,
-          username: targetQueuer?.youtube_username?.toLowerCase(),
-          link: targetQueuer?.link,
-          message: targetQueuer?.message,
-          on_hold: true,
-        });
+  const { isLoading: isLoadingPutCurrentOnHold, refetch: initiateHoldQueuer } =
+    useQuery(
+      ["hold-queuer-admin", targetQueuer],
+      () => {
+        if (targetQueuer?.user_id) {
+          return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
+            artist_name: targetQueuer?.artist_name,
+            track_title: targetQueuer?.track_title,
+            youtube_username: targetQueuer?.youtube_username,
+            username: targetQueuer?.youtube_username?.toLowerCase(),
+            link: targetQueuer?.link,
+            message: targetQueuer?.message,
+            on_hold: true,
+          });
+        }
+      },
+      {
+        enabled: false,
       }
-    },
-    {
-      enabled: false,
-    }
-  );
+    );
 
   // Release from hold:
-  const { refetch: initiateReleaseQueuer } = useQuery(
-    ["release-queuer-admin", targetQueuer],
-    () => {
-      if (targetQueuer?.user_id) {
-        return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
-          artist_name: targetQueuer?.artist_name,
-          track_title: targetQueuer?.track_title,
-          youtube_username: targetQueuer?.youtube_username,
-          username: targetQueuer?.youtube_username?.toLowerCase(),
-          link: targetQueuer?.link,
-          message: targetQueuer?.message,
-          on_hold: false,
-        });
+  const { isLoading: isLoadingReleaseCurrent, refetch: initiateReleaseQueuer } =
+    useQuery(
+      ["release-queuer-admin", targetQueuer],
+      () => {
+        if (targetQueuer?.user_id) {
+          return axiosInstance.put(`queuer/${targetQueuer?.user_id}`, {
+            artist_name: targetQueuer?.artist_name,
+            track_title: targetQueuer?.track_title,
+            youtube_username: targetQueuer?.youtube_username,
+            username: targetQueuer?.youtube_username?.toLowerCase(),
+            link: targetQueuer?.link,
+            message: targetQueuer?.message,
+            on_hold: false,
+          });
+        }
+      },
+      {
+        enabled: false,
       }
-    },
-    {
-      enabled: false,
-    }
-  );
+    );
 
   // Move Queuer to up next:
   const initiateMoveUpNext = async () => {
@@ -139,7 +141,7 @@ const ManageQueue = () => {
         });
 
         initiateLeaveQueue();
-        window.location.reload();
+        !isLoadingRemoveCurrent && window.location.reload();
       } catch (error) {
         alert("Connection failed!");
         error?.response?.status && alert(error?.response?.data?.detail);
@@ -151,11 +153,19 @@ const ManageQueue = () => {
 
   // useEffect hooks:
   useEffect(() => {
-    if (!isLoadingQueue && !isLoadingOnHoldQueue) {
+    if (!isLoadingQueue && !isLoadingOnHoldQueue && !isLoadingActiveQueue) {
       setOnHoldQueueState(new Array(onHoldQueue?.length).fill(false));
       setQueueState(new Array(queue?.length).fill(false));
+      setActiveQueueState(new Array(activeQueue?.length).fill(false));
     }
-  }, [isLoadingQueue, isLoadingOnHoldQueue, queue, onHoldQueue]);
+  }, [
+    isLoadingQueue,
+    isLoadingOnHoldQueue,
+    isLoadingActiveQueue,
+    queue,
+    onHoldQueue,
+    activeQueue,
+  ]);
 
   return (
     <section className="manage-queue-section-container">
@@ -174,7 +184,7 @@ const ManageQueue = () => {
             onClick={() => {
               setIsDeleteOverlayActive(false);
               initiateLeaveQueue();
-              window.location.reload();
+              !isLoadingRemoveCurrent && window.location.reload();
             }}
           >
             Remove Queuer?
@@ -191,7 +201,7 @@ const ManageQueue = () => {
             onClick={() => {
               setIsHoldOverlayActive(false);
               initiateHoldQueuer();
-              window.location.reload();
+              !isLoadingPutCurrentOnHold && window.location.reload();
             }}
           >
             Put On Hold?
@@ -208,7 +218,7 @@ const ManageQueue = () => {
             onClick={() => {
               setIsReleaseOverlayActive(false);
               initiateReleaseQueuer();
-              window.location.reload();
+              !isLoadingReleaseCurrent && window.location.reload();
             }}
           >
             Release Queuer?
@@ -233,7 +243,7 @@ const ManageQueue = () => {
 
         {/* queue section */}
         {/* Up next queuers */}
-        {isLoadingActiveQueue ? (
+        {isLoadingActiveQueue || isLoadingRemoveCurrent ? (
           <ManageQueueLoading heading={"Up Next"} opacity={1} />
         ) : (
           <ManageQueueContainer
@@ -249,7 +259,9 @@ const ManageQueue = () => {
         )}
 
         {/* Waiting queuers */}
-        {isLoadingQueue || isLoadingRemoveCurrent ? (
+        {isLoadingQueue ||
+        isLoadingRemoveCurrent ||
+        isLoadingPutCurrentOnHold ? (
           <ManageQueueLoading heading={"Waiting"} opacity={1} />
         ) : (
           <ManageQueueContainer
@@ -267,7 +279,9 @@ const ManageQueue = () => {
         )}
 
         {/* On Hold queuers */}
-        {isLoadingOnHoldQueue ? (
+        {isLoadingOnHoldQueue ||
+        isLoadingRemoveCurrent ||
+        isLoadingReleaseCurrent ? (
           <ManageQueueLoading heading={"On Hold"} />
         ) : (
           <ManageQueueContainer

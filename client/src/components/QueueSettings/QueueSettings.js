@@ -56,7 +56,7 @@ const QueueSettings = () => {
               title="Click to toggle"
               onClick={() => {
                 initiateQueueOnToggle();
-                window.location.reload();
+                !isLoadingQueueOnToggle && window.location.reload();
               }}
             />
           </div>

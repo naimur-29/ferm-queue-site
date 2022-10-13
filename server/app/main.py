@@ -19,7 +19,6 @@ app = FastAPI(
 origins = [
     "https://www.upcomingartistradio.com",
     "https://upcomingartistradio.com",
-    "https://ferm-queue.naimur29.com",
     "http://localhost:3000"
 ]
 
