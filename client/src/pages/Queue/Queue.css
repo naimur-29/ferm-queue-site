@@ -25,6 +25,7 @@
   text-align: center;
   width: 100%;
   padding: 5px;
+  cursor: pointer;
 }
 
 .queue-section-container .main-container .delete-overlay {

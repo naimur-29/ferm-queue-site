@@ -25,7 +25,12 @@ const ManageQueueContainer = ({
             style={{ opacity: opacity }}
           >
             <p className="username">
-              <span>
+              <span
+                title="Click to copy"
+                onClick={() => {
+                  navigator.clipboard.writeText(item?.youtube_username);
+                }}
+              >
                 {queueState[ind] ? "Username:" : item?.youtube_username}
               </span>{" "}
               {queueState[ind] ? item?.youtube_username : ""}
@@ -60,18 +65,52 @@ const ManageQueueContainer = ({
             {queueState[ind] ? (
               <>
                 <p>
-                  <span>{"Artist(s):"}</span> {item?.artist_name}
+                  <span
+                    title="Click to copy"
+                    onClick={() => {
+                      navigator.clipboard.writeText(item?.artist_name);
+                    }}
+                  >
+                    {"Artist(s):"}
+                  </span>{" "}
+                  {item?.artist_name}
                 </p>
                 <p>
-                  <span>Track:</span> {item?.track_title}
+                  <span
+                    title="Click to copy"
+                    onClick={() => {
+                      navigator.clipboard.writeText(item?.track_title);
+                    }}
+                  >
+                    Track:
+                  </span>{" "}
+                  {item?.track_title}
                 </p>
                 <p>
-                  <span>Link:</span>{" "}
+                  <span
+                    title="Click to copy"
+                    onClick={() => {
+                      navigator.clipboard.writeText(item?.link);
+                    }}
+                  >
+                    Link:
+                  </span>{" "}
                   {item?.link === item?.youtube_username
                     ? "Empty!"
                     : item?.link.length > 50
                     ? item?.link.slice(0, 47) + "..."
                     : item?.link}
+                </p>
+                <p>
+                  <span
+                    title="Click to copy"
+                    onClick={() => {
+                      navigator.clipboard.writeText(item?.message);
+                    }}
+                  >
+                    Message:
+                  </span>{" "}
+                  {item?.message}
                 </p>
                 {/* <p>
                   <span>Joined:</span> {TimeBeautifier(item?.created_at)}

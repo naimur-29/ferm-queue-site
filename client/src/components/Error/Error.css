@@ -1,0 +1,64 @@
+.error-section-container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.error-section-container .main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px 10px;
+}
+
+.error-section-container .main-container .title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  color: #658d95;
+  text-shadow: 0px 1px 3px #97b0b3;
+}
+
+.error-section-container .main-container img {
+  margin-top: -200px;
+  object-fit: cover;
+  object-position: center;
+  max-width: 90vw;
+  max-height: 70vh;
+}
+
+.error-section-container .main-container .error-btn {
+  outline: none;
+  border: none;
+  font-size: 2.4rem;
+  font-weight: bold;
+  padding: 8px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 40px;
+  color: #fff;
+  background-color: #b2c6c9;
+  box-shadow: 0px 6px 5px #97b0b3;
+  transition: box-shadow translate 0.25s ease;
+}
+
+.error-section-container .main-container .error-btn:active {
+  scale: 0.9;
+}
+
+@media (hover: hover) {
+  .error-section-container .main-container .error-btn:hover {
+    translate: 0 -3px;
+    box-shadow: 0px 12px 5px #97b0b3;
+  }
+
+  .error-section-container .main-container .error-btn:active {
+    translate: 0 0;
+    box-shadow: 0px 3px 5px #97b0b3;
+    scale: 1;
+  }
+}

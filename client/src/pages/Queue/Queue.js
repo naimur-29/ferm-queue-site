@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Queue.css";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 // local services:
 import axiosInstance from "../../services/axios";
@@ -35,7 +36,9 @@ const removeCurrentUser = () => {
 const Queue = () => {
   // const [isDisclaimerActive, setIsDisclaimerActive] = useState(true);
   const [isDeleteOverlayActive, setIsDeleteOverlayActive] = useState(false);
+
   // const isMounted = useRef();
+  const navigate = useNavigate();
 
   // queue & onHoldQueue states
   const [queueState, setQueueState] = useState([]);
@@ -125,7 +128,9 @@ const Queue = () => {
   return (
     <section className="queue-section-container">
       <main className="main-container">
-        <h1 className="title">Upcoming Artist Radio</h1>
+        <h1 className="title" onClick={() => navigate("/")}>
+          Upcoming Artist Radio
+        </h1>
 
         {/* Disclaimer */}
         {/* <QueueDisclaimer

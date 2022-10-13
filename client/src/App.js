@@ -1,11 +1,6 @@
 import React from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
@@ -17,6 +12,8 @@ import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import BootAnimation from "./components/BootAnimation/BootAnimation";
 import ManageQueue from "./components/ManageQueue/ManageQueue";
 import QueueSettings from "./components/QueueSettings/QueueSettings";
+import Error from "./components/Error/Error";
+
 import Authenticated from "./auth/Authenticated";
 import PublicRoute from "./auth/PublicRoute";
 
@@ -70,7 +67,7 @@ const App = () => {
                   />
 
                   {/* Error Routes */}
-                  <Route path="*" element={<Navigate to="/" />} />
+                  <Route path="*" element={<Error />} />
                 </Routes>
               )
             }
