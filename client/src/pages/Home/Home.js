@@ -29,7 +29,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  // fetching active queue:
+  // fetching active queuer:
   const { isLoading: isLoadingCurrentQueuer, isError: isCurrentQueuerDead } =
     useQuery("current-queuer", () => {
       let targetID = "";

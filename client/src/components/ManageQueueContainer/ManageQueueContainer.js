@@ -21,7 +21,11 @@ const ManageQueueContainer = ({
         queue?.data.map((item, ind) => (
           <div
             key={ind}
-            className={!queueState[ind] ? "queuer active" : "queuer"}
+            className={
+              !queueState[ind] && heading !== "Up Next"
+                ? "queuer active"
+                : "queuer"
+            }
             style={{ opacity: opacity }}
           >
             <p className="username">
@@ -31,9 +35,13 @@ const ManageQueueContainer = ({
                   navigator.clipboard.writeText(item?.youtube_username);
                 }}
               >
-                {queueState[ind] ? "Username:" : item?.youtube_username}
+                {queueState[ind] || heading === "Up Next"
+                  ? "Username:"
+                  : item?.youtube_username}
               </span>{" "}
-              {queueState[ind] ? item?.youtube_username : ""}
+              {queueState[ind] || heading === "Up Next"
+                ? item?.youtube_username
+                : ""}
             </p>
 
             {item?.youtube_username === item?.link ? (
@@ -53,6 +61,7 @@ const ManageQueueContainer = ({
             <button
               className="info-btn"
               onClick={() => {
+                if (heading === "Up Next") return;
                 let newArr = [...queueState];
                 newArr[ind] = !newArr[ind];
                 setQueueState([...newArr]);
@@ -62,7 +71,7 @@ const ManageQueueContainer = ({
               {ind + 1}
             </button>
 
-            {queueState[ind] ? (
+            {queueState[ind] || heading === "Up Next" ? (
               <>
                 <p>
                   <span

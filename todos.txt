@@ -29,5 +29,8 @@ Bugs To Fix:
 ///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////
-
+1. make clear to ferm, the ui bug where it shows the same person two times, unless you reload the page! but we're all good about the real data! --> done
+2. the click on title to return home causes some issues! --> done
+3. change the on hold limit to 90mins
+4. change so it always shows the full info on up next queue on admin queue page! --> done
 ///////////////////////////////////////////////////
