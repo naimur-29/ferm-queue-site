@@ -54,14 +54,14 @@ async def app_init():
     
 # scheduled tasks
 @app.on_event("startup")
-@repeat_every(seconds=60*1, wait_first=True)
+@repeat_every(seconds=60*3, wait_first=True)
 async def auto_hold():
     print("running...")
     res = await queuer.Queuer.find(queuer.Queuer.on_hold == False).to_list()
     
     if res != []:
         for q in res:
-            if (datetime.utcnow() - q.refreshed_at).total_seconds() >= 60*60:
+            if (datetime.utcnow() - q.refreshed_at).total_seconds() >= 90*60:
                 await q.update({"$set": {"on_hold": True}})
 
 # root path
