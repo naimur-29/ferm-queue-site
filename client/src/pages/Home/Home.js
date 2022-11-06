@@ -181,8 +181,8 @@ const Home = () => {
               </>
             ) : isQueueOn?.data?.state === "false" && !isAlreadyInQueue ? (
               <strong>
-                *The queue is closed, no more free submissions are being
-                accepted. Come back next show!*
+                *The free queue is currently closed. It is only open during the
+                start of each live stream, come back for the next one!*
               </strong>
             ) : (
               `*One submission per artist at a time. To guarantee your track is
