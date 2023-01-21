@@ -130,23 +130,12 @@ const ManageQueue = () => {
   const initiateMoveUpNext = async () => {
     if (targetQueuer?.user_id) {
       try {
-        await axiosInstance.post("active-queuer", {
-          user_id: targetQueuer?.user_id,
-          artist_name: targetQueuer?.artist_name,
-          track_title: targetQueuer?.track_title,
-          youtube_username: targetQueuer?.youtube_username,
-          username: targetQueuer?.youtube_username?.toLowerCase(),
-          link: targetQueuer?.link,
-          message: targetQueuer?.message,
-        });
+        await axiosInstance.get(`move/${targetQueuer?.user_id}`);
 
-        initiateLeaveQueue();
-        !isLoadingRemoveCurrent && window.location.reload();
+        window.location.reload();
       } catch (error) {
-        alert("Connection failed!");
+        alert("Connection failed!\nPlease try again!");
         error?.response?.status && alert(error?.response?.data?.detail);
-        error?.response?.status === 422 &&
-          alert("Must include youtube username & link!");
       }
     }
   };

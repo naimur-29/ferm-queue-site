@@ -117,7 +117,7 @@ const ManageQueueContainer = ({
                       navigator.clipboard.writeText(item?.message);
                     }}
                   >
-                    Message:
+                    Note:
                   </span>{" "}
                   {item?.message}
                 </p>

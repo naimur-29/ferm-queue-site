@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseURL = "http://localhost:8000/api/v1/";
-const baseURL = "https://ferm-queue.herokuapp.com/api/v1/";
+const baseURL = "http://localhost:8000/api/v1/";
+// const baseURL = "https://ferm-queue.herokuapp.com/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL,

@@ -174,10 +174,10 @@ const Home = () => {
             {isAlreadyInQueue ? (
               <>
                 <strong>*You've already Joined the queue!*</strong>
-                <br /> *One submission per artist at a time. To guarantee your
-                track is played for free, stay engaged and keep an eye on the
-                queue page. You may be put on hold after a certain time of
-                inactivity*
+                <br /> *Free plays are ONLY guaranteed to ACTIVE
+                viewers/listeners. Stay engaged and track your position in the
+                queue to avoid being placed on hold for inactivity. Only one
+                submission per artist is allowed in the queue at a time*
               </>
             ) : isQueueOn?.data?.state === "false" && !isAlreadyInQueue ? (
               <strong>
@@ -185,9 +185,7 @@ const Home = () => {
                 start of each live stream, come back for the next one!*
               </strong>
             ) : (
-              `*One submission per artist at a time. To guarantee your track is
-              played for free, stay engaged and keep an eye on the queue page. You
-              may be put on hold after a certain time of inactivity*`
+              `*Free plays are ONLY guaranteed to ACTIVE viewers/listeners. Stay engaged and track your position in the queue to avoid being placed on hold for inactivity. Only one submission per artist is allowed in the queue at a time*`
             )}
           </motion.p>
 

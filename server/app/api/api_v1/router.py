@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from .handlers import queuer, admin, queue_settings, active_queuer
+from .handlers import queuer, admin, queue_settings, active_queuer, queuer_mover
 from ..auth.jwt import auth_router
 
 router = APIRouter()
@@ -34,4 +34,10 @@ router.include_router(
     active_queuer.active_queuer_router,
     prefix="/active-queuer",
     tags=["active queuer"]
+)
+
+router.include_router(
+    queuer_mover.queuer_mover_router,
+    prefix="/move",
+    tags=["move queuer to active queue/up next(frontend ref.)"]
 )

@@ -8,6 +8,9 @@ import BootAnimation from "../../components/BootAnimation/BootAnimation";
 // Local Services:
 import axiosInstance from "../../services/axios";
 
+// Local Hooks:
+import { useFocusNext } from "../../hooks/useFocusNext";
+
 const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
   const [isFile, setIsFile] = useState(false);
   const [isMessageActive, setIsMessageActive] = useState(false);
@@ -22,6 +25,9 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  // Focus on next input field functionality:
+  const focusNextRef = useFocusNext();
 
   const endPoint = isAdmin ? "/admin-post" : "";
 
@@ -95,6 +101,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
                   artist_name: e?.target?.value.trim(),
                 })
               }
+              ref={focusNextRef}
             />
           </div>
 
@@ -109,11 +116,12 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
                   track_title: e?.target?.value.trim(),
                 })
               }
+              ref={focusNextRef}
             />
           </div>
 
           <div className="item">
-            <label htmlFor="YoutubeUsername">Youtube username</label>
+            <label htmlFor="YoutubeUsername">Username</label>
             <input
               type="text"
               placeholder="ex: username"
@@ -123,6 +131,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
                   youtube_username: e?.target?.value.trim(),
                 })
               }
+              ref={focusNextRef}
             />
           </div>
 
@@ -147,6 +156,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
                       song_link: e?.target?.value.trim(),
                     })
                   }
+                  ref={focusNextRef}
                 />
               )}
 
@@ -176,16 +186,17 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
 
           {isMessageActive ? (
             <div className="item">
-              <label htmlFor="Message">Message</label>
+              <label htmlFor="Message">Note</label>
               <input
                 type="text"
-                placeholder="ex: message to ferm"
+                placeholder="ex: note to ferm"
                 onChange={(e) =>
                   setUserInput({
                     ...userInput,
                     message: e?.target?.value.trim(),
                   })
                 }
+                ref={focusNextRef}
               />
             </div>
           ) : (
@@ -197,7 +208,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
               className="form-btn"
               onClick={() => setIsMessageActive(!isMessageActive)}
             >
-              {isMessageActive ? "Remove message" : "Add message"}
+              {isMessageActive ? "Remove Note" : "Add Note"}
             </button>
 
             <div className="submit-btn-container">
