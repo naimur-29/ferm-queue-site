@@ -1,42 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./PublicQueueContainer.css";
 
-// Global Functions & Variables:
-// const TimeBeautifier = (timeString) => {
-//   let date = timeString.slice(0, 10);
-//   let time = timeString.slice(11, -7);
-
-//   // get users time offset:
-//   let offset = new Date().getTimezoneOffset();
-//   offset *= -1;
-
-//   time = time.split(":"); // convert to array
-
-//   // fetch
-//   let hours = Number(time[0]) + Math.floor(offset / 60);
-//   let minutes = Number(time[1]) + (offset % 60);
-
-//   if (minutes > 60) {
-//     minutes -= 60;
-//     hours++;
-//   }
-
-//   // calculate
-//   let timeValue;
-
-//   if (hours > 0 && hours <= 12) {
-//     timeValue = "" + hours;
-//   } else if (hours > 12) {
-//     timeValue = "" + (hours - 24);
-//   } else if (hours === 0) {
-//     timeValue = "12";
-//   }
-
-//   timeValue += minutes < 10 ? ":0" + minutes : ":" + minutes;
-//   timeValue += hours >= 12 ? " AM" : " PM";
-
-//   return date + " at " + timeValue;
-// };
+// import dayjs from "dayjs";
+// import relativeTime from "dayjs/plugin/relativeTime";
+// dayjs.extend(relativeTime);
 
 const PublicQueueContainer = ({
   queue,
@@ -122,7 +89,10 @@ const PublicQueueContainer = ({
                     : item?.link}
                 </p>
                 {/* <p>
-                  <span>Joined:</span> {TimeBeautifier(item?.created_at)}
+                  <span>Joined:</span> {item?.created_at}
+                </p>
+                <p>
+                  <span>Joined:</span> {dayjs(item?.created_at).fromNow()}
                 </p> */}
 
                 {/* leave button */}

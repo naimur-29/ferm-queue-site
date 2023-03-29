@@ -5,7 +5,7 @@
   margin: 0 auto;
   overflow: hidden;
   animation: startup 1s ease-in;
-  animation-delay: 1.9s;
+  animation-delay: 0.9s;
 }
 
 .home-section-container .main-container {
@@ -29,7 +29,9 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url("https://cdn.discordapp.com/attachments/1011744799629529208/1019645944532324486/queue_site_background.jpeg");
+  background-color: #232323;
+  /* background-image: url("https://cdn.discordapp.com/attachments/1011744799629529208/1019645944532324486/queue_site_background.jpeg"); */
+  background-image: url("../../assets/main-bg.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

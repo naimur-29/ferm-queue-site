@@ -19,8 +19,10 @@ import ytIcon from "../../assets/socials/yt-icon.svg";
 import axiosInstance from "../../services/axios";
 
 // constant variables
-const realFermAudioLogoImg =
-  "https://cdn.discordapp.com/attachments/1011744799629529208/1019645944221941841/realFERMaudio_logo_w_face2.png";
+// const realFermAudioLogoImg =
+//   "https://cdn.discordapp.com/attachments/1011744799629529208/1019645944221941841/realFERMaudio_logo_w_face2.png";
+
+import realFermAudioLogoImg from "../../assets/realferm-logo.webp";
 
 const Home = () => {
   const [isDisclaimerActive, setIsDisclaimerActive] = useState(false);
@@ -78,7 +80,7 @@ const Home = () => {
   return (
     <section className="home-section-container">
       {/* loading animation */}
-      <BootAnimation time={2} />
+      <BootAnimation time={1} />
 
       {/* Snow Effect on Background */}
       <Snow />
@@ -89,7 +91,7 @@ const Home = () => {
           className="nav-container"
           initial={{ y: "-200%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 2.2 }}
+          transition={{ delay: 1.2 }}
         >
           {/* Logo section */}
           <div className="left">
