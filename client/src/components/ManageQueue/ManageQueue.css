@@ -3,8 +3,18 @@
   min-height: 100vh;
   padding: 20px 0;
   background-color: #10101e;
-  animation: startup 1s ease-in;
+  /* animation: startup 1s ease-in; */
   position: relative;
+
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    -45deg,
+    #18182a 0%,
+    #18182a 25%,
+    #18182a 51%,
+    #e20bd3 150%
+  );
+  animation: AnimateBG 20s ease-in infinite, startup 1s ease-in;
 }
 
 .manage-queue-section-container .main-container {
@@ -94,6 +104,16 @@
   z-index: 100;
   overflow: hidden;
   transition: left 0.35s ease-in-out;
+
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    -45deg,
+    #2a2a49 0%,
+    #2a2a49 25%,
+    #2a2a49 51%,
+    #e20bd3 100%
+  );
+  animation: AnimateBG 20s ease-in infinite;
 }
 
 .manage-queue-section-container .main-container .nav-container.active {

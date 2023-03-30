@@ -20,6 +20,7 @@
   background-color: #18182a;
   color: #b3baffcc;
   width: 90%;
+  max-width: 1280px;
   border-radius: 8px;
   margin-bottom: 10px;
   display: flex;

@@ -23,7 +23,7 @@
 .home-section-container .main-container::before {
   content: "";
   width: 100%;
-  max-width: 1920px;
+  /* max-width: 1920px; */
   height: 100vh;
   position: absolute;
   top: 0;

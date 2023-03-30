@@ -34,3 +34,9 @@ Bugs To Fix:
 3. change the on hold limit to 90mins --> done
 4. change so it always shows the full info on up next queue on admin queue page! --> done
 ///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
+1. Ability to edit submission (change link after submitting, etc.)
+2. Add social media handle option, or indicate in the “note” form
+3. Typing ”Priority” in the note makes submission entry position highlighted for admin view --> done
+///////////////////////////////////////////////////

@@ -1,6 +1,29 @@
 import React from "react";
 import "./ManageQueueContainer.css";
 
+// check priority submissions:
+const premiumArr = [
+  "donated",
+  "donation",
+  "priority",
+  "prio",
+  "paid",
+  "skip",
+  "venmo",
+  "cashapp",
+];
+
+const isPremium = (string) => {
+  let processedString = string.toLowerCase();
+  for (let clue of premiumArr) {
+    if (processedString.includes(clue)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const ManageQueueContainer = ({
   queue,
   queueState,
@@ -21,11 +44,9 @@ const ManageQueueContainer = ({
         queue?.data.map((item, ind) => (
           <div
             key={ind}
-            className={
-              !queueState[ind] && heading !== "Up Next"
-                ? "queuer active"
-                : "queuer"
-            }
+            className={`queuer${
+              !queueState[ind] && heading !== "Up Next" ? " active" : ""
+            }${isPremium(item?.message || "") ? " premium" : ""}`}
             style={{ opacity: opacity }}
           >
             <p className="username">

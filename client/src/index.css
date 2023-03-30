@@ -99,6 +99,18 @@ a {
   }
 }
 
+@keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @keyframes shadowGlow1 {
   0% {
     text-shadow: 7px 0px 5px #eb58b5;
@@ -172,7 +184,7 @@ a {
 
   100% {
     background-color: #1f1f37;
-    box-shadow: 0px 0px 7px #ff10f0;
+    box-shadow: 0px 0px 7px #47f;
   }
 }
 
@@ -182,8 +194,21 @@ a {
   }
 
   100% {
-    background-color: #1f1f37;
+    /* background-color: #1f1f37; */
+    background-color: #47f3;
     box-shadow: 0px 0px 10px #47f;
+  }
+}
+
+@keyframes PremiumQueuerHighlight {
+  0% {
+    background-color: #18182a;
+  }
+
+  100% {
+    /* background-color: #1f1f37; */
+    background-color: #ff10f033;
+    box-shadow: 0px 0px 10px #ff10f0;
   }
 }
 

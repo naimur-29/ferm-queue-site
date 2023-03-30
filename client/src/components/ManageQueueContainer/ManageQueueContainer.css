@@ -38,6 +38,10 @@
   animation-delay: calc(100ms * var(--i));
 }
 
+.queue-container .queuer.premium {
+  animation: PremiumQueuerHighlight 0.5s ease-out infinite alternate;
+}
+
 @media (hover: hover) {
   .queue-container .queuer:hover {
     background-color: #1f1f37;
