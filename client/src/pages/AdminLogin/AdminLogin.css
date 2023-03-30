@@ -19,7 +19,7 @@
     rgba(0, 0, 0, 0.9) 0%,
     rgba(0, 0, 0, 0.9) 25%,
     rgba(0, 0, 0, 0.9) 51%,
-    #e20bd3 100%
+    #47f 100%
   );
   animation: AnimateBG 20s ease infinite;
 }

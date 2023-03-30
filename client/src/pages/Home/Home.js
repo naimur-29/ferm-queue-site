@@ -80,7 +80,7 @@ const Home = () => {
   return (
     <section className="home-section-container">
       {/* loading animation */}
-      <BootAnimation time={1} />
+      <BootAnimation time={2} />
 
       {/* Snow Effect on Background */}
       <Snow />
@@ -91,7 +91,7 @@ const Home = () => {
           className="nav-container"
           initial={{ y: "-200%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 2.2 }}
         >
           {/* Logo section */}
           <div className="left">
@@ -171,7 +171,7 @@ const Home = () => {
             className="disclaimer"
             initial={{ y: "-100%" }}
             animate={isDisclaimerActive ? { y: 0 } : {}}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 1.2 }}
           >
             {isAlreadyInQueue ? (
               <>

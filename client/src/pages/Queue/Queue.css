@@ -3,18 +3,18 @@
   min-height: 100vh;
   padding: 20px 0;
   background-color: #10101e;
-  /* animation: startup 1s ease-in; */
   position: relative;
-
+  animation: startup 1s ease-in;
+  /* 
   background-size: 300% 300%;
   background-image: linear-gradient(
     -45deg,
     #18182a 0%,
     #18182a 25%,
     #18182a 51%,
-    #e20bd3 150%
+    #e20bd3 200%
   );
-  animation: AnimateBG 20s ease-in infinite, startup 1s ease-in;
+  animation: AnimateBG 20s ease-in infinite, startup 1s ease-in; */
 }
 
 .queue-section-container .main-container {

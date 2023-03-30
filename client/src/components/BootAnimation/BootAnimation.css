@@ -9,8 +9,20 @@
   left: 0;
   overflow: hidden;
   z-index: 999;
-  background-color: #042104;
-  animation: hueRotate 10s linear infinite;
+  /* background-color: #042104; */
+
+  background-color: #18182a;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    -45deg,
+    #18182a 0%,
+    #18182a 25%,
+    #18182a 51%,
+    #e20bd3 150%
+  );
+  animation: AnimateBG 20s ease infinite;
+
+  /* animation: hueRotate 10s linear infinite; */
 }
 
 .loader-container.inactive {
@@ -40,9 +52,14 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #00ff0a;
+  /* background-color: #00ff0a;
   box-shadow: 0 0 10px #00ff0a, 0 0 20px #00ff0a, 0 0 40px #00ff0a,
-    0 0 60px #00ff0a, 0 0 80px #00ff0a, 0 0 100px #00ff0a;
+    0 0 60px #00ff0a, 0 0 80px #00ff0a, 0 0 100px #00ff0a; */
+
+  background-color: #ff10f0;
+  box-shadow: 0 0 10px #ff10f0, 0 0 20px #ff10f0, 0 0 40px #ff10f0,
+    0 0 60px #ff10f0, 0 0 80px #ff10f0, 0 0 100px #ff10f0;
+
   animation: RotateLoader 0.5s linear infinite;
   animation-delay: calc(0.05s * var(--i));
 }

@@ -5,7 +5,7 @@
   margin: 0 auto;
   overflow: hidden;
   animation: startup 1s ease-in;
-  animation-delay: 0.9s;
+  animation-delay: 1.9s;
 }
 
 .home-section-container .main-container {
