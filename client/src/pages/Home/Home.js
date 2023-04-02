@@ -171,7 +171,7 @@ const Home = () => {
             className="disclaimer"
             initial={{ y: "-100%" }}
             animate={isDisclaimerActive ? { y: 0 } : {}}
-            transition={{ delay: 1.2 }}
+            transition={{ delay: 0.2 }}
           >
             {isAlreadyInQueue ? (
               <>

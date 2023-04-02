@@ -109,6 +109,21 @@ const PublicQueueContainer = ({
                 ) : (
                   <></>
                 )}
+
+                {/* update button
+                {currentUser?.youtube_username === item?.youtube_username &&
+                heading !== "Up Next" ? (
+                  <button
+                    className="leave-btn"
+                    onClick={() => {
+                      setIsDeleteOverlayActive(true);
+                    }}
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <></>
+                )} */}
               </>
             ) : (
               <></>

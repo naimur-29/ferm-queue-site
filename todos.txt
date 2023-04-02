@@ -37,6 +37,6 @@ Bugs To Fix:
 
 ///////////////////////////////////////////////////
 1. Ability to edit submission (change link after submitting, etc.)
-2. Add social media handle option, or indicate in the “note” form
+2. Add social media handle option, or indicate in the “note” form --> done
 3. Typing ”Priority” in the note makes submission entry position highlighted for admin view --> done
 ///////////////////////////////////////////////////

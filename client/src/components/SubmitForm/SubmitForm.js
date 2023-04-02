@@ -189,7 +189,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
               <label htmlFor="Message">Note</label>
               <input
                 type="text"
-                placeholder="ex: note to ferm"
+                placeholder="ex: social media handle, other info"
                 onChange={(e) =>
                   setUserInput({
                     ...userInput,
@@ -208,7 +208,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
               className="form-btn"
               onClick={() => setIsMessageActive(!isMessageActive)}
             >
-              {isMessageActive ? "Remove Note" : "Add Note"}
+              {isMessageActive ? "Remove Note" : "Add Note (optional)"}
             </button>
 
             <div className="submit-btn-container">
