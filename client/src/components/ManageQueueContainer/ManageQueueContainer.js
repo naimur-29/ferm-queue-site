@@ -1,6 +1,12 @@
 import React from "react";
 import "./ManageQueueContainer.css";
 
+// importing icons:
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegHandPointer } from "react-icons/fa";
+import { FaRegHandPaper } from "react-icons/fa";
+import { FaHandsWash } from "react-icons/fa";
+
 // check priority submissions:
 const premiumArr = [
   "donated",
@@ -155,7 +161,7 @@ const ManageQueueContainer = ({
                       setIsHoldOverlayActive(true);
                     }}
                   >
-                    Hold
+                    Hold <FaRegHandPaper className="icon" />
                   </button>
                 ) : (
                   <></>
@@ -169,7 +175,7 @@ const ManageQueueContainer = ({
                       setIsReleaseOverlayActive(true);
                     }}
                   >
-                    Release
+                    Release <FaHandsWash className="icon" />
                   </button>
                 ) : (
                   <></>
@@ -183,7 +189,7 @@ const ManageQueueContainer = ({
                       setIsUpNextOverlayActive(true);
                     }}
                   >
-                    Move
+                    Move <FaRegHandPointer className="icon" />
                   </button>
                 ) : (
                   <></>
@@ -198,7 +204,7 @@ const ManageQueueContainer = ({
                     setIsDeleteOverlayActive(true);
                   }}
                 >
-                  Remove
+                  Remove <RiDeleteBin6Line className="icon" />
                 </button>
               </>
             ) : (

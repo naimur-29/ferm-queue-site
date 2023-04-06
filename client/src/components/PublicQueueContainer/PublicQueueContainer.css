@@ -129,39 +129,69 @@
   text-align: center;
 }
 
-.queue-container .queuer.current .leave-btn {
+.queue-container .queuer.current .user-btn {
   display: inline-block;
+  text-transform: uppercase;
   padding: 0.5rem 0;
   margin-top: 10px;
   text-decoration: none;
-  background: #d86666;
-  box-shadow: 0 0 5px #d86666;
+  background: #b3baffcc;
+  box-shadow: 0 0 5px #b3baffcc;
+  border-bottom: solid 4px #949eff;
   color: #fff;
   border: none;
-  border-bottom: solid 4px #b93434;
   border-radius: 3px;
   font-size: 1.4rem;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   transition: all 0.35s ease;
 }
 
+.queue-container .queuer.current .user-btn .icon {
+  font-size: 1.4rem;
+  transform: translateY(-1.5px);
+}
+
+.queue-container .queuer.current .user-btn.leave {
+  background: #d86666;
+  box-shadow: 0 0 5px #d86666;
+  border-bottom: solid 4px #b93434;
+}
+
+.queue-container .queuer.current .user-btn.update {
+  background: #47f;
+  border-bottom: solid 4px #345ac2;
+  box-shadow: 0 0 5px #47f;
+}
+
 @media (hover: hover) {
-  .queue-container .queuer.current .leave-btn {
+  .queue-container .queuer.current .user-btn.leave,
+  .queue-container .queuer.current .user-btn.update {
     background: #b3baffcc;
     box-shadow: 0 0 5px #b3baffcc;
     border-bottom: solid 4px #949eff;
   }
 
-  .queue-container .queuer.current .leave-btn:hover {
+  .queue-container .queuer.current .user-btn.leave:hover {
     background: #d86666;
     border-bottom: solid 4px #b93434;
     translate: 0 -1px;
     box-shadow: 0 0 5px #d86666;
   }
+
+  .queue-container .queuer.current .user-btn.update:hover {
+    background: #47f;
+    border-bottom: solid 4px #345ac2;
+    translate: 0 -1px;
+    box-shadow: 0 0 5px #47f;
+  }
 }
 
-.queue-container .queuer.current .leave-btn:active {
+.queue-container .queuer.current .user-btn:active {
   /*on Click*/
   -ms-transform: translateY(4px);
   -webkit-transform: translateY(4px);

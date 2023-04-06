@@ -10,6 +10,7 @@ import axiosInstance from "../../services/axios";
 // import QueueDisclaimer from "../../components/QueueDisclaimer/QueueDisclaimer";
 import PublicQueueContainer from "../../components/PublicQueueContainer/PublicQueueContainer";
 import PublicQueueLoading from "../../components/PublicQueueContainer/PublicQueueLoading";
+import UpdateForm from "../../components/UpdateForm/UpdateForm";
 
 // query functions:
 const fetchQueue = () => {
@@ -35,7 +36,13 @@ const removeCurrentUser = () => {
 
 const Queue = () => {
   // const [isDisclaimerActive, setIsDisclaimerActive] = useState(true);
+
+  // delete state:
   const [isDeleteOverlayActive, setIsDeleteOverlayActive] = useState(false);
+
+  // update state:
+  const [isUpdateOverlayActive, setIsUpdateOverlayActive] = useState(false);
+  const [isUpdateFormActive, setIsUpdateFormActive] = useState(false);
 
   // const isMounted = useRef();
   const navigate = useNavigate();
@@ -138,7 +145,7 @@ const Queue = () => {
           setIsDisclaimerActive={setIsDisclaimerActive}
         /> */}
 
-        {/* Remove current user overlay */}
+        {/* Remove current user -> overlay */}
         <div
           className={
             isDeleteOverlayActive ? "delete-overlay active" : "delete-overlay"
@@ -157,6 +164,19 @@ const Queue = () => {
           </button>
         </div>
 
+        {/* Update current user -> overlay */}
+        <div
+          className={
+            isUpdateOverlayActive ? "update-overlay active" : "update-overlay"
+          }
+        >
+          <UpdateForm
+            isFormActive={isUpdateFormActive}
+            setIsFormActive={setIsUpdateFormActive}
+            setIsUpdateOverlayActive={setIsUpdateOverlayActive}
+          />
+        </div>
+
         {/* queue section */}
         {/* About To Be Played */}
         {isLoadingActiveQueue ? (
@@ -171,7 +191,7 @@ const Queue = () => {
           />
         )}
 
-        {/* Pending */}
+        {/* waiting */}
         {isLoadingQueue || isLoadingRemoveCurrent ? (
           <PublicQueueLoading heading={"Waiting"} opacity={1} />
         ) : (
@@ -181,8 +201,9 @@ const Queue = () => {
             setQueueState={setQueueState}
             heading={"Waiting"}
             opacity={1}
-            isDeleteOverlayActive={isDeleteOverlayActive}
             setIsDeleteOverlayActive={setIsDeleteOverlayActive}
+            setIsUpdateOverlayActive={setIsUpdateOverlayActive}
+            setIsUpdateFormActive={setIsUpdateFormActive}
           />
         )}
 

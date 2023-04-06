@@ -88,3 +88,25 @@
   transform: translateY(4px); /*Move down*/
   border-bottom: none; /*disappears*/
 }
+
+/* UPDATE OVERLAY START */
+.queue-section-container .main-container .update-overlay {
+  position: fixed;
+  z-index: 990;
+  width: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  left: 50%;
+  top: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.35s ease;
+  translate: -50% -50%;
+}
+
+.queue-section-container .main-container .update-overlay.active {
+  top: 50%;
+  width: 100vw;
+}
+/* UPDATE OVERLAY END */

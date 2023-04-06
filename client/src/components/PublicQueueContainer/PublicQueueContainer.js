@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./PublicQueueContainer.css";
 
+// importing icons:
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { RxPencil2 } from "react-icons/rx";
+
 // import dayjs from "dayjs";
 // import relativeTime from "dayjs/plugin/relativeTime";
 // dayjs.extend(relativeTime);
@@ -12,6 +16,8 @@ const PublicQueueContainer = ({
   heading,
   opacity,
   setIsDeleteOverlayActive,
+  setIsUpdateOverlayActive,
+  setIsUpdateFormActive,
 }) => {
   const [currentUser, setCurrentUser] = useState({});
 
@@ -95,35 +101,36 @@ const PublicQueueContainer = ({
                   <span>Joined:</span> {dayjs(item?.created_at).fromNow()}
                 </p> */}
 
-                {/* leave button */}
+                {/* update button */}
                 {currentUser?.youtube_username === item?.youtube_username &&
                 heading !== "Up Next" ? (
                   <button
-                    className="leave-btn"
+                    className="user-btn update"
                     onClick={() => {
-                      setIsDeleteOverlayActive(true);
+                      setIsUpdateOverlayActive(true);
+                      setIsUpdateFormActive(true);
                     }}
                   >
-                    Leave
+                    Edit <RxPencil2 className="icon" />
                   </button>
                 ) : (
                   <></>
                 )}
 
-                {/* update button
+                {/* leave button */}
                 {currentUser?.youtube_username === item?.youtube_username &&
                 heading !== "Up Next" ? (
                   <button
-                    className="leave-btn"
+                    className="user-btn leave"
                     onClick={() => {
                       setIsDeleteOverlayActive(true);
                     }}
                   >
-                    Update
+                    Leave <RiDeleteBin6Line className="icon" />
                   </button>
                 ) : (
                   <></>
-                )} */}
+                )}
               </>
             ) : (
               <></>
