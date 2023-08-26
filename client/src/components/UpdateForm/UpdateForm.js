@@ -32,6 +32,8 @@ const SubmitForm = ({
   // Focus on next input field functionality:
   const focusNextRef = useFocusNext();
 
+  // console.log(user);
+
   // const endPoint = isAdmin ? "/admin-post" : "";
 
   const handleSubmit = async () => {
