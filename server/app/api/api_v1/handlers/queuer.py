@@ -78,7 +78,7 @@ async def add_queuer(data: QueuerCreate, admin: Admin = Depends(get_current_admi
             detail="Already Joined The Queue!"
         )
         
-@queuer_router.put("/{id}", summary="Update on hold status", response_model=QueuerResponsePersonal)
+@queuer_router.put("/{id}", summary="Update queuer data", response_model=QueuerResponsePersonal)
 async def update_queuer_by_uuid(data: QueuerUpdate, id: UUID):
     res = await QueuerService.update_queuer_data(data, id)
     

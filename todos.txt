@@ -1,3 +1,7 @@
+NOTES
+github subtree push command: git subtree push --prefix=my/folder origin master
+NOTES
+
 ////////////////////////////////////////////////////
 1. Need to change the "on-hold queue" title to "On Hold" --> done
 
@@ -36,7 +40,27 @@ Bugs To Fix:
 ///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////
-1. Ability to edit submission (change link after submitting, etc.)
+1. Ability to edit submission (change link after submitting, etc.) --> done
 2. Add social media handle option, or indicate in the “note” form --> done
 3. Typing ”Priority” in the note makes submission entry position highlighted for admin view --> done
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
+1. Fix the local storage based unique visitor id --> 
+const fingerprintData = {
+  userAgent: navigator.userAgent,
+  language: navigator.language,
+  platform: navigator.platform,
+  screenWidth: window.screen.width,
+  screenHeight: window.screen.height,
+  // ... other data you want to collect
+};
+
+// Create a hash from the collected data to generate a fingerprint
+function generateFingerprint(data) {
+  const fingerprintString = JSON.stringify(data);
+  return sha256(fingerprintString); // You need a hashing library like crypto-js
+}
+
+const fingerprint = generateFingerprint(fingerprintData);
 ///////////////////////////////////////////////////

@@ -61,7 +61,7 @@ async def auto_hold():
     
     if res != []:
         for q in res:
-            if (datetime.utcnow() - q.refreshed_at).total_seconds() >= 90*60:
+            if (datetime.utcnow() - q.refreshed_at).total_seconds() >= 60*60:
                 await q.update({"$set": {"on_hold": True}})
 
 # root path

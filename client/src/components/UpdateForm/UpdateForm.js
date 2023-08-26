@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "./SubmitForm.css";
-import { useNavigate } from "react-router-dom";
+import "./UpdateForm.css";
 
 // Local Components:
-import BootAnimation from "../../components/BootAnimation/BootAnimation";
+import BootAnimation from "../BootAnimation/BootAnimation";
 
 // Local Services:
 import axiosInstance from "../../services/axios";
@@ -14,50 +13,56 @@ import { useFocusNext } from "../../hooks/useFocusNext";
 // importing icons(react):
 import { BsCheck2Circle } from "react-icons/bs";
 import { MdOutlineCancel } from "react-icons/md";
-import { BiNotepad } from "react-icons/bi";
 
-const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
+const SubmitForm = ({
+  isFormActive,
+  setIsFormActive,
+  setIsUpdateOverlayActive,
+  isAdmin,
+}) => {
   const [isFile, setIsFile] = useState(false);
-  const [isMessageActive, setIsMessageActive] = useState(false);
   const [errMessage, setErrMessage] = useState("");
   const [userInput, setUserInput] = useState({
     artist_name: "",
     track_title: "",
-    youtube_username: "",
     song_link: "",
-    message: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
 
   // Focus on next input field functionality:
   const focusNextRef = useFocusNext();
 
-  const endPoint = isAdmin ? "/admin-post" : "";
+  // const endPoint = isAdmin ? "/admin-post" : "";
 
   const handleSubmit = async () => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
     try {
-      setIsLoading(true);
+      if (user?.user_id) {
+        setIsLoading(true);
 
-      const res = await axiosInstance.post(`queuer${endPoint}`, {
-        artist_name: userInput?.artist_name ? userInput.artist_name : "Empty!",
-        track_title: userInput?.track_title ? userInput.track_title : "Empty!",
-        youtube_username: userInput?.youtube_username,
-        username: userInput?.youtube_username.toLowerCase(),
-        link: isFile ? userInput?.youtube_username : userInput?.song_link,
-        message: userInput?.message ? userInput.message : "Empty!",
-      });
+        const res = await axiosInstance.put(`queuer/${user?.user_id}`, {
+          artist_name: userInput?.artist_name
+            ? userInput.artist_name
+            : user.artist_name,
+          track_title: userInput?.track_title
+            ? userInput.track_title
+            : user.track_title,
+          link: isFile ? user.youtube_username : userInput?.song_link,
 
-      setErrMessage("");
-      setIsFormActive(false);
+          youtube_username: user.youtube_username,
+          username: user.youtube_username.toLowerCase(),
+          message: user.message || "Empty!",
+          on_hold: false,
+        });
 
-      if (isAdmin) {
+        setErrMessage("");
+        setIsFormActive(false);
+        setIsUpdateOverlayActive(false);
+
         window.location.reload();
-      } else {
         res?.data &&
           localStorage.setItem("userInfo", JSON.stringify(res?.data));
-        navigate("/queue");
       }
     } catch (error) {
       setErrMessage("Connection failed!");
@@ -65,7 +70,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
       error?.response?.status && setErrMessage(error?.response?.data?.detail);
 
       error?.response?.status === 422 &&
-        setErrMessage("Must include youtube username & link!");
+        setErrMessage("Must include song link!");
     }
 
     setIsLoading(false);
@@ -90,13 +95,13 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
       >
         <div className="form-container">
           <h3 className="title">
-            {isAdmin ? "You're in control" : "Enter your submission"}
+            {isAdmin ? "You're in control" : "Update your submission"}
           </h3>
 
           {errMessage ? <p className="error-message">{errMessage}</p> : <></>}
 
           <div className="item">
-            <label htmlFor="ArtistName">{"Artist(s) name"}</label>
+            <label htmlFor="ArtistName">{"New Artist(s) name"}</label>
             <input
               type="text"
               placeholder="ex: artist1, artist2, ..."
@@ -111,7 +116,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
           </div>
 
           <div className="item">
-            <label htmlFor="TrackName">Track title</label>
+            <label htmlFor="TrackName">New Track title</label>
             <input
               type="text"
               placeholder="ex: song name"
@@ -125,7 +130,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
             />
           </div>
 
-          <div className="item">
+          {/* <div className="item">
             <label htmlFor="YoutubeUsername">Username</label>
             <input
               type="text"
@@ -138,10 +143,10 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
               }
               ref={focusNextRef}
             />
-          </div>
+          </div> */}
 
           <div className="item">
-            <label htmlFor="ArtistName">Song link / file</label>
+            <label htmlFor="ArtistName">New Song link / file</label>
             <div className="input-container">
               {isFile ? (
                 <>
@@ -189,7 +194,7 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
             )}
           </div>
 
-          {isMessageActive ? (
+          {/* {isMessageActive ? (
             <div className="item">
               <label htmlFor="Message">Note</label>
               <input
@@ -206,26 +211,26 @@ const SubmitForm = ({ isFormActive, setIsFormActive, isAdmin }) => {
             </div>
           ) : (
             <></>
-          )}
+          )} */}
 
           <div className="config-btn-container">
-            <button
+            {/* <button
               className="form-btn"
               onClick={() => setIsMessageActive(!isMessageActive)}
             >
               {isMessageActive ? "Remove Note" : "Add Note (optional)"}
-              <BiNotepad />
-            </button>
+            </button> */}
 
             <div className="submit-btn-container">
               <button className="form-btn" onClick={() => handleSubmit()}>
-                {isAdmin ? "Add" : "Join"}
+                {isAdmin ? "Add" : "Submit"}
                 <BsCheck2Circle />
               </button>
               <button
                 className="form-btn"
                 onClick={() => {
                   setIsFormActive(false);
+                  setIsUpdateOverlayActive(false);
                   setErrMessage("");
                   setIsFile(false);
                 }}
