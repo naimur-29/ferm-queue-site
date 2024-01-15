@@ -142,10 +142,18 @@ const ManageQueue = () => {
 
   // useEffect hooks:
   useEffect(() => {
+    document.title = "Manage Queue";    
+    
     if (!isLoadingQueue && !isLoadingOnHoldQueue && !isLoadingActiveQueue) {
       setOnHoldQueueState(new Array(onHoldQueue?.length).fill(false));
       setQueueState(new Array(queue?.length).fill(false));
       setActiveQueueState(new Array(activeQueue?.length).fill(false));
+
+      // // set document title:
+      // document.title = `UAR Queue(${
+      //   activeQueue.data.length + queue.data.length + onHoldQueue.data.length
+      // })`;
+      // console.log("LENGTH:", queue.data.length);
     }
   }, [
     isLoadingQueue,

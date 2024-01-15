@@ -99,10 +99,17 @@ const Queue = () => {
 
   // useEffect hooks:
   useEffect(() => {
+    document.title = "UAR Queue";
+
     if (!isLoadingQueue && !isLoadingOnHoldQueue && !isLoadingActiveQueue) {
       setOnHoldQueueState(new Array(onHoldQueue?.length).fill(false));
       setQueueState(new Array(queue?.length).fill(false));
       setActiveQueueState(new Array(activeQueue?.length).fill(false));
+
+      //TODO:
+      // document.title = `UAR Queue(${
+        // activeQueue?.length + queue?.length + onHoldQueue?.length || 0
+      // })`;
     }
   }, [
     isLoadingQueue,

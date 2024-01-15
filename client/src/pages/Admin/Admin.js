@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,6 +22,10 @@ const Admin = () => {
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    document.title = "UAR Controlling";
+  }, []);
 
   if (isLoading) return <BootAnimation />;
 

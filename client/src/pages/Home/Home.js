@@ -10,6 +10,7 @@ import BootAnimation from "../../components/BootAnimation/BootAnimation";
 import SubmitForm from "../../components/SubmitForm/SubmitForm";
 
 // Importing img assets from local directory
+// from icons8.com
 import fbIcon from "../../assets/socials/fb-icon.svg";
 import instaIcon from "../../assets/socials/insta-icon.svg";
 import twitterIcon from "../../assets/socials/twitter-icon.svg";
@@ -22,7 +23,15 @@ import axiosInstance from "../../services/axios";
 // const realFermAudioLogoImg =
 //   "https://cdn.discordapp.com/attachments/1011744799629529208/1019645944221941841/realFERMaudio_logo_w_face2.png";
 
+// assets:
 import realFermAudioLogoImg from "../../assets/realferm-logo.webp";
+const socials = {
+  realferm: "https://realferm.com",
+  facebook: "https://www.facebook.com/realfermaudio",
+  instagram: "https://www.instagram.com/realfermaudio/",
+  twitter: "https://twitter.com/realFERMaudio",
+  youtube: "https://www.youtube.com/channel/UCegXLVNGhEVDnje5leOXXYQ",
+}
 
 const Home = () => {
   const [isDisclaimerActive, setIsDisclaimerActive] = useState(false);
@@ -72,6 +81,7 @@ const Home = () => {
   }, [isCurrentQueuerDead]);
 
   useEffect(() => {
+    document.title = "Upcoming Artist Radio";
     window.localStorage.setItem("visitCount", 0);
   }, []);
 
@@ -96,7 +106,7 @@ const Home = () => {
           {/* Logo section */}
           <div className="left">
             <a
-              href="https://realfermaudio.com/faq"
+              href={socials.realferm}           
               target="_blank"
               rel="noreferrer"
             >
@@ -111,28 +121,28 @@ const Home = () => {
           {/* Socials Section */}
           <div className="right">
             <a
-              href="https://www.facebook.com/realfermaudio"
+              href={socials.facebook}
               target="_blank"
               rel="noreferrer"
             >
               <img src={fbIcon} alt="fb icon" className="icons" />
             </a>
             <a
-              href="https://www.instagram.com/realfermaudio/"
+              href={socials.instagram}
               target="_blank"
               rel="noreferrer"
             >
               <img src={instaIcon} alt="instagram icon" className="icons" />
             </a>
             <a
-              href="https://twitter.com/realFERMaudio"
+              href={socials.twitter}
               target="_blank"
               rel="noreferrer"
             >
               <img src={twitterIcon} alt="twitter icon" className="icons" />
             </a>
             <a
-              href="https://www.youtube.com/channel/UCegXLVNGhEVDnje5leOXXYQ"
+              href={socials.youtube}
               target="_blank"
               rel="noreferrer"
             >

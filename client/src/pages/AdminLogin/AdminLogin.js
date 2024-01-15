@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminLogin.css";
 
 import { useAuth } from "../../hooks/useAuth";
@@ -23,6 +23,10 @@ const AdminLogin = () => {
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    document.title = "UAR Access Control";
+  }, []);
 
   if (isLoading) return <BootAnimation />;
 
