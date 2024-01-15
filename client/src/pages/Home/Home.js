@@ -11,10 +11,10 @@ import SubmitForm from "../../components/SubmitForm/SubmitForm";
 
 // Importing img assets from local directory
 // from icons8.com
-import fbIcon from "../../assets/socials/fb-icon.svg";
-import instaIcon from "../../assets/socials/insta-icon.svg";
-import twitterIcon from "../../assets/socials/twitter-icon.svg";
 import ytIcon from "../../assets/socials/yt-icon.svg";
+import instaIcon from "../../assets/socials/insta-icon.svg";
+import tiktokIcon from "../../assets/socials/tiktok-icon.svg";
+import twitchIcon from "../../assets/socials/twitch-icon.svg";
 
 // local services:
 import axiosInstance from "../../services/axios";
@@ -27,10 +27,12 @@ import axiosInstance from "../../services/axios";
 import realFermAudioLogoImg from "../../assets/realferm-logo.webp";
 const socials = {
   realferm: "https://realferm.com",
-  facebook: "https://www.facebook.com/realfermaudio",
-  instagram: "https://www.instagram.com/realfermaudio/",
-  twitter: "https://twitter.com/realFERMaudio",
+  // facebook: "https://www.facebook.com/realfermaudio",
+  // twitter: "https://twitter.com/realFERMaudio",
   youtube: "https://www.youtube.com/channel/UCegXLVNGhEVDnje5leOXXYQ",
+  instagram: "https://www.instagram.com/realfermaudio/",
+  tiktok: "https://tiktok.com/@realfermaudio",
+  twitch: "https://twitch.com/upcomingartistradio",
 }
 
 const Home = () => {
@@ -121,11 +123,11 @@ const Home = () => {
           {/* Socials Section */}
           <div className="right">
             <a
-              href={socials.facebook}
+              href={socials.youtube}
               target="_blank"
               rel="noreferrer"
             >
-              <img src={fbIcon} alt="fb icon" className="icons" />
+              <img src={ytIcon} alt="fb icon" className="icons" />
             </a>
             <a
               href={socials.instagram}
@@ -135,18 +137,18 @@ const Home = () => {
               <img src={instaIcon} alt="instagram icon" className="icons" />
             </a>
             <a
-              href={socials.twitter}
+              href={socials.tiktok}
               target="_blank"
               rel="noreferrer"
             >
-              <img src={twitterIcon} alt="twitter icon" className="icons" />
+              <img src={tiktokIcon} alt="twitter icon" className="icons" />
             </a>
             <a
-              href={socials.youtube}
+              href={socials.twitch}
               target="_blank"
               rel="noreferrer"
             >
-              <img src={ytIcon} alt="youtube icon" className="icons" />
+              <img src={twitchIcon} alt="youtube icon" className="icons" />
             </a>
           </div>
         </motion.nav>
