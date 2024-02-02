@@ -6,7 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime
 
 from .core.config import settings
-from .models import queuer, admin, queue_settings, active_queuer
+from .models import queuer, admin, queue_settings, active_queuer, submission_played
 from .api.api_v1.router import router
 
 # Main App Object
@@ -45,7 +45,8 @@ async def app_init():
             admin.Admin,
             queuer.Queuer,
             queue_settings.QueueSettings,
-            active_queuer.ActiveQueuer
+            active_queuer.ActiveQueuer,
+            submission_played.SubmissionPlayed
         ]
     )
     print("""

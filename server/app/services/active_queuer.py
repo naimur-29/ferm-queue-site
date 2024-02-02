@@ -3,6 +3,7 @@ from uuid import UUID
 
 from ..models.active_queuer import ActiveQueuer
 from ..schemas.active_queuer import ActiveQueuerCreate, ActiveQueuerUpdate
+from .submission_played import SubmissionPlayedService
 
 class ActiveQueuerService:
     @staticmethod
@@ -41,6 +42,9 @@ class ActiveQueuerService:
             return False
         
         await res.delete()
+        print("\n////////////")
+        await SubmissionPlayedService.add_queuer_service(res)
+        print("////////////\n")
         return True
     
     @staticmethod
