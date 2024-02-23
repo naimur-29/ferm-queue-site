@@ -196,16 +196,19 @@ const ManageQueueContainer = ({
                 )}
 
                 {/* Remove from queue button */}
-                <button
-                  className="new-btn"
-                  onClick={() => {
-                    setTargetQueuer(item);
-                    setTargetHeader(heading);
-                    setIsDeleteOverlayActive(true);
-                  }}
-                >
-                  Remove <RiDeleteBin6Line className="icon" />
-                </button>
+                {heading ? 
+                  <button
+                    className="new-btn"
+                    onClick={() => {
+                      setTargetQueuer(item);
+                      setTargetHeader(heading);
+                      setIsDeleteOverlayActive(true);
+                    }}
+                  >
+                    Remove <RiDeleteBin6Line className="icon" />
+                  </button>
+                  : <></>
+                }
               </>
             ) : (
               <></>

@@ -1,6 +1,7 @@
 from typing import List
 from uuid import UUID
 
+from ..models.queuer import Queuer
 from ..models.submission_played import SubmissionPlayed
 from ..schemas.submission_played import SubmissionPlayedCreate
 
@@ -33,10 +34,13 @@ class SubmissionPlayedService:
     
     @staticmethod
     async def delete_queue():
-        res = SubmissionPlayed.find_all()
+        submission_played = SubmissionPlayed.find_all()
+        on_hold = Queuer.find(Queuer.on_hold == True)
         
-        if not await res.to_list():
+        
+        if not await submission_played.to_list() and not await on_hold.to_list():
             return False
         
-        await res.delete()
+        await submission_played.delete()
+        await on_hold.delete()
         return True

@@ -31,12 +31,82 @@
 .queue-section-container .main-container .title {
   color: #fff;
   font-size: 2.4rem;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   text-align: center;
   width: 100%;
   padding: 5px;
+}
+
+
+.queue-section-container .main-container .title > span {
   cursor: pointer;
 }
+
+/* STREAM BUTTON START */
+.queue-section-container .main-container .stream-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px;
+  border-radius: 4px;
+  margin-bottom: 50px;
+  overflow: hidden;
+}
+
+.queue-section-container .main-container .stream-btn > .logo-container{
+  background-color: #f5537633;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 100ms linear 100ms;
+}
+
+@media(hover: hover) {
+  .queue-section-container .main-container .stream-btn:hover > .logo-container {
+    background-color: #f5537677;
+  }
+  
+  .queue-section-container .main-container .stream-btn:hover > .logo-container > .logo {
+    animation: none;
+  }
+  
+  .queue-section-container .main-container .stream-btn:hover > p {
+    background-color: #f5537644;
+  }
+}
+
+@keyframes shrink-grow {
+  0% {
+    scale: 1;
+  }
+  33% {
+    scale: 1.1;
+  }
+  66% {
+    scale: 1;
+  }
+  100% {
+    scale: 0.9;
+  }
+}
+
+.queue-section-container .main-container .stream-btn > .logo-container > .logo {
+  padding: 4px;
+    animation: 500ms linear infinite alternate forwards shrink-grow;
+}
+
+.queue-section-container .main-container .stream-btn > p {
+  background-color: #f5537633;
+  color: #eee;
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding: 4px 16px;
+  border-radius: 4px;
+  translate: -10px 0;
+  transition: background-color 300ms linear;
+}
+/* STREAM BUTTON END */
 
 .queue-section-container .main-container .delete-overlay {
   position: fixed;

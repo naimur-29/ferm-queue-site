@@ -35,11 +35,11 @@ const Admin = () => {
         <Link to="/access-queue" className="outer-btn">
           <button className="btn">Manage Queue</button>
         </Link>
-
+    
         <Link to="/settings" className="outer-btn">
           <button className="btn">Queue Settings</button>
         </Link>
-
+    
         <div
           className="outer-btn"
           onClick={() => {
@@ -51,6 +51,10 @@ const Admin = () => {
 
         <Link to="/" className="outer-btn">
           <button className="btn">Return Home</button>
+        </Link>
+    
+        <Link to="/submission-played" className="outer-btn">
+          <button className="btn">Submissions Played</button>
         </Link>
       </div>
     </section>

@@ -11,6 +11,7 @@ import Admin from "./pages/Admin/Admin";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import BootAnimation from "./components/BootAnimation/BootAnimation";
 import ManageQueue from "./components/ManageQueue/ManageQueue";
+import SubmissionPlayed from "./components/SubmissionPlayed/SubmissionPlayed";
 import QueueSettings from "./components/QueueSettings/QueueSettings";
 import Error from "./components/Error/Error";
 
@@ -62,6 +63,14 @@ const App = () => {
                     element={
                       <Authenticated>
                         <QueueSettings />
+                      </Authenticated>
+                    }
+                  />
+                  <Route
+                    path="/submission-played"
+                    element={
+                      <Authenticated>
+                        <SubmissionPlayed />
                       </Authenticated>
                     }
                   />

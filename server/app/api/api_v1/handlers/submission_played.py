@@ -84,7 +84,7 @@ async def update_queuer_by_uuid(admin: Admin = Depends(get_current_admin)):
     if not res:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Empty queue!")
     
-    return {"message": "Successfully removed the 'submission played' queue!"}
+    return {"message": "Successfully removed the 'submission played' & 'on hold' queuers!"}
 
 
 # @active_queuer_router.delete("/{id}", summary="Delete active queuer from queue", status_code=status.HTTP_410_GONE)

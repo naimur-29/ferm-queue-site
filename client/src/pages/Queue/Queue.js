@@ -12,6 +12,9 @@ import PublicQueueContainer from "../../components/PublicQueueContainer/PublicQu
 import PublicQueueLoading from "../../components/PublicQueueContainer/PublicQueueLoading";
 import UpdateForm from "../../components/UpdateForm/UpdateForm";
 
+// assets:
+import YtLogo from "../../assets/socials/yt-icon.svg";
+
 // query functions:
 const fetchQueue = () => {
   return axiosInstance.get("queuer/queue");
@@ -142,9 +145,18 @@ const Queue = () => {
   return (
     <section className="queue-section-container">
       <main className="main-container">
-        <h1 className="title" onClick={() => navigate("/")}>
-          Upcoming Artist Radio
+        <h1 className="title">
+          <span onClick={() => navigate("/")}>
+            Upcoming Artist Radio
+          </span>
         </h1>
+    
+        <a className="stream-btn" href="/">
+          <div className="logo-container">
+            <img className="logo" src={YtLogo} atl="youtube" />
+          </div>
+          <p>STREAM</p>
+        </a>
 
         {/* Disclaimer */}
         {/* <QueueDisclaimer

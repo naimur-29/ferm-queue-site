@@ -167,8 +167,10 @@ const ManageQueue = () => {
   return (
     <section className="manage-queue-section-container">
       <main className="main-container">
-        <h1 className="title" onClick={() => setIsNavigationActive(true)}>
-          Upcoming Artist Radio
+        <h1 className="title">
+          <span onClick={() => setIsNavigationActive(true)}>
+            Upcoming Artist Radio
+          </span>
         </h1>
 
         {/* Remove current user overlay */}
