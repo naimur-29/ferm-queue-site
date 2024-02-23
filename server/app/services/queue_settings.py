@@ -1,3 +1,5 @@
+from typing import List
+
 from ..models.queue_settings import QueueSettings
 from ..schemas.queue_settings import QueueSettingsCreate, QueueSettingsUpdateState
 
@@ -6,6 +8,13 @@ class QueueSettingsService:
     async def new_queuer_setting(data: QueueSettingsCreate) -> QueueSettings:
         queuer_setting_in = QueueSettings(**data.dict())
         return await queuer_setting_in.insert()
+    
+    @staticmethod
+    async def get_queue_settings() -> List[QueueSettings]:
+        res = await QueueSettings.find().to_list()
+        if not res or not len(res):
+            return False
+        return res    
     
     @staticmethod
     async def get_queue_setting_by_name(name: str) -> QueueSettings:

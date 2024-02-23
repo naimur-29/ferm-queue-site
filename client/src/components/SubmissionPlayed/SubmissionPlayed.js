@@ -16,9 +16,6 @@ const fetchQueue = () => {
 };
 
 const SubmissionPlayed = () => {
-  const [targetQueuer, setTargetQueuer] = useState({});
-  const [targetHeader, setTargetHeader] = useState("Waiting");
-
   // react router dom:
   const navigate = useNavigate();
 
@@ -70,8 +67,6 @@ const SubmissionPlayed = () => {
             setQueueState={setQueueState}
             heading={""}
             opacity={1}
-            setTargetQueuer={setTargetQueuer}
-            setTargetHeader={setTargetHeader}
           />
         )}
       </main>

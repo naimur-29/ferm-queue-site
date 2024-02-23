@@ -1,4 +1,5 @@
 import pymongo
+from typing import List
 from fastapi import APIRouter, HTTPException, status, Depends
 
 from ....schemas.queue_settings import QueueSettingsCreate, QueueSettingsUpdateState
@@ -7,6 +8,15 @@ from ....api.auth.jwt import get_current_admin
 from ....models.admin import Admin
 
 queue_settings_router = APIRouter()
+
+# get queue all setttings
+@queue_settings_router.get("/", summary="Get all queue settings", response_model=List[QueueSettingsCreate])
+async def get_setting():
+    res = await QueueSettingsService.get_queue_settings()
+    if not res:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Settings not found!")
+    return res
+
 
 @queue_settings_router.get("/{name}", summary="Get setting status by name", response_model=QueueSettingsCreate)
 async def get_setting(name: str):
