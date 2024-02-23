@@ -8,8 +8,8 @@ class SubmissionPlayed(Document):
 	artist_name: str
 	track_title: str
 	youtube_username: str
-	username: Indexed(str, unique=True)
-	link: Indexed(str, unique=True)
+	username: str
+	link: str
 	message: str = ""
 	created_at: datetime = Field(default_factory=datetime.utcnow)
 	
