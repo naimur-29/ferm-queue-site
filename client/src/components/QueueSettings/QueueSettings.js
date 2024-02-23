@@ -10,6 +10,7 @@ const QueueSettings = () => {
   const [settings, setSettings] = useState({});
   const [isSetStreamLinkBtnDisabled, setIsSetStreamLinkBtnDisabled] = useState(true);
   const [inputStreamLink, setInputStreamLink] = useState("");
+  const [clearSubmissionsPlayedPressed, setClearSubmissionsPlayedPressed] = useState(false);
 
   // fetching queue settings:
   const { data: queueSettings, isLoading: isLoadingQueueSettings} = useQuery(
@@ -19,8 +20,6 @@ const QueueSettings = () => {
 
   // toggle if queue is on or off:
   const {
-    isLoading: isLoadingQueueOnToggle,
-    isError: isQueueOnToggleError,
     refetch: initiateQueueOnToggle,
   } = useQuery(
     ["toggle-queue-on", queueSettings],
@@ -37,8 +36,6 @@ const QueueSettings = () => {
   
   // set stream link:
   const {
-    isLoading: isLoadingSetStreamLink,
-    isError: isErrorSetStreamLink,
     refetch: initiateSetStreamLink,
   } = useQuery(
     ["set-stream-link", queueSettings],
@@ -47,6 +44,20 @@ const QueueSettings = () => {
       return axiosInstance.put("set/youtubeStreamLink", {
         state
       });
+    },
+    {
+      enabled: false,
+    }
+  );
+  
+  // set stream link:
+  const {
+    isLoading: isLoadingClearSubmissionsPlayed,
+    refetch: clearSubmissionsPlayed,
+  } = useQuery(
+    "clear-submissions-played",
+    () => {
+      return axiosInstance.delete("submission-played/queue/admin");
     },
     {
       enabled: false,
@@ -62,6 +73,15 @@ const QueueSettings = () => {
     }
   // eslint-disable-next-line
   }, [isLoadingQueueSettings]);
+  
+  useEffect(() => {
+    if (clearSubmissionsPlayedPressed) {
+      const timeoutRef = window.setTimeout(() => {
+        setClearSubmissionsPlayedPressed(false);
+        window.clearTimeout(timeoutRef);
+      }, 1000)
+    }
+  }, [clearSubmissionsPlayedPressed])
  
   return (
     <section className="queue-settings-section-container">
@@ -78,12 +98,12 @@ const QueueSettings = () => {
                 onClick={() => {
                   initiateQueueOnToggle();
                   const timeoutRef = window.setTimeout(() => {
-                    !isLoadingQueueOnToggle && window.location.reload();
+                    window.location.reload();
                     window.clearTimeout(timeoutRef);
-                  }, 100);
+                  }, 300);
                 }}
               >
-                Toggle On
+                On
               </button>
 
               <button
@@ -92,12 +112,12 @@ const QueueSettings = () => {
                 onClick={() => {
                   initiateQueueOnToggle();
                   const timeoutRef = window.setTimeout(() => {
-                    !isLoadingQueueOnToggle && window.location.reload();
+                    window.location.reload();
                     window.clearTimeout(timeoutRef);
-                  }, 100);
+                  }, 300);
                 }}
               >
-                Toggle Off
+                Off
               </button>
             </div>
           </div>
@@ -123,12 +143,25 @@ const QueueSettings = () => {
               }
               initiateSetStreamLink();
               const timeoutRef = window.setTimeout(() => {
-                !isLoadingQueueOnToggle && window.location.reload();
+                window.location.reload();
                 window.clearTimeout(timeoutRef);
-              }, 100);
+              }, 300);
             }}
             disabled={isSetStreamLinkBtnDisabled}
             >Set</button>
+          </div>
+    
+          {/* Clear All Submissions Played & On Hold Submissions */}
+          <div className="clear-submissions-played-container">
+            <span>Submissions Played</span>
+            <button onClick={() => {
+              if (clearSubmissionsPlayedPressed) {
+                clearSubmissionsPlayed();
+              } else setClearSubmissionsPlayedPressed(true);
+            }}>{isLoadingClearSubmissionsPlayed ? "clearing..."
+              : clearSubmissionsPlayedPressed ? "Are you sure?"
+              : "Clear?"
+            }</button>
           </div>
         </div>
       </div>

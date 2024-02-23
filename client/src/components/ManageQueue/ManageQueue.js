@@ -54,7 +54,9 @@ const ManageQueue = () => {
     isLoading: isLoadingOnHoldQueue,
     data: onHoldQueue,
     isError: isOnHoldQueueError,
-  } = useQuery("on-hold-queue-admin", fetchOnHoldQueue);
+  } = useQuery("on-hold-queue-admin", fetchOnHoldQueue, {
+    cacheTime: 0,
+  });
 
   // fetching active queue:
   const {

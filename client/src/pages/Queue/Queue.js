@@ -72,7 +72,9 @@ const Queue = () => {
     isLoading: isLoadingOnHoldQueue,
     data: onHoldQueue,
     isError: isOnHoldQueueError,
-  } = useQuery("on-hold-queue", fetchOnHoldQueue);
+  } = useQuery("on-hold-queue", fetchOnHoldQueue, {
+    cacheTime: 0,
+  });
 
   // fetching active queue:
   const {

@@ -27,7 +27,9 @@ const SubmissionPlayed = () => {
     isLoading: isLoadingQueue,
     data: queue,
     isError: isQueueError,
-  } = useQuery("submission-played-admin", fetchQueue);
+  } = useQuery("submission-played-admin", fetchQueue, {
+    cacheTime: 0, // disable caching!
+  });
 
   // useEffect hooks:
   useEffect(() => {
