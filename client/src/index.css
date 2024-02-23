@@ -221,3 +221,18 @@ a {
     box-shadow: 0 0 10px #f47;
   }
 }
+
+@keyframes shrink-grow {
+  0% {
+    scale: 1;
+  }
+  33% {
+    scale: 1.1;
+  }
+  66% {
+    scale: 1;
+  }
+  100% {
+    scale: 0.9;
+  }
+}

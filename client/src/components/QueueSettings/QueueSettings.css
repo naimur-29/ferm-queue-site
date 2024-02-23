@@ -11,33 +11,48 @@
   background-size: 300% 300%;
   background-image: linear-gradient(
     -45deg,
-    #18182a 0%,
-    #18182a 25%,
-    #18182a 51%,
-    #e20bd3 100%
+    #2a2a49 0%,
+    #2a2a49 25%,
+    #2a2a49 51%,
+    #e20bd3 125%
   );
-  animation: AnimateBG 20s ease infinite, startup 0.5s ease-in;
+  animation: AnimateBG 20s ease-in infinite, startup 0.5s ease-in;
 }
 
 .queue-settings-section-container .main-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
   height: 100%;
   min-height: 100vh;
   overflow: hidden;
   padding: 10px;
 }
 
+.queue-settings-section-container .main-container .title {
+  color: #fff;
+  font-size: 2.4rem;
+  margin-bottom: 50px;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.queue-settings-section-container .main-container .title > span {
+  cursor: pointer;
+}
+
 .queue-settings-section-container .main-container > .settings-container {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
   width: 100%;  
   max-width: 720px;
-  font-size: 2.4rem;
 }
 
 @media (max-width: 520px) {
   .queue-settings-section-container .main-container > .settings-container {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 }
 
@@ -47,18 +62,15 @@
   }
 }
 
-.queue-settings-section-container .main-container > .settings-container button:disabled {
-  cursor: default;
-  opacity: 0.3;
+.queue-settings-section-container .main-container > .settings-container button:not([disabled]):active {
+  scale: 0.9;
 }
 
 /* TOGGLE QUEUE ON OFF START */
 .queue-settings-section-container .main-container > .settings-container > .queue-on-off {
   background-color: #ff10f033;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
-  font-weight: bold;
-  color: #fff;
   width: 100%;
   display: flex;
   align-items: center;
@@ -86,22 +98,24 @@
   box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+.queue-settings-section-container .main-container > .settings-container > .queue-on-off > .btn-container > button:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
 .queue-settings-section-container .main-container > .settings-container > .queue-on-off > .btn-container > button.on-btn {
   background-color: #2ecc71;
 }
 .queue-settings-section-container .main-container > .settings-container > .queue-on-off > .btn-container > button.off-btn {
   background-color: #f49;
 }
-
 /* TOGGLE QUEUE ON OFF END */
 
 /* SET STREAM LINK START */
 .queue-settings-section-container .main-container > .settings-container > .set-stream-link-container {
   background-color: #ff10f044;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
-  font-weight: bold;
-  color: #fff;
   width: 100%;
   margin-bottom: 10px;
   display: flex;
@@ -119,11 +133,10 @@
   flex: 2;
   width: 100%;
   font-size: 1.1rem;
-  height: 47px;
+  height: 44px;
   padding: 2px 4px;
   border: none;
   border-radius: 4px;
-  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 .queue-settings-section-container .main-container > .settings-container > .set-stream-link-container > button {
@@ -140,15 +153,18 @@
   cursor: pointer;
   box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.15);
 }
+
+.queue-settings-section-container .main-container > .settings-container > .set-stream-link-container > button:disabled {
+  cursor: default;
+  opacity: 0.3
+}
 /* SET STREAM LINK END */
 
 /* CLEAR SUBMISSIONS PLAYED START */
 .queue-settings-section-container .main-container > .settings-container > .clear-submissions-played-container {
   background-color: #ff10f044;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
-  font-weight: bold;
-  color: #fff;
   width: 100%;
   display: flex;
   align-items: center;
@@ -158,7 +174,7 @@
 }
 
 .queue-settings-section-container .main-container > .settings-container > .clear-submissions-played-container > button {
-  background-color: #47f;
+  background-color: #f49;
   color: #fff;
   text-transform: uppercase;
   font-size: 1.4rem;
@@ -170,3 +186,5 @@
   box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.15);
 }
 /* CLEAR SUBMISSIONS PLAYED END */
+
+

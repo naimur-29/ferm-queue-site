@@ -37,7 +37,6 @@
   padding: 5px;
 }
 
-
 .queue-section-container .main-container .title > span {
   cursor: pointer;
 }
@@ -75,21 +74,6 @@
   
   .queue-section-container .main-container .stream-btn:hover > p {
     background-color: #f5537644;
-  }
-}
-
-@keyframes shrink-grow {
-  0% {
-    scale: 1;
-  }
-  33% {
-    scale: 1.1;
-  }
-  66% {
-    scale: 1;
-  }
-  100% {
-    scale: 0.9;
   }
 }
 

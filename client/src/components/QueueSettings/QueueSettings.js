@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./QueueSettings.css";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 // local services:
 import axiosInstance from "../../services/axios";
@@ -11,6 +12,9 @@ const QueueSettings = () => {
   const [isSetStreamLinkBtnDisabled, setIsSetStreamLinkBtnDisabled] = useState(true);
   const [inputStreamLink, setInputStreamLink] = useState("");
   const [clearSubmissionsPlayedPressed, setClearSubmissionsPlayedPressed] = useState(false);
+  
+  // hooks:
+  const navigate = useNavigate();
 
   // fetching queue settings:
   const { data: queueSettings, isLoading: isLoadingQueueSettings} = useQuery(
@@ -86,6 +90,12 @@ const QueueSettings = () => {
   return (
     <section className="queue-settings-section-container">
       <div className="main-container">
+        <h3 className="title">
+          <span onClick={() => navigate("/admin")}>
+            Queue Settings
+          </span>
+        </h3>
+    
         <div className="settings-container">
           {/* queue on of settings */}
           <div className="queue-on-off">
@@ -103,7 +113,7 @@ const QueueSettings = () => {
                   }, 300);
                 }}
               >
-                On
+                Toggle On
               </button>
 
               <button
@@ -117,7 +127,7 @@ const QueueSettings = () => {
                   }, 300);
                 }}
               >
-                Off
+                Toggle Off
               </button>
             </div>
           </div>
