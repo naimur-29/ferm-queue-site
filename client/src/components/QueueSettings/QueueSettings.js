@@ -8,6 +8,8 @@ import axiosInstance from "../../services/axios";
 const QueueSettings = () => {
   // states:
   const [settings, setSettings] = useState({});
+  const [isSetStreamLinkBtnDisabled, setIsSetStreamLinkBtnDisabled] = useState(true);
+  const [inputStreamLink, setInputStreamLink] = useState("");
 
   // fetching queue settings:
   const { data: queueSettings, isLoading: isLoadingQueueSettings} = useQuery(
@@ -15,6 +17,7 @@ const QueueSettings = () => {
     () => axiosInstance.get("set")
   );
 
+  // toggle if queue is on or off:
   const {
     isLoading: isLoadingQueueOnToggle,
     isError: isQueueOnToggleError,
@@ -31,16 +34,31 @@ const QueueSettings = () => {
       enabled: false,
     }
   );
-
-  useEffect(() => {
-    isQueueOnToggleError && alert("Failed to toggle!");
-  });
-
+  
+  // set stream link:
+  const {
+    isLoading: isLoadingSetStreamLink,
+    isError: isErrorSetStreamLink,
+    refetch: initiateSetStreamLink,
+  } = useQuery(
+    ["set-stream-link", queueSettings],
+    () => {
+      const state = inputStreamLink.trim();
+      return axiosInstance.put("set/youtubeStreamLink", {
+        state
+      });
+    },
+    {
+      enabled: false,
+    }
+  );
+  
   useEffect(() => {
     if (!isLoadingQueueSettings) {
       const res = {};
       for (const ele of queueSettings?.data) res[ele.name] = ele.state;
       setSettings(res);
+      setInputStreamLink(res.youtubeStreamLink);
     }
   // eslint-disable-next-line
   }, [isLoadingQueueSettings]);
@@ -87,7 +105,30 @@ const QueueSettings = () => {
           {/* set stream link */}
           <div className="set-stream-link-container">
             <label htmlFor="stream link">Stream Link</label>
-            <input type="text" />
+            <input 
+              onChange={(e) => {
+                e.preventDefault();
+                setIsSetStreamLinkBtnDisabled(false);
+                setInputStreamLink(e.target.value);
+              }}  
+              value={inputStreamLink} 
+              type="text" 
+              placeholder="ex: https://yourlink.com/"
+            />
+    
+            <button onClick={() => {
+              if (!inputStreamLink.trim().length || !inputStreamLink.includes("https://")) {
+                alert("Invalid Stream Link!");
+                return;
+              }
+              initiateSetStreamLink();
+              const timeoutRef = window.setTimeout(() => {
+                !isLoadingQueueOnToggle && window.location.reload();
+                window.clearTimeout(timeoutRef);
+              }, 100);
+            }}
+            disabled={isSetStreamLinkBtnDisabled}
+            >Set</button>
           </div>
         </div>
       </div>

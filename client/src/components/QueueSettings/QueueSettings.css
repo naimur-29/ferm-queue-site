@@ -34,8 +34,13 @@
   max-width: 720px;
 }
 
+.queue-settings-section-container .main-container > .settings-container button:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
 .queue-settings-section-container .main-container > .settings-container > .queue-on-off {
-  background-color: #fff3;
+  background-color: #ff10f033;
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 2.4rem;
@@ -64,11 +69,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.queue-settings-section-container .main-container > .settings-container > .queue-on-off > .btn-container > button:disabled {
-  cursor: default;
-  opacity: 0.3;
+  box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .queue-settings-section-container .main-container > .settings-container > .queue-on-off > .btn-container > button.on-btn {
@@ -91,7 +92,7 @@
 }
 
 .queue-settings-section-container .main-container .settings-container .set-stream-link-container {
-  background-color: #fff3;
+  background-color: #ff10f044;
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 2.4rem;
@@ -101,17 +102,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 10px;
   box-shadow: 10px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
+.queue-settings-section-container .main-container .settings-container .set-stream-link-container > label {
+  flex: 3;
+}
+
 .queue-settings-section-container .main-container .settings-container .set-stream-link-container > input {
+  flex: 2;
   width: 100%;
   font-size: 1.1rem;
-  max-width: 220px;
   height: 47px;
   padding: 2px 4px;
+  border: none;
   border-radius: 4px;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.15);
+}
+
+.queue-settings-section-container .main-container .settings-container .set-stream-link-container > button {
+  background-color: #47f;
+  flex: 1;
+  width: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 520px) {
