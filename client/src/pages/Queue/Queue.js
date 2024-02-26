@@ -57,7 +57,7 @@ const Queue = () => {
   
 
   // fetching queue settings -> youtubeStreamLink:
-  const { data: youtubeStreamLink, isLoading: isLoadingYoutubeStreamLink} = useQuery(
+  const { data: youtubeStreamLink, isLoading: isLoadingYoutubeStreamLink, isError: isErrorYoutubeStreamLink} = useQuery(
     "queue-settings-youtubeStreamLink", () => axiosInstance.get("set/youtubeStreamLink"));
   
   // fetching queue:
@@ -158,8 +158,8 @@ const Queue = () => {
           </span>
         </h1>
     
-        {isLoadingYoutubeStreamLink ? <></> :
-          <a className="stream-btn" href={youtubeStreamLink.data?.state} target="_blank" rel="noreferrer">
+        {isLoadingYoutubeStreamLink || isErrorYoutubeStreamLink? <></> :
+          <a className="stream-btn" href={youtubeStreamLink?.data?.state} target="_blank" rel="noreferrer">
             <div className="logo-container">
               <img className="logo" src={YtLogo} alt="youtube" />
             </div>
